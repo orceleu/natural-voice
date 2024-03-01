@@ -1,7 +1,9 @@
 "use client";
 
-import * as React from "react";
+import React from "react";
+import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
 
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -9,7 +11,6 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -17,75 +18,74 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-type Status = {
-  value: string;
-  label: string;
-};
-
-const statuses: Status[] = [
+const frameworks = [
   {
-    value: "backlog",
-    label: "Backlog",
+    value: "next.js",
+    label: "Next.js",
   },
   {
-    value: "todo",
-    label: "Todo",
+    value: "sveltekit",
+    label: "SvelteKit",
   },
   {
-    value: "in progress",
-    label: "In Progress",
+    value: "nuxt.js",
+    label: "Nuxt.js",
   },
   {
-    value: "done",
-    label: "Done",
+    value: "remix",
+    label: "Remix",
   },
   {
-    value: "canceled",
-    label: "Canceled",
+    value: "astro",
+    label: "Astro",
   },
 ];
 
 export function ComboboxPopover() {
   const [open, setOpen] = React.useState(false);
-  const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-    null
-  );
+  const [value, setValue] = React.useState("");
 
   return (
-    <div className="flex items-center space-x-4">
-      <p className="text-sm text-muted-foreground">Status</p>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button variant="outline" className="w-[150px] justify-start">
-            {selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="p-0" side="right" align="start">
-          <Command>
-            <CommandInput placeholder="Change status..." />
-            <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup>
-                {statuses.map((status) => (
-                  <CommandItem
-                    key={status.value}
-                    value={status.value}
-                    onSelect={(value) => {
-                      setSelectedStatus(
-                        statuses.find((priority) => priority.value === value) ||
-                          null
-                      );
-                      setOpen(false);
-                    }}
-                  >
-                    {status.label}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-    </div>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
+        >
+          {value
+            ? frameworks.find((framework) => framework.value === value)?.label
+            : "Select framework..."}
+          <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search framework..." className="h-9" />
+          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandGroup>
+            {frameworks.map((framework) => (
+              <CommandItem
+                key={framework.value}
+                value={framework.value}
+                onSelect={(currentValue) => {
+                  setValue(currentValue === value ? "" : currentValue);
+                  setOpen(false);
+                }}
+              >
+                {framework.label}
+                <BoxSelectIcon
+                  className={cn(
+                    "ml-auto h-4 w-4",
+                    value === framework.value ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 }

@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
+import { PlayCircleIcon, DeleteIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ComboboxPopover } from "../componentCustom/ComboboxPopover";
 export default function Dashboard() {
+  const [text, setText] = useState("");
+
   const [value, setValues] = useState("");
   const [isActive, activeButtonSubmit] = useState(false);
   const handleClick = async () => {
@@ -18,6 +21,8 @@ export default function Dashboard() {
         })
         .then((res) => {
           console.log(res.data);
+          const { output } = res.data;
+          setText(output);
         })
         .catch((error) => {
           console.log(error);
@@ -38,8 +43,12 @@ export default function Dashboard() {
   }, [value]);
 
   return (
-    <>
-      <div className=" grid w-full  ml-10 mr-10 ">
+    <div className="grid w-full mx-9">
+      <div className="flex justify-center">
+        <p className="text-md text-center">{`>${text}`}</p>
+      </div>
+      <br />
+      <div className=" grid w-full   ">
         <ComboboxPopover />
 
         <br />
@@ -54,20 +63,28 @@ export default function Dashboard() {
         />
         <div className=" flex justify-center">
           <div className="fixed bottom-4 grid gap-2">
-            <Button onClick={handleClick} disabled={isActive}>
-              Send message
+            <Button
+              onClick={handleClick}
+              disabled={isActive}
+              variant="outline"
+              size="icon"
+            >
+              <PlayCircleIcon className="h-4 w-4" />
             </Button>
+
             <Button
               onClick={() => {
                 setValues("");
               }}
               disabled={isActive}
+              variant="outline"
+              size="icon"
             >
-              Clear
+              <DeleteIcon className="h-3 w-3" />
             </Button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

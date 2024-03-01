@@ -22,5 +22,7 @@ export async function POST(req) {
     }
   );
   console.log(output);*/
-  return NextResponse.json({ output: " output" });
+  return NextResponse.json({
+    output: `your text from backend node js api: ${text}`,
+  });
 }
