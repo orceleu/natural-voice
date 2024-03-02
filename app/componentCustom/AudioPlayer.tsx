@@ -35,7 +35,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
           Pause
         </button>
         <button className="btn btn-primary" onClick={download}>
-          Télécharger l'audio
+          Télécharger laudio
         </button>
       </div>
     </div>
