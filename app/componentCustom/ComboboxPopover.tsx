@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -20,30 +20,34 @@ import {
 
 const frameworks = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "en",
+    label: "english",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "fr",
+    label: "french",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
+    value: "rs",
+    label: "russia",
   },
   {
-    value: "remix",
-    label: "Remix",
+    value: "sp",
+    label: "spanish",
   },
   {
-    value: "astro",
-    label: "Astro",
+    value: "pg",
+    label: "portugal",
   },
 ];
-
+var selectedLanguage1 = "language";
 export function ComboboxPopover() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [selectedLanguage, setLanguage] = React.useState("");
+  useEffect(() => {
+    selectedLanguage1 = value;
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -56,7 +60,7 @@ export function ComboboxPopover() {
         >
           {value
             ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+            : "Select language..."}
           <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -89,3 +93,4 @@ export function ComboboxPopover() {
     </Popover>
   );
 }
+export default selectedLanguage1;
