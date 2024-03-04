@@ -17,7 +17,7 @@ export async function POST(req) {
       input: {
         text: text,
         speaker:
-          "https://replicate.delivery/pbxt/KV9s78PwB0U53gO3qoPiCnq0tcUcKaFi3rYuwoZmpmLsuN5S/ElevenLabs_2024-03-02T17_58_01_Daniel.mp3",
+          "https://firebasestorage.googleapis.com/v0/b/my-saas-1.appspot.com/o/ElevenLabs_2024-03-03T21_40_50_Daniel.mp3?alt=media&token=3f0c18be-b49e-4221-ab20-129756932fc3",
         language: language,
         cleanup_voice: clean_voice,
       },
