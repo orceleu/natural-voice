@@ -8,6 +8,7 @@ import AudioPlayer from "../componentCustom/AudioPlayer";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
+axios.defaults.timeout = 240000;
 
 import { cn } from "@/lib/utils";
 import {
