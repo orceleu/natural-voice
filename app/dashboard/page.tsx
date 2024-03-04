@@ -8,9 +8,6 @@ import AudioPlayer from "../componentCustom/AudioPlayer";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
-const config: AxiosRequestConfig = {
-  timeout: 240000, // Temps d'attente en millisecondes (10 secondes dans cet exemple)
-};
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -64,6 +61,10 @@ export default function Dashboard() {
     return chaine.replace(/[\r\n]+/g, "");
   }
   const handleClick = async () => {
+    const config: AxiosRequestConfig = {
+      timeout: 240000, // Temps d'attente en millisecondes (10 secondes dans cet exemple)
+    };
+
     var text = remplacerPointsParPointVirgules(textvalue);
     setLoaded(true);
     activeButtonSubmit(true);
@@ -92,8 +93,7 @@ export default function Dashboard() {
           toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
-            description:
-              "There was a problem with your request. verify your connexion and try again.",
+            description: `${error}`,
           });
         });
       //alert("click from client");

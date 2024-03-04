@@ -24,7 +24,6 @@ export async function POST(req) {
       },
     }
   );
-  console.log(mp3);
   return NextResponse.json({
     output: output,
   });
