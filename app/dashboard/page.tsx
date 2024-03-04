@@ -1,15 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { PlayCircleIcon, DeleteIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
-axios.defaults.timeout = 240000;
-
+const config: AxiosRequestConfig = {
+  timeout: 240000, // Temps d'attente en millisecondes (10 secondes dans cet exemple)
+};
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -60,7 +61,7 @@ export default function Dashboard() {
   const [isLoaded, setLoaded] = useState(false);
 
   function remplacerPointsParPointVirgules(chaine: string): string {
-    return chaine.replace(/\./g, ";");
+    return chaine.replace(/[\r\n]+/g, "");
   }
   const handleClick = async () => {
     var text = remplacerPointsParPointVirgules(textvalue);
@@ -68,11 +69,15 @@ export default function Dashboard() {
     activeButtonSubmit(true);
     if (textvalue !== "") {
       await axios
-        .post("/api/speak", {
-          text: text,
-          language: languagevalue,
-          clean_voice: false,
-        })
+        .post(
+          "/api/speak",
+          {
+            text: text,
+            language: languagevalue,
+            clean_voice: false,
+          },
+          config
+        )
         .then((res) => {
           console.log(res.data);
           const { output } = res.data;
