@@ -44,15 +44,58 @@ const frameworks = [
     label: "portugal",
   },
 ];
+/*
+James;
+John;
+Robert;
+Michael;
+William;
+David;
+Richard;
+Joseph;
+Charles;
+Thomas;
+Christopher;
+Daniel;
+Matthew;
 
+Patricia;
+Elizabeth;
+Barbara;
+Susan;
+Jessica;*/
+const voices = [
+  {
+    value: "en",
+    label: "David ",
+  },
+  {
+    value: "fr",
+    label: "Michael",
+  },
+  {
+    value: "rs",
+    label: "Anthony",
+  },
+  {
+    value: "sp",
+    label: "Linda",
+  },
+  {
+    value: "pg",
+    label: "Jennifer",
+  },
+];
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 export default function Dashboard() {
   //https://replicate.delivery/pbxt/KymPMxIaMKKWCtfLIy0rOx6pKSKZWM3HaOHKoFxf9t40f03kA/output.wav
+  const { toast } = useToast();
 
   const [open, setOpen] = React.useState(false);
+  const [openVoice, setOpenVoice] = React.useState(false);
   const [languagevalue, setLanguageValue] = React.useState("fr");
-  const { toast } = useToast();
+  const [voicevalue, setvoiceValue] = React.useState("fr");
 
   const [text, setText] = useState("");
   const [textvalue, settextValues] = useState("");
@@ -110,103 +153,158 @@ export default function Dashboard() {
   }, [textvalue]);
 
   return (
-    <div className="grid w-full mx-9">
-      <div className="flex justify-center">
-        <p className="text-md  text-center mx-7 mb-7">
-          Paste your text and get your voice
-        </p>
-      </div>
+    <div className="flex justify-center mt-10">
+      <div className="grid w-full mx-9">
+        <div className="flex justify-center">
+          <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
+            Paste your text and get your voice
+          </p>
+        </div>
 
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={open}
-            className="w-[200px] justify-between"
-          >
-            {languagevalue
-              ? frameworks.find(
-                  (framework) => framework.value === languagevalue
-                )?.label
-              : "Select language..."}
-            <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
-          <Command>
-            <CommandInput placeholder="Search framework..." className="h-9" />
-            <CommandEmpty>No framework found.</CommandEmpty>
-            <CommandGroup>
-              {frameworks.map((framework) => (
-                <CommandItem
-                  key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    setLanguageValue(
-                      currentValue === languagevalue ? "" : currentValue
-                    );
-                    setOpen(false);
-                    console.log(` language selected: ${languagevalue}`);
-                  }}
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              className="w-[200px] justify-between"
+            >
+              {languagevalue
+                ? frameworks.find(
+                    (framework) => framework.value === languagevalue
+                  )?.label
+                : "Select language..."}
+              <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0">
+            <Command>
+              <CommandInput placeholder="Search language..." className="h-9" />
+              <CommandEmpty>No language found.</CommandEmpty>
+              <CommandGroup>
+                {frameworks.map((framework) => (
+                  <CommandItem
+                    key={framework.value}
+                    value={framework.value}
+                    onSelect={(currentValue) => {
+                      setLanguageValue(
+                        currentValue === languagevalue ? "" : currentValue
+                      );
+                      setOpen(false);
+                      console.log(` language selected: ${languagevalue}`);
+                    }}
+                  >
+                    {framework.label}
+                    <BoxSelectIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        languagevalue === framework.value
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
+        <br />
+        <Popover open={openVoice} onOpenChange={setOpenVoice}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={openVoice}
+              className="w-[200px] justify-between"
+            >
+              {voicevalue
+                ? voices.find((voices) => voices.value === voicevalue)?.label
+                : "Select language..."}
+              <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0">
+            <Command>
+              <CommandInput placeholder="Search Voice..." className="h-9" />
+              <CommandEmpty>No voice found.</CommandEmpty>
+              <CommandGroup>
+                {voices.map((voices) => (
+                  <CommandItem
+                    key={voices.value}
+                    value={voices.value}
+                    onSelect={(currentValue) => {
+                      setvoiceValue(
+                        currentValue === voicevalue ? "" : currentValue
+                      );
+                      setOpenVoice(false);
+                      console.log(` language selected: ${voicevalue}`);
+                    }}
+                  >
+                    {voices.label}
+                    <BoxSelectIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        voicevalue === voices.value
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
+        <br />
+        <div className=" grid w-full   ">
+          <br />
+          <br />
+          <div className="grid w-full gap-1.5">
+            <Textarea
+              placeholder="Type your message here."
+              onChange={(e) => {
+                settextValues(e.target.value);
+                handleActiveButton();
+              }}
+              value={textvalue}
+            />
+
+            <p className="text-sm text-muted-foreground">
+              Your message will be copied to the support team.
+            </p>
+          </div>
+          <div className=" flex justify-center">
+            <div className=" grid gap-2">
+              <div className="flex justify-center space-x-4 mt-4">
+                <Button
+                  onClick={handleClick}
+                  disabled={isActive}
+                  variant="outline"
+                  size="icon"
                 >
-                  {framework.label}
-                  <BoxSelectIcon
-                    className={cn(
-                      "ml-auto h-4 w-4",
-                      languagevalue === framework.value
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </Command>
-        </PopoverContent>
-      </Popover>
-      <br />
-      <div className=" grid w-full   ">
-        <br />
-        <br />
-        <Textarea
-          placeholder="Type your message here."
-          onChange={(e) => {
-            settextValues(e.target.value);
-            handleActiveButton();
-          }}
-          value={textvalue}
-          color="text-red"
-        />
-        <div className=" flex justify-center">
-          <div className="fixed bottom-4 grid gap-2">
-            <div className="flex justify-center space-x-4 mt-4">
-              <Button
-                onClick={handleClick}
-                disabled={isActive}
-                variant="outline"
-                size="icon"
-              >
-                {isLoaded ? (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <PlayCircleIcon className="h-4 w-4" />
-                )}
-              </Button>
+                  {isLoaded ? (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <PlayCircleIcon className="h-4 w-4" />
+                  )}
+                </Button>
 
-              <Button
-                onClick={() => {
-                  settextValues("");
-                }}
-                disabled={isActive}
-                variant="outline"
-                size="icon"
-              >
-                <DeleteIcon className="h-3 w-3" />
-              </Button>
+                <Button
+                  onClick={() => {
+                    settextValues("");
+                  }}
+                  disabled={isActive}
+                  variant="outline"
+                  size="icon"
+                >
+                  <DeleteIcon className="h-3 w-3" />
+                </Button>
+              </div>
+              <br />
+              <AudioPlayer audioUrl={text} />
+              <br />
             </div>
-
-            <AudioPlayer audioUrl={text} />
           </div>
         </div>
       </div>
