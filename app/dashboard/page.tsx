@@ -115,7 +115,7 @@ export default function Dashboard() {
     activeButtonSubmit(true);
     if (textvalue !== "") {
       await axiosInstance
-        .post("/api/speak", {
+        .post("https://server-natural-voice.onrender.com", {
           text: text,
           language: languagevalue,
           clean_voice: false,
