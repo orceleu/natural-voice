@@ -45,6 +45,8 @@ const frameworks = [
   },
 ];
 
+const axiosInstance = axios.create();
+axiosInstance.defaults.timeout = 240000;
 export default function Dashboard() {
   //https://replicate.delivery/pbxt/KymPMxIaMKKWCtfLIy0rOx6pKSKZWM3HaOHKoFxf9t40f03kA/output.wav
 
@@ -61,24 +63,20 @@ export default function Dashboard() {
     return chaine.replace(/[\r\n]+/g, "");
   }
   const handleClick = async () => {
-    const config: AxiosRequestConfig = {
+    /* const config: AxiosRequestConfig = {
       timeout: 240000, // Temps d'attente en millisecondes (10 secondes dans cet exemple)
     };
-
+*/
     var text = remplacerPointsParPointVirgules(textvalue);
     setLoaded(true);
     activeButtonSubmit(true);
     if (textvalue !== "") {
-      await axios
-        .post(
-          "/api/speak",
-          {
-            text: text,
-            language: languagevalue,
-            clean_voice: false,
-          },
-          config
-        )
+      await axiosInstance
+        .post("/api/speak", {
+          text: text,
+          language: languagevalue,
+          clean_voice: false,
+        })
         .then((res) => {
           console.log(res.data);
           const { output } = res.data;
@@ -178,6 +176,7 @@ export default function Dashboard() {
             handleActiveButton();
           }}
           value={textvalue}
+          color="text-red"
         />
         <div className=" flex justify-center">
           <div className="fixed bottom-4 grid gap-2">
