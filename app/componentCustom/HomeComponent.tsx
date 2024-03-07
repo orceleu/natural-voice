@@ -1,8 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import React from "react";
+import useSound from "use-sound";
+import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import { PauseIcon, PlayIcon } from "@radix-ui/react-icons";
+
 interface Props {
   img1: StaticImageData;
   img2: StaticImageData;
@@ -10,6 +12,22 @@ interface Props {
   img4: StaticImageData;
 }
 const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
+  const [playing, setPlaying] = useState(false);
+  const [playing2, setPlaying2] = useState(false);
+  const [playing3, setPlaying3] = useState(false);
+  const [playing4, setPlaying4] = useState(false);
+  const [play, { stop }] = useSound(
+    "https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3"
+  );
+  const [play2, { stop: stopAudio2 }] = useSound(
+    "https://audioplayer.madza.dev/Madza-Persistence.mp3"
+  );
+  const [play3, { stop: stopAudio3 }] = useSound(
+    "https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3"
+  );
+  const [play4, { stop: stopAudio4 }] = useSound(
+    "https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3"
+  );
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {/* Card 1 */}
@@ -19,15 +37,26 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
           <h3 className="text-xl font-semibold mb-2">Lisa</h3>
         </div>
         <br />
-        <div className="flex justify-end my-2">
+        <div className="my-auto mr-4 ml-auto">
           <Button
             className=" "
             variant="outline"
             onClick={() => {
-              alert("fonctionne");
+              if (playing) {
+                stop();
+              } else {
+                play();
+                console.log("playing");
+              }
+              setPlaying(!playing);
             }}
+            size="icon"
           >
-            Button
+            {playing ? (
+              <PauseIcon className="h-4 w-4" />
+            ) : (
+              <PlayIcon className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>
@@ -40,15 +69,26 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
           <h3 className="text-xl font-semibold mb-2">Emma</h3>
         </div>
         <br />
-        <div className="flex justify-end my-2">
+        <div className="my-auto mr-4 ml-auto">
           <Button
             className=" "
             variant="outline"
             onClick={() => {
-              alert("fonctionne");
+              if (playing2) {
+                stopAudio2();
+              } else {
+                play2();
+                console.log("playing");
+              }
+              setPlaying2(!playing2);
             }}
+            size="icon"
           >
-            Button
+            {playing2 ? (
+              <PauseIcon className="h-4 w-4" />
+            ) : (
+              <PlayIcon className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>
@@ -60,15 +100,26 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
           <h3 className="text-xl font-semibold mb-2">Daniel</h3>{" "}
         </div>{" "}
         <br />
-        <div className="flex justify-end my-2">
+        <div className="my-auto mr-4 ml-auto">
           <Button
             className=" "
             variant="outline"
             onClick={() => {
-              alert("fonctionne");
+              if (playing3) {
+                stopAudio3();
+              } else {
+                play3();
+                console.log("playing");
+              }
+              setPlaying3(!playing3);
             }}
+            size="icon"
           >
-            Button
+            {playing3 ? (
+              <PauseIcon className="h-4 w-4" />
+            ) : (
+              <PlayIcon className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>
@@ -80,15 +131,26 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
           <h3 className="text-xl font-semibold mb-2">Michael</h3>{" "}
         </div>{" "}
         <br />
-        <div className="flex justify-end my-2">
+        <div className="my-auto mr-4 ml-auto">
           <Button
             className=" "
             variant="outline"
             onClick={() => {
-              alert("fonctionne");
+              if (playing4) {
+                stopAudio4();
+              } else {
+                play4();
+                console.log("playing");
+              }
+              setPlaying4(!playing4);
             }}
+            size="icon"
           >
-            Button
+            {playing4 ? (
+              <PauseIcon className="h-4 w-4" />
+            ) : (
+              <PlayIcon className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>

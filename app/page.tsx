@@ -9,6 +9,8 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import NavBar from "./componentCustom/NavBar";
+import SoundExemple from "./componentCustom/SoundExemple";
+
 import {
   Card,
   CardContent,
@@ -69,6 +71,8 @@ export default function Home() {
             You can choose from over 80 languages and 1000 voices to convert
             your texts into speech and get your audio file
           </p>
+
+          <SoundExemple />
           <div className="mx-10 my-10">
             <HomeComponent
               img1={lisa}
