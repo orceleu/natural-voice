@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
 import screentts from "../public/screentts.png";
@@ -5,6 +6,7 @@ import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
 import lisa from "../public/lisa.png";
+//import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";

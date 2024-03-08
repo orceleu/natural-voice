@@ -17,7 +17,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
   const [playing3, setPlaying3] = useState(false);
   const [playing4, setPlaying4] = useState(false);
   const [play, { stop }] = useSound(
-    "https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3"
+    "https://firebasestorage.googleapis.com/v0/b/my-saas-1.appspot.com/o/lobservateur.mp3.mp3?alt=media&token=8985ed8c-a960-4631-95f9-ed3ce9db476d"
   );
   const [play2, { stop: stopAudio2 }] = useSound(
     "https://audioplayer.madza.dev/Madza-Persistence.mp3"

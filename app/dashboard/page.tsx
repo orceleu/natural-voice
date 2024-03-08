@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { PlayCircleIcon, DeleteIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
