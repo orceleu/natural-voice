@@ -8,7 +8,12 @@ import AudioPlayer from "../componentCustom/AudioPlayer";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+
 import { cn } from "@/lib/utils";
+import { franc, francAll } from "franc";
+
 import {
   Command,
   CommandEmpty,
@@ -25,45 +30,54 @@ import {
 const frameworks = [
   {
     value: "en",
-    label: "english",
+    label: "English",
   },
   {
     value: "fr",
-    label: "french",
+    label: "French",
   },
   {
-    value: "rs",
-    label: "russia",
+    value: "ru",
+    label: "Russia",
   },
   {
-    value: "sp",
-    label: "spanish",
+    value: "es",
+    label: "Spanish",
   },
   {
-    value: "pg",
-    label: "portugal",
+    value: "pt",
+    label: "Portugal",
+  },
+  {
+    value: "cs",
+    label: "Czech",
+  },
+  {
+    value: "it",
+    label: "Italian",
+  },
+  {
+    value: "nl",
+    label: "Dutch",
+  },
+  {
+    value: "zh-cn",
+    label: "Chinese",
+  },
+  {
+    value: "tr",
+    label: "Turkish",
+  },
+  {
+    value: "pl",
+    label: "Polish",
+  },
+  {
+    value: "ar",
+    label: "Arabic",
   },
 ];
-/*
-James;
-John;
-Robert;
-Michael;
-William;
-David;
-Richard;
-Joseph;
-Charles;
-Thomas;
-Christopher;
-Daniel;
-Matthew;
 
-Patricia;
-Elizabeth;
-Barbara;
-Susan;
-Jessica;*/
 const voices = [
   {
     value: "en",
@@ -74,7 +88,7 @@ const voices = [
     label: "Michael",
   },
   {
-    value: "rs",
+    value: "ru",
     label: "Anthony",
   },
   {
@@ -104,6 +118,41 @@ export default function Dashboard() {
 
   function remplacerPointsParPointVirgules(chaine: string): string {
     return chaine.replace(/[\r\n]+/g, "");
+  }
+  function detectTheLanguage() {
+    /*
+ English: en 🇺🇸 French: fr 🇫🇷 German: de 🇩🇪 Spanish: es 🇪🇸 Italian: it 🇮🇹 Portuguese: pt 🇵🇹 Czech: cs 🇨🇿 Polish: pl 🇵🇱 Russian: ru 🇷🇺 Dutch: nl 🇳🇱 Turksih: tr 🇹🇷 Arabic: ar 🇦🇪 Mandarin Chinese: zh-cn 🇨🇳
+
+    */
+    var detectedLangauge = franc(remplacerPointsParPointVirgules(textvalue));
+    var finalDetectedLanguage = "fr";
+    if (detectedLangauge == "fra") {
+      finalDetectedLanguage = "fr"; //francais 1
+    } else if (detectedLangauge == "eng") {
+      finalDetectedLanguage = "en"; //anglais 2
+    } else if (detectedLangauge == "spa") {
+      finalDetectedLanguage = "es"; //espagnole 3
+    } else if (detectedLangauge == "rus") {
+      finalDetectedLanguage = "ru"; //russe 4
+    } else if (detectedLangauge == "cmn") {
+      finalDetectedLanguage = "zh-cn"; //mandarin 5
+    } else if (detectedLangauge == "ita") {
+      finalDetectedLanguage = "it"; //italien 6
+    } else if (detectedLangauge == "por") {
+      finalDetectedLanguage = "pt"; //portugais 7
+    } else if (detectedLangauge == "ces") {
+      finalDetectedLanguage = "cs"; //tcheque 8
+    } else if (detectedLangauge == "nld") {
+      finalDetectedLanguage = "nl"; // Néerlandais 9
+    } else if (detectedLangauge == "tur") {
+      finalDetectedLanguage = "tr"; // turk //polonais 10
+    } else if (detectedLangauge == "pol") {
+      finalDetectedLanguage = "pl"; //polonais 11
+    } else if (detectedLangauge == "arb") {
+      finalDetectedLanguage = "ar"; //arabe 12
+    }
+    console.log(finalDetectedLanguage);
+    setLanguageValue(finalDetectedLanguage);
   }
   const handleClick = async () => {
     /* const config: AxiosRequestConfig = {
@@ -146,6 +195,7 @@ export default function Dashboard() {
       activeButtonSubmit(true);
     } else {
       activeButtonSubmit(false);
+      detectTheLanguage();
     }
   };
   useEffect(() => {
@@ -160,7 +210,10 @@ export default function Dashboard() {
             Paste your text and get your voice
           </p>
         </div>
-
+        <div className="flex items-center space-x-2 mb-5">
+          <Checkbox id="terms" checked />
+          <Label htmlFor="terms">auto detect language</Label>
+        </div>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
