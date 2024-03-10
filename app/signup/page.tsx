@@ -16,7 +16,6 @@ import {
   User,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { AuthContext } from "../firebase/AuthContext";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
 
@@ -27,7 +26,6 @@ export default function SignUp() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const { toast } = useToast();
-  //const { googleSignIn, logOut }: any = UserAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -40,17 +38,11 @@ export default function SignUp() {
     });
     return () => unsubscribe();
   }, [user]);
-  const AuthProvider: any = ({ children }: any) => {
-    return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
-  };
 
-  const googleSignIn = () => {
+  const handleSignInGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-  };
-  const handleSignInGoogle = () => {
     try {
-      googleSignIn();
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +75,7 @@ export default function SignUp() {
     setTextError("");
   };
   return (
-    <AuthProvider>
+    <>
       <div>
         <br />
         <br />
@@ -142,6 +134,6 @@ export default function SignUp() {
         <br />
         <br />
       </div>
-    </AuthProvider>
+    </>
   );
 }

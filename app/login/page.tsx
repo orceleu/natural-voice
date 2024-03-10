@@ -26,13 +26,10 @@ export default function Login() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
-  const googleLogIn = () => {
+  const handleLoginGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-  };
-  const handleLoginGoogle = () => {
     try {
-      googleLogIn();
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.log(error);
     }

@@ -169,8 +169,8 @@ const getUserAudios = async () => {
   return [];
 };*/
 
-  const logOut = () => {
-    signOut(auth);
+  const logOut = async () => {
+    await signOut(auth);
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
