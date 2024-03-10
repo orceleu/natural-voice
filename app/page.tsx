@@ -74,7 +74,6 @@ export default function Home() {
             your texts into speech and get your audio file
           </p>
 
-          <SoundExemple />
           <div className="mx-10 my-10">
             <HomeComponent
               img1={lisa}

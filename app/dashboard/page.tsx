@@ -10,6 +10,20 @@ import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { cn } from "@/lib/utils";
 import { franc, francAll } from "franc";
@@ -26,6 +40,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+import { auth } from "@/app/firebase/config";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  User,
+} from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 const frameworks = [
   {
@@ -103,9 +128,8 @@ const voices = [
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 export default function Dashboard() {
-  //https://replicate.delivery/pbxt/KymPMxIaMKKWCtfLIy0rOx6pKSKZWM3HaOHKoFxf9t40f03kA/output.wav
   const { toast } = useToast();
-
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [openVoice, setOpenVoice] = React.useState(false);
   const [languagevalue, setLanguageValue] = React.useState("fr");
@@ -115,6 +139,58 @@ export default function Dashboard() {
   const [textvalue, settextValues] = useState("");
   const [isActive, activeButtonSubmit] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [userName, setUserName] = useState("");
+  const [userId, setUserid] = useState("");
+
+  /*
+  const uploadAudio = async (file: File) => {
+    const currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      const userStorageRef = firebase.storage().ref().child('audios').child(currentUser.uid);
+      const uploadTask = userStorageRef.child(file.name).put(file);
+      // Vous pouvez écouter les événements de progression de téléchargement ici
+      return uploadTask;
+    }
+  };
+  
+
+  // Fonction pour récupérer les données audio de l'utilisateur
+const getUserAudios = async () => {
+  const currentUser = firebase.auth().currentUser;
+  if (currentUser) {
+    const userStorageRef = firebase.storage().ref().child('audios').child(currentUser.uid);
+    const listResult = await userStorageRef.listAll();
+    const audioUrls = await Promise.all(
+      listResult.items.map((item) => item.getDownloadURL())
+    );
+    return audioUrls;
+  }
+  return [];
+};*/
+
+  const logOut = () => {
+    signOut(auth);
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        const name = currentUser?.displayName;
+        const uiid = currentUser?.uid;
+        console.log(currentUser?.displayName);
+        if (name !== undefined && name !== null) {
+          setUserName(name);
+          setUserid(uiid);
+        } else {
+        }
+      }
+      if (currentUser == null) {
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
+  }, [user]);
 
   function remplacerPointsParPointVirgules(chaine: string): string {
     return chaine.replace(/[\r\n]+/g, "");
@@ -203,8 +279,43 @@ export default function Dashboard() {
   }, [textvalue]);
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center mt-4">
       <div className="grid w-full mx-9">
+        <div className="ml-auto mr-5">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">My...</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  Profile
+                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Billing
+                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Settings
+                  <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>GitHub</DropdownMenuItem>
+              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuItem disabled>API</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={logOut}>
+                Log out
+                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <p>{userName}</p>
+        </div>
         <div className="flex justify-center">
           <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
             Paste your text and get your voice

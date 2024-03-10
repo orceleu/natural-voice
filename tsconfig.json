@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/speak/route.js"
-  ],
+, "app/firebase/AuthContext.js", "app/firebase/AuthContext.js"  ],
   "exclude": ["node_modules"]
 }
