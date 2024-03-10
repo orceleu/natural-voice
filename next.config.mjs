@@ -1,18 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* webpack: (config, { isServer }) => {
-    // Ajoutez la configuration pour file-loader
-    config.module.rules.push({
-      test: /\.(mp3)$/,
-      use: {
-        loader: "file-loader",
-        options: {
-          publicPath: "/app",
-          name: "app/sound/[name].[hash].[ext]",
-        },
+  async headers() {
+    return [
+      {
+        source: "/signup",
+        headers: [
+          {
+            key: "Cross-Origin-Embedder-Policy",
+            value: "unsafe-none",
+          },
+        ],
       },
-    });
-    return config;
-  },*/
+    ];
+  },
 };
 export default nextConfig;

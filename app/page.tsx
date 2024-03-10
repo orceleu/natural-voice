@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
 import screentts from "../public/screentts.png";
