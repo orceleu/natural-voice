@@ -2,14 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
-import { PlayCircleIcon, DeleteIcon } from "lucide-react";
+import { PlayCircleIcon, DeleteIcon, AudioWaveformIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { InputIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { storage } from "@/app/firebase/config";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  listAll,
+} from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +32,13 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import { cn } from "@/lib/utils";
 import { franc, francAll } from "franc";
@@ -51,6 +66,7 @@ import {
   User,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 const frameworks = [
   {
@@ -128,6 +144,9 @@ const voices = [
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 export default function Dashboard() {
+  const [audioUrl, setAudioUrl] = useState("");
+  const [progresspercent, setProgresspercent] = useState(0);
+
   const { toast } = useToast();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
@@ -168,6 +187,55 @@ const getUserAudios = async () => {
   }
   return [];
 };*/
+
+  //upload audio
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const file = e.target[0]?.files[0];
+    if (!file) return;
+    const storageRef = ref(storage, `users/${user?.uid}/${uuidv4()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setAudioUrl(downloadURL);
+        });
+      }
+    );
+  };
+
+  // List All Files
+  const listAllFile = async () => {
+    const storageRef2 = await ref(storage, `users/${userId}/`);
+    if (storageRef2.fullPath == `users/${userId}`) {
+      listAll(storageRef2).then(async (res) => {
+        await res.items.forEach((fileRef) => {
+          getDownloadURL(fileRef).then((fileUrl) => {
+            console.log(fileUrl);
+          });
+        });
+      });
+    } else {
+      console.log("no directory for custom voice found");
+    }
+  };
+
+  useEffect(() => {
+    if (userId !== "") {
+      listAllFile();
+    }
+  }, [userId]);
 
   const logOut = async () => {
     await signOut(auth);
@@ -321,6 +389,20 @@ const getUserAudios = async () => {
             Paste your text and get your voice
           </p>
         </div>
+        <form onSubmit={handleSubmit}>
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="picture">
+              Upload your voice(mp3,wav)
+              <AudioWaveformIcon />
+            </Label>
+            <Input id="picture" type="file" />
+          </div>
+          <Button type="submit" className="my-2">
+            Upload
+          </Button>
+        </form>
+        <div>{progresspercent}</div>
+
         <div className="flex items-center space-x-2 mb-5">
           <Checkbox id="terms" checked />
           <Label htmlFor="terms">auto detect language</Label>

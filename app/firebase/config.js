@@ -1,6 +1,6 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyBPIc-g0fXX_xIqyWe-0t39ilStHrHPAtU",
   authDomain: "natural-voice-28245.firebaseapp.com",
@@ -14,4 +14,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = !getApps.length ? initializeApp(firebaseConfig) : getApp;
 const auth = getAuth(app);
-export { auth, app };
+const storage = getStorage(app);
+export { auth, app, storage };

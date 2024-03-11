@@ -41,6 +41,7 @@ export default function SignUp() {
 
   const handleSignInGoogle = async () => {
     const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ app: "natural-voice" });
     try {
       await signInWithPopup(auth, provider);
     } catch (error) {
