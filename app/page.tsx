@@ -5,6 +5,7 @@ import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
 import lisa from "../public/lisa.png";
+import screensaasvoice from "../public/screensaasvoice.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
@@ -91,7 +92,7 @@ export default function Home() {
       </div>
 
       <div className="flex justify-center mt-11 mx-10">
-        <Image src={screentts} alt="" />
+        <Image src={screensaasvoice} alt="" />
       </div>
 
       <div className="container mx-auto py-8">
