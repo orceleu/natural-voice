@@ -5,17 +5,26 @@ import axios from "axios";
 import { PlayCircleIcon, DeleteIcon, AudioWaveformIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
-import { InputIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
+import { Player } from "react-simple-player";
+import {
+  InputIcon,
+  PauseIcon,
+  PlayIcon,
+  ReloadIcon,
+} from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { storage } from "@/app/firebase/config";
+import useSound from "use-sound";
+
 import {
   ref,
   getDownloadURL,
   uploadBytesResumable,
   listAll,
+  deleteObject,
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -67,6 +76,7 @@ import {
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import SoundExemple from "../componentCustom/SoundExemple";
 
 const frameworks = [
   {
@@ -141,10 +151,25 @@ const voices = [
     label: "Jennifer",
   },
 ];
+
+interface Item {
+  name: string;
+  path: string;
+  url: string;
+}
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 export default function Dashboard() {
-  const [audioUrl, setAudioUrl] = useState("");
+  const [changed, setChange] = useState(false);
+  const [stringList, setStringList] = useState<Item[]>([]);
+  const [verifystringList, setverifyStringList] = useState<string[]>([]);
+  const [audioVoiceToPlay, setaudioVoiceToPlay] = useState("");
+
+  const [play2, { stop: stopAudio2 }] = useSound(
+    "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/users%2Fem5YVb6jtzZCCQ1n5LnLAwXqLG32%2FcustomVoice(1)?alt=media&token=8a6cd910-e31c-4110-9fac-96f5ca25f310"
+  );
+  const [playing2, setPlaying2] = useState(false);
+
   const [progresspercent, setProgresspercent] = useState(0);
 
   const { toast } = useToast();
@@ -162,38 +187,34 @@ export default function Dashboard() {
   const [userName, setUserName] = useState("");
   const [userId, setUserid] = useState("");
 
-  /*
-  const uploadAudio = async (file: File) => {
-    const currentUser = firebase.auth().currentUser;
-    if (currentUser) {
-      const userStorageRef = firebase.storage().ref().child('audios').child(currentUser.uid);
-      const uploadTask = userStorageRef.child(file.name).put(file);
-      // Vous pouvez écouter les événements de progression de téléchargement ici
-      return uploadTask;
-    }
-  };
-  
-
-  // Fonction pour récupérer les données audio de l'utilisateur
-const getUserAudios = async () => {
-  const currentUser = firebase.auth().currentUser;
-  if (currentUser) {
-    const userStorageRef = firebase.storage().ref().child('audios').child(currentUser.uid);
-    const listResult = await userStorageRef.listAll();
-    const audioUrls = await Promise.all(
-      listResult.items.map((item) => item.getDownloadURL())
-    );
-    return audioUrls;
-  }
-  return [];
-};*/
+  const tracks = [
+    {
+      url: "https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3",
+      title: "Madza - Chords of Life",
+      tags: ["house"],
+    },
+    {
+      url: "https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3",
+      title: "Madza - Late Night Drive",
+      tags: ["dnb"],
+    },
+    {
+      url: "https://audioplayer.madza.dev/Madza-Persistence.mp3",
+      title: "Madza - Persistence",
+      tags: ["dubstep"],
+    },
+  ];
 
   //upload audio
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const file = e.target[0]?.files[0];
+
     if (!file) return;
-    const storageRef = ref(storage, `users/${user?.uid}/${uuidv4()}`);
+    const storageRef = ref(
+      storage,
+      `users/${user?.uid}/customVoice(${stringList.length + 1})`
+    );
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -203,13 +224,17 @@ const getUserAudios = async () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setProgresspercent(progress);
+        if (progresspercent == 100) {
+          setChange(!changed);
+          console.log("upload finished");
+        }
       },
       (error) => {
         alert(error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setAudioUrl(downloadURL);
+          //setAudioUrl(downloadURL);
         });
       }
     );
@@ -220,22 +245,46 @@ const getUserAudios = async () => {
     const storageRef2 = await ref(storage, `users/${userId}/`);
     if (storageRef2.fullPath == `users/${userId}`) {
       listAll(storageRef2).then(async (res) => {
+        console.log(res.items.length);
         await res.items.forEach((fileRef) => {
-          getDownloadURL(fileRef).then((fileUrl) => {
-            console.log(fileUrl);
-          });
+          if (stringList.length !== res.items.length) {
+            getDownloadURL(fileRef).then((fileUrl) => {
+              console.log(fileUrl);
+              let name = fileRef.name;
+              let path = fileRef.fullPath;
+              const newItem: Item = { name: name, path: path, url: fileUrl };
+              if (!verifystringList.includes(fileUrl)) {
+                setverifyStringList([...verifystringList, fileUrl]);
+                setStringList([...stringList, newItem]);
+              }
+            });
+          }
         });
       });
     } else {
       console.log("no directory for custom voice found");
     }
   };
-
+  const deleteFile = async (audioPath: string) => {
+    const storageRef2 = await ref(storage, audioPath);
+    deleteObject(storageRef2)
+      .then(() => {
+        setChange(!changed);
+        const copyfuits = [...stringList];
+        const updateFuits = copyfuits.filter(
+          (fuits) => fuits.path !== audioPath
+        );
+        setStringList(updateFuits);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
   useEffect(() => {
     if (userId !== "") {
       listAllFile();
     }
-  }, [userId]);
+  }, [userId, stringList, changed]);
 
   const logOut = async () => {
     await signOut(auth);
@@ -388,6 +437,37 @@ const getUserAudios = async () => {
           <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
             Paste your text and get your voice
           </p>
+        </div>
+        <div className="mx-10">
+          <div>
+            {stringList.map((item, index) => (
+              <div
+                className="bg-white rounded-3xl shadow-md overflow-hidden flex  h-auto my-4 w-auto"
+                key={index}
+              >
+                <div className="p-4 flex flex-col justify-center">
+                  <h3 className="text-sm font-semibold my-auto">
+                    <p>{item.name}</p>
+                  </h3>
+                </div>
+                <br />
+                <div className="my-auto">
+                  <Button
+                    onClick={() => {
+                      alert(`delete audio ${item.name} ?`);
+                      deleteFile(item.path);
+                    }}
+                  >
+                    delete
+                  </Button>
+                </div>
+
+                <div className="my-auto mr-4 ml-auto">
+                  <Player src={item.url} height={40} />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="grid w-full max-w-sm items-center gap-1.5">
