@@ -438,335 +438,350 @@ export default function Dashboard() {
   }, [textvalue]);
 
   return (
-    <div className="flex justify-center ">
-      {/* Partie gauche */}
-      <div className="w-2/6 bg-gray-200 ">
-        {/* Contenu de la partie gauche */}
-        <br />
+    <>
+      <div> {dashBoardDesktop()}</div>
 
-        <ScrollArea className="h-[600px]">
-          <ScrollBar className="bg-white rounded-sm" />
-          <div className="grid w-full mx-2">
-            <div className="flex items-center space-x-2 mb-5">
-              <Checkbox id="terms" checked />
-              <Label htmlFor="terms">auto detect language</Label>
-            </div>
-            <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  className="w-[200px] justify-between"
-                >
-                  {languagevalue
-                    ? frameworks.find(
-                        (framework) => framework.value === languagevalue
-                      )?.label
-                    : "Select language..."}
-                  <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0">
-                <Command>
-                  <CommandInput
-                    placeholder="Search language..."
-                    className="h-9"
-                  />
-                  <CommandEmpty>No language found.</CommandEmpty>
-                  <CommandGroup>
-                    {frameworks.map((framework) => (
-                      <CommandItem
-                        key={framework.value}
-                        value={framework.value}
-                        onSelect={(currentValue) => {
-                          setLanguageValue(
-                            currentValue === languagevalue ? "" : currentValue
-                          );
-                          setOpen(false);
-                          console.log(` language selected: ${languagevalue}`);
-                        }}
-                      >
-                        {framework.label}
-                        <CheckIcon
-                          className={cn(
-                            "ml-auto h-4 w-4",
-                            languagevalue === framework.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </Command>
-              </PopoverContent>
-            </Popover>
-            <br />
-            <Popover open={openVoice} onOpenChange={setOpenVoice}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={openVoice}
-                  className="w-[200px] justify-between"
-                >
-                  {voicevalue
-                    ? voices.find((voices) => voices.value === voicevalue)
-                        ?.label
-                    : "Select language..."}
-                  <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0">
-                <Command>
-                  <CommandInput placeholder="Search Voice..." className="h-9" />
-                  <CommandEmpty>No voice found.</CommandEmpty>
-                  <CommandGroup>
-                    {voices.map((voices) => (
-                      <CommandItem
-                        key={voices.value}
-                        value={voices.value}
-                        onSelect={(currentValue) => {
-                          setvoiceValue(
-                            currentValue === voicevalue ? "" : currentValue
-                          );
-                          setOpenVoice(false);
-                          console.log(` language selected: ${voicevalue}`);
-                        }}
-                      >
-                        {voices.label}
-                        <CheckIcon
-                          className={cn(
-                            "ml-auto h-4 w-4",
-                            voicevalue === voices.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </Command>
-              </PopoverContent>
-            </Popover>
-            <br />
-
-            <form onSubmit={handleSubmit}>
-              <div className="grid w-[320px] items-center gap-1.5">
-                <Label htmlFor="picture">
-                  Upload your voice(mp3,wav)
-                  <AudioWaveformIcon />
-                </Label>
-                <Input id="picture" type="file" />
-              </div>
-              <Button type="submit" className="my-2">
-                Upload
-              </Button>
-            </form>
-
-            <Progress value={progresspercent} className="w-[60%]" />
-
-            <div className="mx-5">
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    <p className="font-semibold">Your voices...</p>
-                    <AudioWaveformIcon />
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div>
-                      {stringList.map((item, index) => (
-                        <div
-                          className="bg-gray-50 rounded-xl grid w-[320px] my-1"
-                          key={index}
-                        >
-                          <div className="mx-auto">
-                            <div className="flex justify-center">
-                              <h3 className="text-sm font-semibold my-auto">
-                                <p>{item.name}</p>
-                              </h3>
-                              <div className="my-1 ml-5">
-                                <Button
-                                  onClick={() => {
-                                    alert(`delete audio ${item.name} ?`);
-                                    deleteFile(item.path);
-                                  }}
-                                  variant="destructive"
-                                >
-                                  delete
-                                </Button>
-                                <Button
-                                  onClick={() => {
-                                    alert(`add this Voice? ${item.url}`);
-                                    seturlExempleVoice(item.url);
-                                    setNameVoiceSelected(item.name);
-                                  }}
-                                  variant="outline"
-                                  size="icon"
-                                  className="ml-5"
-                                >
-                                  <CheckIcon className="h-5 w-5" />
-                                </Button>
-                              </div>
-                            </div>
-
-                            <div className="mx-auto">
-                              <Player src={item.url} height={40} />
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-              <Separator className="bg-blue-500" />
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    <p className="font-semibold">Public voices...</p>
-                    <AudioWaveformIcon />
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div>
-                      {publicVoices.map((item, index) => (
-                        <div
-                          className="bg-gray-50 rounded-xl grid w-[320px] my-1"
-                          key={index}
-                        >
-                          <div className="mx-auto">
-                            <div className="flex justify-center">
-                              <h3 className="text-sm font-semibold my-auto">
-                                <p>{item.name}</p>
-                              </h3>
-                              <div className="my-1 ml-5">
-                                <Button
-                                  onClick={() => {
-                                    alert(`add this voice? ${item.url}`);
-                                    seturlExempleVoice(item.url);
-                                    setNameVoiceSelected(item.name);
-                                  }}
-                                  variant="outline"
-                                  size="icon"
-                                  className="ml-5 "
-                                >
-                                  <CheckIcon className="h-5 w-5" />
-                                </Button>
-                              </div>
-                            </div>
-
-                            <div className="mx-auto">
-                              <Player src={item.url} height={40} />
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-          </div>
-        </ScrollArea>
+      <div className="lg:hidden">
+        <p>mobile screen</p>
       </div>
+    </>
+  );
 
-      {/* Partie droite */}
-      <div className="w-4/6 bg-white mx-3">
-        {/* Contenu de la partie droite */}
-        <p>Voice selected:</p>
-        <p className=" text-green-500">{nameVoiceSelected}</p>
-        <div className=" grid w-full   ">
-          <div className="ml-auto mr-3 mt-7">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">My...</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    Profile
-                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    Billing
-                    <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    Settings
-                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>GitHub</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuItem disabled>API</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logOut}>
-                  Log out
-                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <p>{userName}</p>
-          </div>
+  function dashBoardDesktop() {
+    return (
+      <div className="hidden lg:flex justify-center ">
+        {/* Partie gauche */}
+        <div className=" max-w-[400px] bg-gray-200 ">
+          {/* Contenu de la partie gauche */}
           <br />
-          <div className="flex justify-center">
-            <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
-              Paste your text and get your voice
-            </p>
-          </div>
-          <br />
-          <div className="grid w-full gap-1.5">
-            <Textarea
-              placeholder="Type your message here."
-              onChange={(e) => {
-                settextValues(e.target.value);
-                handleActiveButton();
-              }}
-              value={textvalue}
-            />
 
-            <p className="text-sm text-muted-foreground">
-              Your message will be copied to the support team.
-            </p>
-          </div>
-          <div className=" flex justify-center">
-            <div className=" grid gap-2">
-              <div className="flex justify-center space-x-4 mt-4">
-                <Button
-                  onClick={handleClick}
-                  disabled={isActive}
-                  variant="outline"
-                  size="icon"
-                >
-                  {isLoaded ? (
-                    <ReloadIcon className=" h-5 w-5 animate-spin" />
-                  ) : (
-                    <SendIcon className="h-5 w-5" />
-                  )}
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    settextValues("");
-                  }}
-                  disabled={isActive}
-                  variant="outline"
-                  size="icon"
-                >
-                  <TrashIcon className="h-5 w-5" />
-                </Button>
+          <ScrollArea className="h-[600px]">
+            <ScrollBar className="bg-white rounded-sm" />
+            <div className="grid w-full mx-2">
+              <div className="flex items-center space-x-2 mb-5">
+                <Checkbox id="terms" checked />
+                <Label htmlFor="terms">auto detect language</Label>
               </div>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className="w-[200px] justify-between"
+                  >
+                    {languagevalue
+                      ? frameworks.find(
+                          (framework) => framework.value === languagevalue
+                        )?.label
+                      : "Select language..."}
+                    <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandInput
+                      placeholder="Search language..."
+                      className="h-9"
+                    />
+                    <CommandEmpty>No language found.</CommandEmpty>
+                    <CommandGroup>
+                      {frameworks.map((framework) => (
+                        <CommandItem
+                          key={framework.value}
+                          value={framework.value}
+                          onSelect={(currentValue) => {
+                            setLanguageValue(
+                              currentValue === languagevalue ? "" : currentValue
+                            );
+                            setOpen(false);
+                            console.log(` language selected: ${languagevalue}`);
+                          }}
+                        >
+                          {framework.label}
+                          <CheckIcon
+                            className={cn(
+                              "ml-auto h-4 w-4",
+                              languagevalue === framework.value
+                                ? "opacity-100"
+                                : "opacity-0"
+                            )}
+                          />
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <br />
-              <AudioPlayer audioUrl={text} />
+              <Popover open={openVoice} onOpenChange={setOpenVoice}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={openVoice}
+                    className="w-[200px] justify-between"
+                  >
+                    {voicevalue
+                      ? voices.find((voices) => voices.value === voicevalue)
+                          ?.label
+                      : "Select language..."}
+                    <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandInput
+                      placeholder="Search Voice..."
+                      className="h-9"
+                    />
+                    <CommandEmpty>No voice found.</CommandEmpty>
+                    <CommandGroup>
+                      {voices.map((voices) => (
+                        <CommandItem
+                          key={voices.value}
+                          value={voices.value}
+                          onSelect={(currentValue) => {
+                            setvoiceValue(
+                              currentValue === voicevalue ? "" : currentValue
+                            );
+                            setOpenVoice(false);
+                            console.log(` language selected: ${voicevalue}`);
+                          }}
+                        >
+                          {voices.label}
+                          <CheckIcon
+                            className={cn(
+                              "ml-auto h-4 w-4",
+                              voicevalue === voices.value
+                                ? "opacity-100"
+                                : "opacity-0"
+                            )}
+                          />
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <br />
+
+              <form onSubmit={handleSubmit}>
+                <div className="grid w-[320px] items-center gap-1.5">
+                  <Label htmlFor="picture">
+                    Upload your voice(mp3,wav)
+                    <AudioWaveformIcon />
+                  </Label>
+                  <Input id="picture" type="file" />
+                </div>
+                <Button type="submit" className="my-2">
+                  Upload
+                </Button>
+              </form>
+
+              <Progress value={progresspercent} className="w-[60%]" />
+
+              <div className="mx-5">
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>
+                      <p className="font-semibold">Your voices...</p>
+                      <AudioWaveformIcon />
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div>
+                        {stringList.map((item, index) => (
+                          <div
+                            className="bg-gray-50 rounded-xl grid w-[320px] my-1"
+                            key={index}
+                          >
+                            <div className="mx-auto">
+                              <div className="flex justify-center">
+                                <h3 className="text-sm font-semibold my-auto">
+                                  <p>{item.name}</p>
+                                </h3>
+                                <div className="my-1 ml-5">
+                                  <Button
+                                    onClick={() => {
+                                      alert(`delete audio ${item.name} ?`);
+                                      deleteFile(item.path);
+                                    }}
+                                    variant="destructive"
+                                  >
+                                    delete
+                                  </Button>
+                                  <Button
+                                    onClick={() => {
+                                      alert(`add this Voice? ${item.url}`);
+                                      seturlExempleVoice(item.url);
+                                      setNameVoiceSelected(item.name);
+                                    }}
+                                    variant="outline"
+                                    size="icon"
+                                    className="ml-5"
+                                  >
+                                    <CheckIcon className="h-5 w-5" />
+                                  </Button>
+                                </div>
+                              </div>
+
+                              <div className="mx-auto">
+                                <Player src={item.url} height={40} />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+                <Separator className="bg-blue-500" />
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>
+                      <p className="font-semibold">Public voices...</p>
+                      <AudioWaveformIcon />
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div>
+                        {publicVoices.map((item, index) => (
+                          <div
+                            className="bg-gray-50 rounded-xl grid w-[320px] my-1"
+                            key={index}
+                          >
+                            <div className="mx-auto">
+                              <div className="flex justify-center">
+                                <h3 className="text-sm font-semibold my-auto">
+                                  <p>{item.name}</p>
+                                </h3>
+                                <div className="my-1 ml-5">
+                                  <Button
+                                    onClick={() => {
+                                      alert(`add this voice? ${item.url}`);
+                                      seturlExempleVoice(item.url);
+                                      setNameVoiceSelected(item.name);
+                                    }}
+                                    variant="outline"
+                                    size="icon"
+                                    className="ml-5 "
+                                  >
+                                    <CheckIcon className="h-5 w-5" />
+                                  </Button>
+                                </div>
+                              </div>
+
+                              <div className="mx-auto">
+                                <Player src={item.url} height={40} />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </div>
+          </ScrollArea>
+        </div>
+
+        {/* Partie droite */}
+        <div className="w-3/4 bg-white mx-3">
+          {/* Contenu de la partie droite */}
+          <p>Voice selected:</p>
+          <p className=" text-green-500">{nameVoiceSelected}</p>
+          <div className=" grid w-full   ">
+            <div className="ml-auto mr-3 mt-7">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">My...</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      Profile
+                      <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Billing
+                      <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Settings
+                      <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>GitHub</DropdownMenuItem>
+                  <DropdownMenuItem>Support</DropdownMenuItem>
+                  <DropdownMenuItem disabled>API</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logOut}>
+                    Log out
+                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <p>{userName}</p>
+            </div>
+            <br />
+            <div className="flex justify-center">
+              <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
+                Paste your text and get your voice
+              </p>
+            </div>
+            <br />
+            <div className="grid w-full gap-1.5">
+              <Textarea
+                placeholder="Type your message here."
+                onChange={(e) => {
+                  settextValues(e.target.value);
+                  handleActiveButton();
+                }}
+                value={textvalue}
+              />
+
+              <p className="text-sm text-muted-foreground">
+                Your message will be copied to the support team.
+              </p>
+            </div>
+            <div className=" flex justify-center">
+              <div className=" grid gap-2">
+                <div className="flex justify-center space-x-4 mt-4">
+                  <Button
+                    onClick={handleClick}
+                    disabled={isActive}
+                    variant="outline"
+                    size="icon"
+                  >
+                    {isLoaded ? (
+                      <ReloadIcon className=" h-5 w-5 animate-spin" />
+                    ) : (
+                      <SendIcon className="h-5 w-5" />
+                    )}
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      settextValues("");
+                    }}
+                    disabled={isActive}
+                    variant="outline"
+                    size="icon"
+                  >
+                    <TrashIcon className="h-5 w-5" />
+                  </Button>
+                </div>
+                <br />
+                <AudioPlayer audioUrl={text} />
+                <br />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
