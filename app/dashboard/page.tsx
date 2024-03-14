@@ -277,7 +277,8 @@ export default function Dashboard() {
   const [urlExempleVoice, seturlExempleVoice] = useState("");
   const [nameVoiceSelected, setNameVoiceSelected] = useState("");
   const [verifystringList, setverifyStringList] = useState<string[]>([]);
-  const [audioVoiceToPlay, setaudioVoiceToPlay] = useState("");
+  const [seconds, setSeconds] = useState(0);
+  const [screenShotseconds, setSreenShotSeconds] = useState("");
 
   const [play2, { stop: stopAudio2 }] = useSound(
     "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/users%2Fem5YVb6jtzZCCQ1n5LnLAwXqLG32%2FcustomVoice(1)?alt=media&token=8a6cd910-e31c-4110-9fac-96f5ca25f310"
@@ -298,6 +299,7 @@ export default function Dashboard() {
   const [textvalue, settextValues] = useState("");
   const [isActive, activeButtonSubmit] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
+  const [uploadIsLoaded, setUploadLoaded] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [userName, setUserName] = useState("");
   const [userId, setUserid] = useState("");
@@ -322,6 +324,7 @@ export default function Dashboard() {
 
   //upload audio
   const handleSubmit = (e: any) => {
+    setUploadLoaded(true);
     e.preventDefault();
     const file = e.target[0]?.files[0];
 
@@ -463,13 +466,15 @@ export default function Dashboard() {
     setLanguageValue(finalDetectedLanguage);
   }
   const handleClick = async () => {
-    /* const config: AxiosRequestConfig = {
-      timeout: 240000, // Temps d'attente en millisecondes (10 secondes dans cet exemple)
-    };
-*/
-    var text = remplacerPointsParPointVirgules(textvalue);
     setLoaded(true);
     activeButtonSubmit(true);
+    let secondeToScreen = seconds;
+    const interval = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000); // Mettre à jour chaque seconde
+
+    var text = remplacerPointsParPointVirgules(textvalue);
+
     if (textvalue !== "") {
       await axiosInstance
         .post("https://server-natural-voice.onrender.com", {
@@ -483,6 +488,14 @@ export default function Dashboard() {
           setText(output);
           setLoaded(false);
           activeButtonSubmit(false);
+          setSreenShotSeconds(`${secondeToScreen} sec`);
+          setTimeout(() => {
+            clearInterval(interval);
+          }, 500);
+
+          setTimeout(() => {
+            setSeconds(0);
+          }, 3000);
         })
         .catch((error) => {
           console.log(error);
@@ -509,6 +522,19 @@ export default function Dashboard() {
   useEffect(() => {
     handleActiveButton();
   }, [textvalue]);
+
+  useEffect(() => {
+    if (progresspercent == 100) {
+      setTimeout(listAllFile, 3000);
+      setTimeout(() => {
+        toast({
+          title: "Uploaded!",
+        });
+        setProgresspercent(0);
+        setUploadLoaded(false);
+      }, 500);
+    }
+  }, [progresspercent]);
 
   return (
     <div>
@@ -775,8 +801,16 @@ export default function Dashboard() {
                   </Label>
                   <Input id="picture" type="file" />
                 </div>
-                <Button type="submit" className="my-2">
-                  Upload
+                <Button
+                  type="submit"
+                  className="my-2"
+                  disabled={uploadIsLoaded}
+                >
+                  {uploadIsLoaded ? (
+                    <ReloadIcon className=" h-5 w-5 animate-spin" />
+                  ) : (
+                    "Upload"
+                  )}
                 </Button>
               </form>
 
@@ -1017,8 +1051,16 @@ export default function Dashboard() {
                   </Label>
                   <Input id="picture" type="file" />
                 </div>
-                <Button type="submit" className="my-2">
-                  Upload
+                <Button
+                  type="submit"
+                  className="my-2"
+                  disabled={uploadIsLoaded}
+                >
+                  {uploadIsLoaded ? (
+                    <ReloadIcon className=" h-5 w-5 animate-spin" />
+                  ) : (
+                    "Upload"
+                  )}
                 </Button>
               </form>
 
@@ -1192,6 +1234,8 @@ export default function Dashboard() {
             </div>
             <div className=" flex justify-center">
               <div className=" grid gap-2">
+                <p>{seconds}</p>
+                <p>{screenShotseconds}</p>
                 <div className="flex justify-center space-x-4 mt-4">
                   <Button
                     onClick={handleClick}
