@@ -168,9 +168,9 @@ export default function Home() {
         <p className="text-3xl ">Pricing</p>
         <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
           <Card className=" max-w-sm mt-9">
-            <h3 className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+            <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
               Pricing <span className="text-sm">/one plan</span>
-            </h3>
+            </p>
             <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
               500$/month
             </p>
@@ -190,9 +190,9 @@ export default function Home() {
           </Card>
 
           <Card className=" max-w-sm mt-9">
-            <h3 className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+            <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
               Pricing <span className="text-sm">/one plan</span>
-            </h3>
+            </p>
             <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
               500$/month
             </p>
@@ -212,9 +212,9 @@ export default function Home() {
           </Card>
 
           <Card className=" max-w-sm mt-9">
-            <h3 className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+            <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
               Pricing <span className="text-sm">/one plan</span>
-            </h3>
+            </p>
             <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
               500$/month
             </p>
