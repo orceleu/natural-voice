@@ -29,9 +29,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Player } from "react-simple-player";
+import SampleLanguage from "./componentCustom/SampleLanguage";
 
 export default function Home() {
-  const textContent = ["text1", "text2", "text3", "text4", "text5", "text6"];
   const textCard = [
     {
       id: "1",
@@ -68,7 +69,6 @@ export default function Home() {
   return (
     <main>
       <NavBar />
-      <div className="flex justify-center mt-10">welcome to AI voice</div>
 
       <div className="mt-11">
         <div>
@@ -92,12 +92,13 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center mt-11">
-            <Button asChild className=" " size="lg">
+            <Button asChild size="lg">
               <Link href="/dashboard"> get started</Link>
             </Button>
           </div>
         </div>
       </div>
+
       <br />
       <br />
       <br />
@@ -113,7 +114,7 @@ export default function Home() {
       <br />
       <br />
       <div className="container mx-auto py-8">
-        <p className="text-3xl text-center my-10">why use ai tts ?</p>
+        <p className="text-3xl text-center my-10">why use ai SpeechLab ?</p>
         <Separator className="my-8" />
 
         <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -139,11 +140,107 @@ export default function Home() {
           ))}
         </div>
         <Separator className="my-4" />
+
+        <p className="text-3xl font-bold">Generate voice in 12 Language.</p>
+        <div className="mx-8 my-10">
+          <SampleLanguage
+            english={daniel}
+            french={daniel}
+            turkish={daniel}
+            polish={daniel}
+            arabic={daniel}
+            czech={daniel}
+            chinese={daniel}
+            dutch={daniel}
+            spanish={daniel}
+            portugal={daniel}
+            russia={daniel}
+            italian={daniel}
+          />
+        </div>
+
         <br />
         <br />
         <br />
         <br />
         <br />
+
+        <p className="text-3xl ">Pricing</p>
+        <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
+          <Card className=" max-w-sm mt-9">
+            <h3 className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+              Pricing <span className="text-sm">/one plan</span>
+            </h3>
+            <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+              500$/month
+            </p>
+            <Separator className="my-4" />
+            <ul className="text-lg font-thin text-center mb-4">
+              <li>*unlimided access</li>
+              <li>*AI tools</li>
+              <li> *take note</li>
+              <li>*High quality content</li>
+            </ul>
+            <div className="flex justify-center">
+              <Button asChild className="bg-emerald-700">
+                <Link href="/signup">Get access</Link>
+              </Button>
+            </div>
+            <br />
+          </Card>
+
+          <Card className=" max-w-sm mt-9">
+            <h3 className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+              Pricing <span className="text-sm">/one plan</span>
+            </h3>
+            <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+              500$/month
+            </p>
+            <Separator className="my-4" />
+            <ul className="text-lg font-thin text-center mb-4">
+              <li>*unlimided access</li>
+              <li>*AI tools</li>
+              <li> *take note</li>
+              <li>*High quality content</li>
+            </ul>
+            <div className="flex justify-center">
+              <Button asChild className="bg-emerald-700">
+                <Link href="/signup">Get access</Link>
+              </Button>
+            </div>
+            <br />
+          </Card>
+
+          <Card className=" max-w-sm mt-9">
+            <h3 className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+              Pricing <span className="text-sm">/one plan</span>
+            </h3>
+            <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+              500$/month
+            </p>
+            <Separator className="my-4" />
+            <ul className="text-lg font-thin text-center mb-4">
+              <li>*unlimided access</li>
+              <li>*AI tools</li>
+              <li> *take note</li>
+              <li>*High quality content</li>
+            </ul>
+            <div className="flex justify-center">
+              <Button asChild className="bg-emerald-700">
+                <Link href="/signup">Get access</Link>
+              </Button>
+            </div>
+            <br />
+          </Card>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <p className="font-bold text-center text-3xl">FAQ</p>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
@@ -159,6 +256,27 @@ export default function Home() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
+            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionContent>
+              Yes. Its animated by default, but you can disable it if you
+              prefer.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-4">
+            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionContent>
+              Yes. Its animated by default, but you can disable it if you
+              prefer.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-5">
+            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionContent>
+              Yes. Its animated by default, but you can disable it if you
+              prefer.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-6">
             <AccordionTrigger>Is it animated?</AccordionTrigger>
             <AccordionContent>
               Yes. Its animated by default, but you can disable it if you

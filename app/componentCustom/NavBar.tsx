@@ -15,10 +15,10 @@ export default function NavBar() {
   };
   return (
     <header className="bg-white  p-4 fixed top-0 left-0 right-0 z-50 shadow-sm">
-      <nav className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center">
+      <nav className="container px-1 md:px-6 mx-auto flex items-center justify-between">
+        <div className="flex items-center ">
           <a href="#" className="font-bold text-lg ">
-            MyWebsite
+            SpeechLab
           </a>
         </div>
         <div className="hidden md:flex items-center space-x-4">
@@ -28,8 +28,8 @@ export default function NavBar() {
           <a href="#" className=" hover:text-emerald-700">
             About
           </a>
-          <a href="#" className=" hover:text-emerald-700">
-            Services
+          <a href="/pricing" className=" hover:text-emerald-700">
+            pricing
           </a>
           <a href="#" className=" hover:text-emerald-700">
             Contact
@@ -39,7 +39,7 @@ export default function NavBar() {
             sign up
           </a>
           <Button
-            className="bg-emerald-500 hover:bg-emerald-300"
+            className="bg-emerald-500 hover:bg-emerald-300 "
             onClick={() => {
               router.push("/login");
             }}
