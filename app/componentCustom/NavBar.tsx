@@ -39,8 +39,7 @@ export default function NavBar() {
             sign up
           </a>
           <Button
-            className=""
-            variant="ghost"
+            className="bg-emerald-500 hover:bg-emerald-300"
             onClick={() => {
               router.push("/login");
             }}
@@ -50,8 +49,7 @@ export default function NavBar() {
         </div>
         <div className="md:hidden">
           <Button
-            className=" mr-5 "
-            variant="ghost"
+            className=" mr-5  bg-emerald-500 hover:bg-emerald-300"
             onClick={() => {
               router.push("/login");
             }}

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
 import screentts from "../public/screentts.png";
+import dataaudioinput from "../public/dataaudioinput.png";
+import audioconversation from "../public/audioconversation.png";
 import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
@@ -33,27 +35,33 @@ export default function Home() {
   const textCard = [
     {
       id: "1",
-      desc: "what s SQL",
+      title: "emotive based voice,(Like human)",
+      desc: "Genarate voice with accent or no, with emotion based on your sample voicve.",
     },
     {
       id: "2",
-      desc: "what s SQL",
+      title: "Clone your own voice",
+      desc: "Upload your voice and replicate it",
     },
     {
       id: "3",
-      desc: "what s SQL",
+      title: "all generated voice is 100% original",
+      desc: "no voice gererated is exactly the same.",
     },
     {
       id: "4",
-      desc: "what s SQL",
+      title: "Simple to use",
+      desc: "Upload, enter your text ,and generate.",
     },
     {
       id: "5",
-      desc: "what s SQL",
+      title: "No engagenment",
+      desc: "no years engagement",
     },
     {
       id: "6",
-      desc: "what s SQL",
+      title: "24khz HD voice",
+      desc: "Hd Voice.",
     },
   ];
 
@@ -74,7 +82,7 @@ export default function Home() {
             your texts into speech and get your audio file
           </p>
 
-          <div className="mx-10 my-10">
+          <div className="mx-8 my-10">
             <HomeComponent
               img1={lisa}
               img2={emma}
@@ -90,29 +98,52 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
       <div className="flex justify-center mt-11 mx-10">
         <Image src={screensaasvoice} alt="" />
       </div>
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="container mx-auto py-8">
-        <p className="text-3xl text-center">why use ai tts ?</p>
+        <p className="text-3xl text-center my-10">why use ai tts ?</p>
+        <Separator className="my-8" />
 
         <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {textCard.map((txt) => (
             <Card key={txt.id}>
               <CardHeader>
-                <Image src={screentts} alt="" />
-                <CardDescription>{txt.desc}</CardDescription>
+                <Image
+                  src={dataaudioinput}
+                  alt=""
+                  className="h-[100px] w-[100px] "
+                />
+                <CardTitle>
+                  <p className="font-bold text-center">{txt.title}</p>
+                </CardTitle>
+                <CardDescription>
+                  <p className="text-center">{txt.desc}</p>
+                </CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button className="">Learn more</Button>
+                <Separator />
               </CardFooter>
             </Card>
           ))}
         </div>
         <Separator className="my-4" />
-
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>

@@ -42,12 +42,16 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {person.map((item, index) => (
-          <div className="bg-gray-50 rounded-[30px] flex h-16" key={index}>
-            <Image src={item.picture} alt="" className="w-1/5 rounded-[30px]" />
+          <div className="bg-gray-50 rounded-[30px] grid" key={index}>
+            <Image
+              src={item.picture}
+              alt=""
+              className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 "
+            />
             <h3 className="text-sm font-semibold my-auto mx-auto">
               <p>{item.name}</p>
             </h3>
-            <div className="ml-auto my-auto mr-5">
+            <div className="mx-auto mb-auto mt-1">
               <Player src={item.audioUrl} height={40} hideVolume />
             </div>
           </div>
