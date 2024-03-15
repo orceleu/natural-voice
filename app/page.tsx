@@ -69,18 +69,21 @@ export default function Home() {
   return (
     <main>
       <NavBar />
-
+      <br />
+      <br />
+      <br />
       <div className="mt-11">
         <div>
           <p className="text-center font-bold  text-lg md:text-xl lg:text-2xl xl:text-3xl">
             TTSAI® (TEXT TO SPEECH AI) CONVERTS TEXT INTO VOICE by ARTIFICIAL
             INTELLIGENCE
           </p>
-
-          <p className="mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 font-semibold">
-            You can choose from over 80 languages and 1000 voices to convert
-            your texts into speech and get your audio file
-          </p>
+          <div className="mx-3">
+            <p className="mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 font-semibold">
+              You can choose from over 80 languages and 1000 voices to convert
+              your texts into speech and get your audio file
+            </p>
+          </div>
 
           <div className="mx-8 my-10">
             <HomeComponent
