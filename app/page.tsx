@@ -1,13 +1,12 @@
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
-import screentts from "../public/screentts.png";
 import dataaudioinput from "../public/dataaudioinput.png";
 import audioconversation from "../public/audioconversation.png";
 import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
 import lisa from "../public/lisa.png";
-import screensaasvoice from "../public/screensaasvoice.png";
+import screennaturalvoice from "../public/screennaturalvoice.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
@@ -109,7 +108,7 @@ export default function Home() {
       <br />
 
       <div className="flex justify-center mt-11 mx-10">
-        <Image src={screensaasvoice} alt="" />
+        <Image src={screennaturalvoice} alt="" />
       </div>
       <br />
       <br />
