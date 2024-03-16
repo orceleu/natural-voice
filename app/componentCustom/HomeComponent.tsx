@@ -29,13 +29,13 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
       name: "Daniel",
       picture: img3,
       audioUrl:
-        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDaniel.mp3?alt=media&token=5dc3afa9-fa4f-4985-a673-93b949b3d22b",
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDanielGenerate.wav?alt=media&token=8f3f9605-706b-4dbc-9ac4-75fb3c212043",
     },
     {
       name: "Michael",
       picture: img4,
       audioUrl:
-        " https://firebasestorage.googleapis.com/v0/b/my-saas-1.appspot.com/o/lobservateur.mp3.mp3?alt=media&token=8985ed8c-a960-4631-95f9-ed3ce9db476d",
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnhonyGenerate.wav?alt=media&token=8544ae0a-3abb-4b07-8f30-7f90e3ae8126 ",
     },
   ];
 
