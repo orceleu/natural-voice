@@ -243,15 +243,15 @@ const voices = [
 
 const publicVoices = [
   {
-    url: "en",
-    name: "David ",
+    url: "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDaniel.mp3?alt=media&token=5dc3afa9-fa4f-4985-a673-93b949b3d22b",
+    name: "Daniel ",
   },
   {
     url: "fr",
     name: "Michael",
   },
   {
-    url: "ru",
+    url: "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnthony.mp3?alt=media&token=1da13aec-26ae-4612-9018-ff0ceb6a0b9d",
     name: "Anthony",
   },
   {
@@ -269,21 +269,18 @@ interface Item {
   path: string;
   url: string;
 }
+const defauldVoice =
+  "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnthony.mp3?alt=media&token=1da13aec-26ae-4612-9018-ff0ceb6a0b9d";
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 export default function Dashboard() {
   const [changed, setChange] = useState(false);
   const [stringList, setStringList] = useState<Item[]>([]);
-  const [urlExempleVoice, seturlExempleVoice] = useState("");
+  const [urlExempleVoice, seturlExempleVoice] = useState(defauldVoice);
   const [nameVoiceSelected, setNameVoiceSelected] = useState("");
   const [verifystringList, setverifyStringList] = useState<string[]>([]);
   const [seconds, setSeconds] = useState(0);
   const [screenShotseconds, setSreenShotSeconds] = useState("");
-
-  const [play2, { stop: stopAudio2 }] = useSound(
-    "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/users%2Fem5YVb6jtzZCCQ1n5LnLAwXqLG32%2FcustomVoice(1)?alt=media&token=8a6cd910-e31c-4110-9fac-96f5ca25f310"
-  );
-  const [playing2, setPlaying2] = useState(false);
 
   const [progresspercent, setProgresspercent] = useState(0);
 
@@ -303,24 +300,6 @@ export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [userName, setUserName] = useState("");
   const [userId, setUserid] = useState("");
-
-  const tracks = [
-    {
-      url: "https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3",
-      title: "Madza - Chords of Life",
-      tags: ["house"],
-    },
-    {
-      url: "https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3",
-      title: "Madza - Late Night Drive",
-      tags: ["dnb"],
-    },
-    {
-      url: "https://audioplayer.madza.dev/Madza-Persistence.mp3",
-      title: "Madza - Persistence",
-      tags: ["dubstep"],
-    },
-  ];
 
   //upload audio
   const handleSubmit = (e: any) => {
@@ -481,6 +460,7 @@ export default function Dashboard() {
           text: text,
           language: languagevalue,
           clean_voice: false,
+          voice_sample: urlExempleVoice,
         })
         .then((res) => {
           console.log(res.data);
@@ -591,6 +571,7 @@ export default function Dashboard() {
                   handleActiveButton();
                 }}
                 value={textvalue}
+                className="h-[200px]"
               />
 
               <p className="text-sm text-muted-foreground">
@@ -928,8 +909,9 @@ export default function Dashboard() {
     return (
       <div className="hidden lg:flex justify-center ">
         {/* Partie gauche */}
-        <div className=" max-w-[400px] bg-gray-200 ">
+        <div className=" max-w-[400px] bg-white ">
           {/* Contenu de la partie gauche */}
+          <p className="font-bold text-center mt-5"> Setting</p>
           <br />
 
           <ScrollArea className="h-[600px]">
@@ -1171,99 +1153,108 @@ export default function Dashboard() {
         </div>
 
         {/* Partie droite */}
-        <div className="w-3/4 bg-white mx-3">
+        <div className="w-3/4 bg-white  lg:flex flex-row ">
           {/* Contenu de la partie droite */}
-          <p>Voice selected:</p>
-          <p className=" text-green-500">{nameVoiceSelected}</p>
-          <div className=" grid w-full   ">
-            <div className="ml-auto mr-3 mt-7">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">My...</Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      Profile
-                      <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          <Separator orientation="vertical" />
+          <div className="w-full mx-3 mt-5">
+            <div className="flex justify-between ">
+              <div>
+                <p>Voice selected:</p>
+                <p className=" text-green-500">{nameVoiceSelected}</p>
+              </div>
+              <div className="ml-auto mr-10 ">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline">My...</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem>
+                        Profile
+                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        Billing
+                        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        Settings
+                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>GitHub</DropdownMenuItem>
+                    <DropdownMenuItem>Support</DropdownMenuItem>
+                    <DropdownMenuItem disabled>API</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logOut}>
+                      Log out
+                      <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      Billing
-                      <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      Settings
-                      <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>GitHub</DropdownMenuItem>
-                  <DropdownMenuItem>Support</DropdownMenuItem>
-                  <DropdownMenuItem disabled>API</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logOut}>
-                    Log out
-                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <p>{userName}</p>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <p>{userName}</p>
+              </div>
             </div>
-            <br />
-            <div className="flex justify-center">
-              <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
-                Paste your text and get your voice
-              </p>
-            </div>
-            <br />
-            <div className="grid w-full gap-1.5">
-              <Textarea
-                placeholder="Type your message here."
-                onChange={(e) => {
-                  settextValues(e.target.value);
-                  handleActiveButton();
-                }}
-                value={textvalue}
-              />
 
-              <p className="text-sm text-muted-foreground">
-                Your message will be copied to the support team.
-              </p>
-            </div>
-            <div className=" flex justify-center">
-              <div className=" grid gap-2">
-                <p>{seconds}</p>
-                <p>{screenShotseconds}</p>
-                <div className="flex justify-center space-x-4 mt-4">
-                  <Button
-                    onClick={handleClick}
-                    disabled={isActive}
-                    variant="outline"
-                    size="icon"
-                  >
-                    {isLoaded ? (
-                      <ReloadIcon className=" h-5 w-5 animate-spin" />
-                    ) : (
-                      <SendIcon className="h-5 w-5" />
-                    )}
-                  </Button>
+            <div className=" grid w-full   ">
+              <br />
+              <div className="flex justify-center">
+                <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
+                  Paste your text and get your voice
+                </p>
+              </div>
+              <br />
+              <div className="grid w-full gap-1.5">
+                <Textarea
+                  placeholder="Type your message here."
+                  onChange={(e) => {
+                    settextValues(e.target.value);
+                    handleActiveButton();
+                  }}
+                  value={textvalue}
+                  className="h-[300px]"
+                />
 
-                  <Button
-                    onClick={() => {
-                      settextValues("");
-                    }}
-                    disabled={isActive}
-                    variant="outline"
-                    size="icon"
-                  >
-                    <TrashIcon className="h-5 w-5" />
-                  </Button>
+                <p className="text-sm text-muted-foreground">
+                  Your message will be copied to the support team.
+                </p>
+              </div>
+              <div className=" flex justify-center">
+                <div className=" grid gap-2">
+                  <p>{seconds}</p>
+                  <p>{screenShotseconds}</p>
+                  <div className="flex justify-center space-x-4 mt-4">
+                    <Button
+                      onClick={handleClick}
+                      disabled={isActive}
+                      variant="outline"
+                      size="icon"
+                    >
+                      {isLoaded ? (
+                        <ReloadIcon className=" h-5 w-5 animate-spin" />
+                      ) : (
+                        <SendIcon className="h-5 w-5" />
+                      )}
+                    </Button>
+
+                    <Button
+                      onClick={() => {
+                        settextValues("");
+                      }}
+                      disabled={isActive}
+                      variant="outline"
+                      size="icon"
+                    >
+                      <TrashIcon className="h-5 w-5" />
+                    </Button>
+                  </div>
+                  <br />
+                  <AudioPlayer audioUrl={text} />
+                  <br />
                 </div>
-                <br />
-                <AudioPlayer audioUrl={text} />
-                <br />
               </div>
             </div>
           </div>

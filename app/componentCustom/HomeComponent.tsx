@@ -28,7 +28,8 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
     {
       name: "Daniel",
       picture: img3,
-      audioUrl: "audio",
+      audioUrl:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDaniel.mp3?alt=media&token=5dc3afa9-fa4f-4985-a673-93b949b3d22b",
     },
     {
       name: "Michael",
