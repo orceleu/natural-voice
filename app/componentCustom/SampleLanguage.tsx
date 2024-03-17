@@ -44,53 +44,53 @@ const SampleLanguage: React.FC<Props> = ({
     },
     {
       flag: russia,
-      name: "French",
+      name: "Russia",
       audio: "audio",
     },
     {
       flag: spanish,
-      name: "French",
+      name: "Spanish",
       audio: "audio",
     },
     {
       flag: portugal,
-      name: "French",
+      name: "Portugal",
       audio: "audio",
     },
     {
       flag: czech,
-      name: "French",
+      name: "Czech",
       audio: "audio",
     },
     {
       flag: italian,
-      name: "French",
+      name: "Italian",
       audio: "audio",
     },
 
     {
       flag: dutch,
-      name: "French",
+      name: "Dutch",
       audio: "audio",
     },
     {
       flag: chinese,
-      name: "French",
+      name: "Chinese",
       audio: "audio",
     },
     {
       flag: turkish,
-      name: "French",
+      name: "Turkish",
       audio: "audio",
     },
     {
       flag: polish,
-      name: "French",
+      name: "Polish",
       audio: "audio",
     },
     {
       flag: arabic,
-      name: "French",
+      name: "Arabic",
       audio: "audio",
     },
   ];

@@ -26,10 +26,10 @@ export default function NavBar() {
             Home
           </a>
           <a href="#" className=" hover:text-emerald-700">
-            About
+            Blog
           </a>
           <a href="/pricing" className=" hover:text-emerald-700">
-            pricing
+            Pricing
           </a>
           <a href="#" className=" hover:text-emerald-700">
             Contact
@@ -85,10 +85,10 @@ export default function NavBar() {
             Home
           </a>
           <a href="#" className="block  px-10 py-2 hover:text-emerald-700">
-            About
+            Blog
           </a>
           <a href="#" className="block  px-10 py-2 hover:text-emerald-700">
-            Services
+            Pricing
           </a>
           <a href="#" className="block px-10 py-2 hover:text-emerald-700">
             Contact

@@ -18,12 +18,14 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
     {
       name: "Lisa",
       picture: img1,
-      audioUrl: "audio",
+      audioUrl:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDanielGenerate.wav?alt=media&token=8f3f9605-706b-4dbc-9ac4-75fb3c212043",
     },
     {
       name: "Emma",
       picture: img2,
-      audioUrl: "audio",
+      audioUrl:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDanielGenerate.wav?alt=media&token=8f3f9605-706b-4dbc-9ac4-75fb3c212043",
     },
     {
       name: "Daniel",
@@ -58,7 +60,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
           </div>
         ))}
       </div>
-      <p className=" my-10 text-center bg-emerald-50 rounded-xl">
+      <p className=" my-10 text-center bg-emerald-50 rounded-xl font-sans">
         and 50 more...
       </p>
     </>

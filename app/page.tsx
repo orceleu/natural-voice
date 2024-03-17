@@ -13,6 +13,18 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import NavBar from "./componentCustom/NavBar";
 import SoundExemple from "./componentCustom/SoundExemple";
+import usaflag from "../public/flag/usaflag.png";
+import franceflag from "../public/flag/franceflag.png";
+import italyflag from "../public/flag/italyflag.png";
+import russiaflag from "../public/flag/russiaflag.png";
+import chinaflag from "../public/flag/chinaflag.png";
+import spainflag from "../public/flag/spainflag.png";
+import tchequeflag from "../public/flag/tchequeflag.png";
+import turcflag from "../public/flag/turcflag.png";
+import portugalflag from "../public/flag/portugalflag.svg";
+import polandflag from "../public/flag/polandflag.svg";
+import neerlandaisflag from "../public/flag/neerlandaisflag.png";
+import arabicflag from "../public/flag/arabicflag.png";
 
 import {
   Card,
@@ -72,19 +84,19 @@ export default function Home() {
       <br />
       <br />
       <div className="mt-11">
-        <div>
-          <p className="text-center font-bold  text-lg md:text-xl lg:text-2xl xl:text-3xl">
-            TTSAI® (TEXT TO SPEECH AI) CONVERTS TEXT INTO VOICE by ARTIFICIAL
-            INTELLIGENCE
+        <div className=" md:mx-[100px]">
+          <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
+            GENERATE VOICE WITH OUR PRETRAINNED AI MODEL, CONVERTS TEXT INTO
+            REALISTICS VOICE by ARTIFICIAL INTELLIGENCE
           </p>
-          <div className="mx-3">
+          <div className="mx-5">
             <p className="mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 font-semibold">
               You can choose from over 80 languages and 1000 voices to convert
               your texts into speech and get your audio file
             </p>
           </div>
 
-          <div className="mx-8 my-10">
+          <div className="mx-10 my-10">
             <HomeComponent
               img1={lisa}
               img2={emma}
@@ -107,19 +119,21 @@ export default function Home() {
       <br />
       <br />
 
-      <div className="flex justify-center mt-11 mx-10">
-        <Image src={screennaturalvoice} alt="" />
+      <div className="flex justify-center mt-11 mx-10 md:mx-[70px] shadow-md rounded-md">
+        <Image src={screennaturalvoice} alt="" className="rounded-md" />
       </div>
       <br />
       <br />
       <br />
       <br />
       <br />
-      <div className="container mx-auto py-8">
-        <p className="text-3xl text-center my-10">why use ai SpeechLab ?</p>
-        <Separator className="my-8" />
+      <div className="container mx-auto  py-8">
+        <p className=" text-3xl md:text-5xl text-center my-[100px]">
+          why use ai SpeechLab ?
+        </p>
+        <Separator className="my-10" />
 
-        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px]">
           {textCard.map((txt) => (
             <Card key={txt.id}>
               <CardHeader>
@@ -141,23 +155,31 @@ export default function Home() {
             </Card>
           ))}
         </div>
-        <Separator className="my-4" />
+        <Separator className="my-10" />
+        <div className="md:mx-[100px]">
+          <p className="text-3xl md:text-5xl font-bold mt-[200px]">
+            AI Voice Generator in 12 Languages.
+          </p>
+          <p className="my-10 font-medium">
+            Our AI voice generator supports 12 langauges and all diverse accents
+            - just select the appropriate accent and enter text in your langauge
+            of choice. VoiceLab allows you to create voices and use them in any
+            language.
+          </p>
 
-        <p className="text-3xl font-bold">Generate voice in 12 Language.</p>
-        <div className="mx-8 my-10">
           <SampleLanguage
-            english={daniel}
-            french={daniel}
-            turkish={daniel}
-            polish={daniel}
-            arabic={daniel}
-            czech={daniel}
-            chinese={daniel}
-            dutch={daniel}
-            spanish={daniel}
-            portugal={daniel}
-            russia={daniel}
-            italian={daniel}
+            english={usaflag}
+            french={franceflag}
+            turkish={turcflag}
+            polish={polandflag}
+            arabic={arabicflag}
+            czech={tchequeflag}
+            chinese={chinaflag}
+            dutch={neerlandaisflag}
+            spanish={spainflag}
+            portugal={portugalflag}
+            russia={russiaflag}
+            italian={italyflag}
           />
         </div>
 
@@ -166,74 +188,75 @@ export default function Home() {
         <br />
         <br />
         <br />
+        <div className="md:mx-[100px]">
+          <p className="text-3xl mt-[200px]">Pricing</p>
+          <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
+            <Card className=" max-w-sm mt-9">
+              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+                Pricing /one plan
+              </p>
+              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+                500$/month
+              </p>
+              <Separator className="my-4" />
+              <ul className="text-lg font-thin text-center mb-4">
+                <li>*unlimided access</li>
+                <li>*AI tools</li>
+                <li> *take note</li>
+                <li>*High quality content</li>
+              </ul>
+              <div className="flex justify-center">
+                <Button asChild className="bg-emerald-700">
+                  <Link href="/signup">Get access</Link>
+                </Button>
+              </div>
+              <br />
+            </Card>
 
-        <p className="text-3xl ">Pricing</p>
-        <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
-          <Card className=" max-w-sm mt-9">
-            <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
-              Pricing <span className="text-sm">/one plan</span>
-            </p>
-            <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-              500$/month
-            </p>
-            <Separator className="my-4" />
-            <ul className="text-lg font-thin text-center mb-4">
-              <li>*unlimided access</li>
-              <li>*AI tools</li>
-              <li> *take note</li>
-              <li>*High quality content</li>
-            </ul>
-            <div className="flex justify-center">
-              <Button asChild className="bg-emerald-700">
-                <Link href="/signup">Get access</Link>
-              </Button>
-            </div>
-            <br />
-          </Card>
+            <Card className=" max-w-sm mt-9">
+              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+                Pricing /one plan
+              </p>
+              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+                500$/month
+              </p>
+              <Separator className="my-4" />
+              <ul className="text-lg font-thin text-center mb-4">
+                <li>*unlimided access</li>
+                <li>*AI tools</li>
+                <li> *take note</li>
+                <li>*High quality content</li>
+              </ul>
+              <div className="flex justify-center">
+                <Button asChild className="bg-emerald-700">
+                  <Link href="/signup">Get access</Link>
+                </Button>
+              </div>
+              <br />
+            </Card>
 
-          <Card className=" max-w-sm mt-9">
-            <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
-              Pricing <span className="text-sm">/one plan</span>
-            </p>
-            <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-              500$/month
-            </p>
-            <Separator className="my-4" />
-            <ul className="text-lg font-thin text-center mb-4">
-              <li>*unlimided access</li>
-              <li>*AI tools</li>
-              <li> *take note</li>
-              <li>*High quality content</li>
-            </ul>
-            <div className="flex justify-center">
-              <Button asChild className="bg-emerald-700">
-                <Link href="/signup">Get access</Link>
-              </Button>
-            </div>
-            <br />
-          </Card>
-
-          <Card className=" max-w-sm mt-9">
-            <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
-              Pricing <span className="text-sm">/one plan</span>
-            </p>
-            <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-              500$/month
-            </p>
-            <Separator className="my-4" />
-            <ul className="text-lg font-thin text-center mb-4">
-              <li>*unlimided access</li>
-              <li>*AI tools</li>
-              <li> *take note</li>
-              <li>*High quality content</li>
-            </ul>
-            <div className="flex justify-center">
-              <Button asChild className="bg-emerald-700">
-                <Link href="/signup">Get access</Link>
-              </Button>
-            </div>
-            <br />
-          </Card>
+            <Card className=" max-w-sm mt-9">
+              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+                Pricing /one plan
+              </p>
+              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+                500$/month
+              </p>
+              <Separator className="my-4" />
+              <ul className="text-lg font-thin text-center mb-4">
+                <li>*unlimided access</li>
+                <li>*AI tools</li>
+                <li> *take note</li>
+                <li>*High quality content</li>
+              </ul>
+              <div className="flex justify-center">
+                <Button asChild className="bg-emerald-700">
+                  <Link href="/signup">Get access</Link>
+                </Button>
+              </div>
+              <br />
+            </Card>
+          </div>
         </div>
 
         <br />
@@ -242,7 +265,9 @@ export default function Home() {
         <br />
         <br />
 
-        <p className="font-bold text-center text-3xl">FAQ</p>
+        <p className="font-bold text-center text-3xl md:text-5xl mt-[200px]">
+          FAQ
+        </p>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
