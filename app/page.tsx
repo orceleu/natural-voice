@@ -1,7 +1,6 @@
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
 import dataaudioinput from "../public/dataaudioinput.png";
-import audioconversation from "../public/audioconversation.png";
 import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
@@ -28,7 +27,6 @@ import arabicflag from "../public/flag/arabicflag.png";
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -40,8 +38,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Player } from "react-simple-player";
 import SampleLanguage from "./componentCustom/SampleLanguage";
+import { AlertTriangle } from "lucide-react";
 
 export default function Home() {
   const textCard = [
@@ -83,13 +81,55 @@ export default function Home() {
       <br />
       <br />
       <br />
+
+      <div className=" start-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <div className="flex items-center mx-auto">
+          <AlertTriangle />
+          <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
+            <span>
+              Your are fully responsable of generated voices utilisation.
+              <a
+                href="https://flowbite.com"
+                className="inline font-medium text-blue-600 underline dark:text-blue-500 underline-offset-2 decoration-600 dark:decoration-500 decoration-solid hover:no-underline"
+              >
+                terms & condition
+              </a>
+            </span>
+          </p>
+        </div>
+        <div className="flex items-center">
+          <button
+            data-dismiss-target="#sticky-banner"
+            type="button"
+            className="flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            <svg
+              className="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span className="sr-only">Close banner</span>
+          </button>
+        </div>
+      </div>
+
       <div className="mt-11">
         <div className=" md:mx-[100px]">
           <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
             GENERATE REALISTIC VOICE WITH OUR MODEL.
           </p>
           <div className="mx-5">
-            <p className=" font-thin  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 ">
+            <p className=" md:font-thin  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 ">
               You can choose from over 12 languages and 50 voices to convert
               your texts into speech and get your audio file
             </p>
@@ -161,7 +201,7 @@ export default function Home() {
           <p className="text-3xl md:text-5xl font-bold mt-[200px]">
             AI Voice Generator in 12 Languages.
           </p>
-          <p className="my-10 font-thin md:text-xl">
+          <p className=" md:font-thin my-10  md:text-xl">
             Our AI voice generator supports 12 languages and all diverse accents
             - just select the appropriate accent and enter text in your language
             of choice. VoiceLab allows you to create voices and use them in any
