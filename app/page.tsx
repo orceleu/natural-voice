@@ -267,7 +267,7 @@ export default function Home() {
         <br />
 
         <p className="font-bold text-center text-3xl md:text-5xl mt-[200px] mb-[100px]">
-          Frequently asked question.
+          Frequently asked questions.
         </p>
         <div className="mx-[50px] md:mx-[100px]">
           <Accordion type="single" collapsible className="w-full">
@@ -278,7 +278,7 @@ export default function Home() {
               <AccordionContent className="md:text-xl text-gray-500 ">
                 To create your own AI voice at SpeechLab, go to the setting,
                 upload your best quality voice and select it. Voice Design
-                allows you to customize the speaker's identityfor unique voices
+                allows you to customize the speaker s identityfor unique voices
                 in your scripts, while Voice Cloning mimics real voices. This
                 ensures variety and exclusivity in your generated voices, as
                 they are entirely artificial and not linked to real people.
@@ -330,8 +330,8 @@ export default function Home() {
               <AccordionContent className="md:text-xl text-gray-500">
                 Step 1 involves selecting a voice and adjusting settings to your
                 liking. In Step 2, you input your text into the provided box,
-                ensuring it's in one of the supported languages. For Step 3, you
-                simply click 'send iconButton' to convert your text into audio,
+                ensuring it s in one of the supported languages. For Step 3, you
+                simply click send iconButton to convert your text into audio,
                 listen to the output. After that, you can download the audio for
                 use in your project.
               </AccordionContent>
