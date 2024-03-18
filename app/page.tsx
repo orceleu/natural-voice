@@ -5,7 +5,7 @@ import audioconversation from "../public/audioconversation.png";
 import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
-import lisa from "../public/lisa.png";
+import claire from "../public/claire.png";
 import screennaturalvoice from "../public/screennaturalvoice.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
@@ -86,26 +86,27 @@ export default function Home() {
       <div className="mt-11">
         <div className=" md:mx-[100px]">
           <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
-            GENERATE VOICE WITH OUR PRETRAINNED AI MODEL, CONVERTS TEXT INTO
-            REALISTICS VOICE by ARTIFICIAL INTELLIGENCE
+            GENERATE REALISTIC VOICE WITH OUR MODEL.
           </p>
           <div className="mx-5">
-            <p className="mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 font-semibold">
-              You can choose from over 80 languages and 1000 voices to convert
+            <p className=" font-thin  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 ">
+              You can choose from over 12 languages and 50 voices to convert
               your texts into speech and get your audio file
             </p>
           </div>
-
+          <p className="text-center my-10 text-emerald-500 font-mono text-lg underline">
+            sample
+          </p>
           <div className="mx-10 my-10">
             <HomeComponent
-              img1={lisa}
+              img1={claire}
               img2={emma}
               img3={daniel}
               img4={michael}
             />
           </div>
 
-          <div className="flex justify-center mt-11">
+          <div className="flex justify-center mt-11 md:mt-[100px]">
             <Button asChild size="lg">
               <Link href="/dashboard"> get started</Link>
             </Button>
@@ -119,7 +120,7 @@ export default function Home() {
       <br />
       <br />
 
-      <div className="flex justify-center mt-11 mx-10 md:mx-[70px] shadow-md rounded-md">
+      <div className="flex justify-center mt-11 md:mt-[200px] mx-10 md:mx-[70px] shadow-md rounded-md">
         <Image src={screennaturalvoice} alt="" className="rounded-md" />
       </div>
       <br />
@@ -160,9 +161,9 @@ export default function Home() {
           <p className="text-3xl md:text-5xl font-bold mt-[200px]">
             AI Voice Generator in 12 Languages.
           </p>
-          <p className="my-10 font-medium">
-            Our AI voice generator supports 12 langauges and all diverse accents
-            - just select the appropriate accent and enter text in your langauge
+          <p className="my-10 font-thin md:text-xl">
+            Our AI voice generator supports 12 languages and all diverse accents
+            - just select the appropriate accent and enter text in your language
             of choice. VoiceLab allows you to create voices and use them in any
             language.
           </p>
@@ -265,52 +266,78 @@ export default function Home() {
         <br />
         <br />
 
-        <p className="font-bold text-center text-3xl md:text-5xl mt-[200px]">
-          FAQ
+        <p className="font-bold text-center text-3xl md:text-5xl mt-[200px] mb-[100px]">
+          Frequently asked question.
         </p>
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>Is it styled?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It comes with default styles that matches the other
-              components&apos; aesthetic.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>Is it animated?</AccordionTrigger>
-            <AccordionContent>
-              Yes. Its animated by default, but you can disable it if you
-              prefer.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-4">
-            <AccordionTrigger>Is it animated?</AccordionTrigger>
-            <AccordionContent>
-              Yes. Its animated by default, but you can disable it if you
-              prefer.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-5">
-            <AccordionTrigger>Is it animated?</AccordionTrigger>
-            <AccordionContent>
-              Yes. Its animated by default, but you can disable it if you
-              prefer.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-6">
-            <AccordionTrigger>Is it animated?</AccordionTrigger>
-            <AccordionContent>
-              Yes. Its animated by default, but you can disable it if you
-              prefer.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        <div className="mx-[50px] md:mx-[100px]">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+                How do I make my own AI voice?
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500 ">
+                To create your own AI voice at SpeechLab, go to the setting,
+                upload your best quality voice and select it. Voice Design
+                allows you to customize the speaker's identityfor unique voices
+                in your scripts, while Voice Cloning mimics real voices. This
+                ensures variety and exclusivity in your generated voices, as
+                they are entirely artificial and not linked to real people.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+                How much does using SpeechLab AI voice generator cost?
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500">
+                The Starter Plan is $8 per month, offering 40,000 characters and
+                up to 5 custom voices. the pro plan is 22$/month and offering
+                100,000 characters and up to 15 voices.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+                Can I use SpeechLab AI voice generator for free?
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500">
+                No,with this model we are unable to offer free plan
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+                How many languages does SpeechLab support?
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500">
+                SpeechLab support 12 language for the moment
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-5">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+                What is an AI voice generator?
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500">
+                SpeechLab AI voice generator transforms text to spoken audio
+                that sounds like a natural human voice, complete with realistic
+                intonation and accents. It offers a wide range of voice options
+                across various languages and dialects. Designed for ease of use,
+                it caters to both individuals and businesses looking for
+                customizable vocal outputs.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-6">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+                How do I use AI voice generators to turn text into audio?
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500">
+                Step 1 involves selecting a voice and adjusting settings to your
+                liking. In Step 2, you input your text into the provided box,
+                ensuring it's in one of the supported languages. For Step 3, you
+                simply click 'send iconButton' to convert your text into audio,
+                listen to the output. After that, you can download the audio for
+                use in your project.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       </div>
 
       <Separator className="my-4" />

@@ -306,6 +306,7 @@ export default function Dashboard() {
     setUploadLoaded(true);
     e.preventDefault();
     const file = e.target[0]?.files[0];
+    // if(file!=='audio')
 
     if (!file) return;
     const storageRef = ref(

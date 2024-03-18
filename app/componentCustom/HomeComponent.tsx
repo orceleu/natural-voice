@@ -60,7 +60,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
           </div>
         ))}
       </div>
-      <p className=" my-10 text-center bg-emerald-50 rounded-xl font-sans">
+      <p className=" my-10 text-center text-emerald-500 bg-emerald-50 rounded-xl font-mono">
         and 50 more...
       </p>
     </>
