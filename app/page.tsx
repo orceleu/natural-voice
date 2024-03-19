@@ -1,6 +1,5 @@
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
-import dataaudioinput from "../public/dataaudioinput.png";
 import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
@@ -12,6 +11,13 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import NavBar from "./componentCustom/NavBar";
 import SoundExemple from "./componentCustom/SoundExemple";
+import img2 from "../public/img2.svg";
+import img3 from "../public/img3.svg";
+import img4 from "../public/img4.svg";
+import img6 from "../public/img6.svg";
+import podcast from "../public/podcast.svg";
+import audioconv from "../public/audioconv.svg";
+
 import usaflag from "../public/flag/usaflag.png";
 import franceflag from "../public/flag/franceflag.png";
 import italyflag from "../public/flag/italyflag.png";
@@ -39,7 +45,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SampleLanguage from "./componentCustom/SampleLanguage";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Check } from "lucide-react";
 
 export default function Home() {
   const textCard = [
@@ -47,31 +53,37 @@ export default function Home() {
       id: "1",
       title: "emotive based voice,(Like human)",
       desc: "Genarate voice with accent or no, with emotion based on your sample voicve.",
+      img: img6,
     },
     {
       id: "2",
       title: "Clone your own voice",
       desc: "Upload your voice and replicate it",
+      img: podcast,
     },
     {
       id: "3",
       title: "all generated voice is 100% original",
       desc: "no voice gererated is exactly the same.",
+      img: audioconv,
     },
     {
       id: "4",
       title: "Simple to use",
       desc: "Upload, enter your text ,and generate.",
+      img: img4,
     },
     {
       id: "5",
-      title: "No engagenment",
-      desc: "no years engagement",
+      title: "Emotion transfer",
+      desc: "pitch based on your emotion",
+      img: img2,
     },
     {
       id: "6",
       title: "24khz HD voice",
       desc: "Hd Voice.",
+      img: img3,
     },
   ];
 
@@ -178,11 +190,7 @@ export default function Home() {
           {textCard.map((txt) => (
             <Card key={txt.id}>
               <CardHeader>
-                <Image
-                  src={dataaudioinput}
-                  alt=""
-                  className="h-[100px] w-[100px] "
-                />
+                <Image src={txt.img} alt="" className="h-[100px] w-[100px] " />
                 <CardTitle>
                   <p className="font-bold text-center">{txt.title}</p>
                 </CardTitle>
@@ -234,17 +242,43 @@ export default function Home() {
           <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
             <Card className=" max-w-sm mt-9">
               <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
-                Pricing /one plan
+                Basic
               </p>
               <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-                500$/month
+                8$/month
               </p>
               <Separator className="my-4" />
               <ul className="text-lg font-thin text-center mb-4">
-                <li>*unlimided access</li>
-                <li>*AI tools</li>
-                <li> *take note</li>
-                <li>*High quality content</li>
+                <li>New content creators, students</li>
+                <li>40,000 char/Month</li>
+                <li> 5 custom voice</li>
+                <li>commercial use</li>
+              </ul>
+              <div className="flex justify-center">
+                <Button asChild className="bg-emerald-700">
+                  <Link href="/signup">Get access</Link>
+                </Button>
+              </div>
+              <br />
+            </Card>
+
+            <Card className=" max-w-sm mt-9">
+              <div className="w-full bg-stone-100 h-[55px] rounded-t-md">
+                <br />
+                <p className="text-center font-semibold"> Most popular*</p>
+              </div>
+              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+                Pro
+              </p>
+              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+                22$/month
+              </p>
+              <Separator className="my-4" />
+              <ul className="text-lg font-thin text-center mb-4">
+                <li>Content creators, freelancers</li>
+                <li>100,000 char/Month</li>
+                <li> 15 custom voice</li>
+                <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
                 <Button asChild className="bg-emerald-700">
@@ -256,39 +290,17 @@ export default function Home() {
 
             <Card className=" max-w-sm mt-9">
               <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
-                Pricing /one plan
+                Premium
               </p>
               <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-                500$/month
+                50$/month
               </p>
               <Separator className="my-4" />
               <ul className="text-lg font-thin text-center mb-4">
-                <li>*unlimided access</li>
-                <li>*AI tools</li>
-                <li> *take note</li>
-                <li>*High quality content</li>
-              </ul>
-              <div className="flex justify-center">
-                <Button asChild className="bg-emerald-700">
-                  <Link href="/signup">Get access</Link>
-                </Button>
-              </div>
-              <br />
-            </Card>
-
-            <Card className=" max-w-sm mt-9">
-              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
-                Pricing /one plan
-              </p>
-              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-                500$/month
-              </p>
-              <Separator className="my-4" />
-              <ul className="text-lg font-thin text-center mb-4">
-                <li>*unlimided access</li>
-                <li>*AI tools</li>
-                <li> *take note</li>
-                <li>*High quality content</li>
+                <li>Corporations, public entities, agencies, MCNs</li>
+                <li>250,000 char/Month</li>
+                <li> 30 custom voice</li>
+                <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
                 <Button asChild className="bg-emerald-700">
@@ -410,3 +422,17 @@ export default function Home() {
     </main>
   );
 }
+const PricingCard = ({ plan, price, features, buttonText }: any) => {
+  return (
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{plan}</div>
+        <div className="text-gray-700 text-base">${price} / month</div>
+        <p className="text-gray-700 text-base mt-4 mb-8">{features}</p>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          {buttonText}
+        </button>
+      </div>
+    </div>
+  );
+};
