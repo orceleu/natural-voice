@@ -4,6 +4,11 @@ import daniel from "../public/daniel.png";
 import michael from "../public/michael.png";
 import emma from "../public/emma.png";
 import claire from "../public/claire.png";
+import claireremovebgpreview from "../public/claireremovebgpreview.png";
+import danielremovebgpreview from "../public/danielremovebgpreview.png";
+import emmaremovebgpreview from "../public/emmaremovebgpreview.png";
+import anthonyremovebgpreview from "../public/anthonyremovebgpreview.png";
+
 import screennaturalvoice from "../public/screennaturalvoice.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
@@ -151,10 +156,10 @@ export default function Home() {
           </p>
           <div className="mx-10 my-10">
             <HomeComponent
-              img1={claire}
-              img2={emma}
-              img3={daniel}
-              img4={michael}
+              img1={claireremovebgpreview}
+              img2={emmaremovebgpreview}
+              img3={danielremovebgpreview}
+              img4={anthonyremovebgpreview}
             />
           </div>
 
