@@ -3,3 +3,4 @@ declare module "use-sound" {
 }
 declare module "@madzadev/audio-player";
 declare module "uuid";
+declare module "@paypal/checkout-server-sdk";

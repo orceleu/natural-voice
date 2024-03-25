@@ -5,6 +5,8 @@ import michael from "../public/michael.png";
 import emma from "../public/emma.png";
 import claire from "../public/claire.png";
 import claireremovebgpreview from "../public/claireremovebgpreview.png";
+import claireremovebg from "../public/claireremovebg.png";
+
 import danielremovebgpreview from "../public/danielremovebgpreview.png";
 import emmaremovebgpreview from "../public/emmaremovebgpreview.png";
 import anthonyremovebgpreview from "../public/anthonyremovebgpreview.png";
@@ -156,7 +158,7 @@ export default function Home() {
           </p>
           <div className="mx-10 my-10">
             <HomeComponent
-              img1={claireremovebgpreview}
+              img1={claireremovebg}
               img2={emmaremovebgpreview}
               img3={danielremovebgpreview}
               img4={anthonyremovebgpreview}

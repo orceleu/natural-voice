@@ -2,13 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
-import {
-  PlayCircleIcon,
-  DeleteIcon,
-  AudioWaveformIcon,
-  SendIcon,
-  SettingsIcon,
-} from "lucide-react";
+import { AudioWaveformIcon, SendIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
 import { Player } from "react-simple-player";
@@ -23,20 +17,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import {
-  CheckIcon,
-  InputIcon,
-  PauseIcon,
-  PlayIcon,
-  ReloadIcon,
-  TrashIcon,
-} from "@radix-ui/react-icons";
+import { CheckIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { BoxSelectIcon, ChevronDownIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { storage } from "@/app/firebase/config";
-import useSound from "use-sound";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import {
   Accordion,
@@ -44,15 +30,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 import {
   ref,
@@ -68,22 +45,10 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { cn } from "@/lib/utils";
 import { franc, francAll } from "franc";
 
@@ -101,20 +66,11 @@ import {
 } from "@/components/ui/popover";
 
 import { auth } from "@/app/firebase/config";
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
-  User,
-} from "firebase/auth";
+import { signOut, onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import SoundExemple from "../componentCustom/SoundExemple";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
-import { SelectIcon } from "@radix-ui/react-select";
 
 const frameworks = [
   {
@@ -273,7 +229,15 @@ const defauldVoice =
   "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnthony.mp3?alt=media&token=1da13aec-26ae-4612-9018-ff0ceb6a0b9d";
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
+
+// Renders errors or successfull transactions on the screen.
+function Message({ content }: any) {
+  return <>{content}</>;
+}
+
 export default function Dashboard() {
+  const [message, setMessage] = useState("");
+
   const [changed, setChange] = useState(false);
   const [stringList, setStringList] = useState<Item[]>([]);
   const [urlExempleVoice, seturlExempleVoice] = useState(defauldVoice);
@@ -301,41 +265,84 @@ export default function Dashboard() {
   const [userName, setUserName] = useState("");
   const [userId, setUserid] = useState("");
 
+  //const [{ isSubscribed, plan }, dispatch] = usePayPalScriptReducer();
+  // const [{ options }, dispatch] = usePayPalScriptReducer();
+  const createSubscription = async () => {
+    // Logique pour créer un abonnement
+  };
+
+  const changeSubscriptionPlan = async () => {
+    // Logique pour changer de plan d'abonnement
+  };
+
+  const cancelSubscription = async () => {
+    // Logique pour annuler l'abonnement
+  };
+
+  /* useEffect(() => {
+    // Vérifier si l'abonnement est actif
+    if (isSubscribed && plan) {
+      // Donner accès aux fonctionnalités ici
+    }
+  }, [isSubscribed, plan]);
+*/
   //upload audio
   const handleSubmit = (e: any) => {
-    setUploadLoaded(true);
     e.preventDefault();
     const file = e.target[0]?.files[0];
-    // if(file!=='audio')
 
-    if (!file) return;
-    const storageRef = ref(
-      storage,
-      `users/${user?.uid}/customVoice(${stringList.length + 1})`
-    );
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    if (!file) {
+      toast({
+        variant: "destructive",
+        title: "No file found.",
+      });
+    } else {
+      if (file && file.type.startsWith("audio/")) {
+        //console.log("est un fichier audio");
+        console.log(`${file.size / 1024} KB`);
+        if (file.size > 1000000) {
+          toast({
+            variant: "destructive",
+            title: "audio size too large (> 1MB).",
+          });
+        } else {
+          setUploadLoaded(true);
+          const storageRef = ref(
+            storage,
+            `users/${user?.uid}/customVoice(${stringList.length + 1})`
+          );
+          const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgresspercent(progress);
-        if (progresspercent == 100) {
-          setChange(!changed);
-          console.log("upload finished");
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              setProgresspercent(progress);
+              if (progresspercent == 100) {
+                setChange(!changed);
+                console.log("upload finished");
+              }
+            },
+            (error) => {
+              alert(error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                //setAudioUrl(downloadURL);
+              });
+            }
+          );
         }
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          //setAudioUrl(downloadURL);
+      } else {
+        //console.log("nest pas");
+        toast({
+          variant: "destructive",
+          title: "Only audio file can be uploaded.",
         });
       }
-    );
+    }
   };
 
   // List All Files
@@ -343,11 +350,11 @@ export default function Dashboard() {
     const storageRef2 = await ref(storage, `users/${userId}/`);
     if (storageRef2.fullPath == `users/${userId}`) {
       listAll(storageRef2).then(async (res) => {
-        console.log(res.items.length);
+        //console.log(res.items.length);
         await res.items.forEach((fileRef) => {
           if (stringList.length !== res.items.length) {
             getDownloadURL(fileRef).then((fileUrl) => {
-              console.log(fileUrl);
+              // console.log(fileUrl);
               let name = fileRef.name;
               let path = fileRef.fullPath;
               const newItem: Item = { name: name, path: path, url: fileUrl };
@@ -520,7 +527,6 @@ export default function Dashboard() {
   return (
     <div>
       <div> {dashBoardDesktop()}</div>
-
       <div> {dashBoardMobile()}</div>
     </div>
   );
@@ -631,7 +637,11 @@ export default function Dashboard() {
                   Profile
                   <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    router.push("/billing");
+                  }}
+                >
                   Billing
                   <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                 </DropdownMenuItem>
@@ -1163,6 +1173,9 @@ export default function Dashboard() {
                 <p>Voice selected:</p>
                 <p className=" text-green-500">{nameVoiceSelected}</p>
               </div>
+
+              <div className="App"></div>
+
               <div className="ml-auto mr-10 ">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
