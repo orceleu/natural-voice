@@ -92,6 +92,14 @@ const ButtonWrapper = ({ type }: any) => {
           createSubscription={(data, actions) => {
             return actions.subscription.create({
               plan_id: "P-86S718199T297924TMX654VA",
+              application_context: {
+                shipping_preference: "NO_SHIPPING",
+                return_url: "http://localhost:3000/billing",
+                cancel_url: "http://localhost:3000/dashboard",
+                payment_method: {
+                  payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
+                },
+              },
             });
           }}
           onApprove={(data, action) => {
