@@ -244,7 +244,7 @@ export default function Home() {
         <br />
         <br />
         <br />
-        <div className="md:mx-[100px]">
+        <div className="mx-10 md:mx-[100px]">
           <p className="text-3xl mt-[200px]">Pricing</p>
           <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
             <Card className=" max-w-sm mt-9">
