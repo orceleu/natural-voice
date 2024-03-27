@@ -17,6 +17,12 @@ import axios from "axios";
 import { CheckCircleIcon, LoaderIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { collection, addDoc, getDoc, doc, setDoc } from "firebase/firestore";
+import { auth } from "@/app/firebase/config";
+
+import { signOut, onAuthStateChanged, User } from "firebase/auth";
+import { db } from "../firebase/config";
+
 import Link from "next/link";
 import {
   Accordion,
@@ -30,8 +36,12 @@ import { CheckCircledIcon, CheckIcon } from "@radix-ui/react-icons";
 export default function Billing() {
   //secret: EHJu3f2e_krcmRT-dVmVkjmN3LLIksgIDsORtuebjym3hgvGPczJD9eggDg_isb9DcfMdgqOnsRFCRu1
   //client id:AYUz6PJaJRmYWImq2oPBnPZPpGC7lYb6e729pLHW3J4bQ8zo9nidGQJMIbctio-XMvovPYX9QzvKUgxf
+  const router = useRouter();
   const [status, setStatus] = useState("");
-  const [subscriptionStatus, setSubscriptionStatus] = useState("");
+  const [havingPlan, setHavingPlan] = useState(false);
+  const [userId, setUserid] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+
   const initialOptions: any = {
     "client-id":
       "ATZl5eLAOWOORW9XV8ZBo5YRhjn0j7k34UmfHmXgXVZ2QU-DYVaNnB7jqxarzFYpGkvapgPuqrVkafc5",
@@ -41,35 +51,63 @@ export default function Billing() {
     vault: "true",
     intent: "subscription",
   };
+
+  const fetchPost = async () => {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setHavingPlan(true);
+      console.log(`
+        Currrent Plan:
+        ${docSnap.data().plan}\n
+        start date:
+       ${docSnap.data().start_date}\n
+        end date:
+       ${docSnap.data().end_date}\n
+        used char:
+       ${docSnap.data().used_char}
+      `);
+      console.log(Date.now());
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("no plan setup!");
+      setHavingPlan(false);
+    }
+  };
+
   useEffect(() => {
-    const getSubscriptionStatus = async () => {
-      const accessToken =
-        "access_token$sandbox$bjxnzxfq5ypgwfkp$746af76a7dad1bd9ca60a9caa35e0116 ";
-      const subscriptionId = "I-P6X59NWRHW8B";
-      try {
-        const response = await axios.get(
-          `https://api-m.sandbox.paypal.com/v1/billing/subscription/${subscriptionId}`,
-          {
-            headers: {
-              Authorization: `Basic ATZl5eLAOWOORW9XV8ZBo5YRhjn0j7k34UmfHmXgXVZ2QU-DYVaNnB7jqxarzFYpGkvapgPuqrVkafc5:EJkD4x7jUJe-QvQhvAGjOLToIQOEFQ9zXGAPcmIMVK8GejY9BL6lb7I3Ud2O9yE7ys5Ddye63NL3h3KO`,
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        );
+    if (userId !== "") {
+      fetchPost();
+      console.log(userId);
+    }
+  }, [userId]);
 
-        console.log("Subscription status:", response.data.status);
-      } catch (error) {
-        console.error("Error fetching subscription status:", error);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        const name = currentUser?.displayName;
+        const uiid = currentUser?.uid;
+        console.log(currentUser?.displayName);
+        if (name !== undefined && name !== null) {
+          setUserid(uiid);
+        } else {
+        }
       }
-    };
+      if (currentUser == null) {
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
+  }, [user]);
 
-    getSubscriptionStatus();
-  }, []);
   return (
     <div>
       <div className="mx-10 md:mx-[100px]">
-        <p className="text-3xl mt-[200px]">Pricing</p>
+        <p className="text-3xl mt-[200px]">
+          Pricing
+          <span>{havingPlan ? <>(you already have a plan)</> : null}</span>
+        </p>
         <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
           <Card className=" max-w-sm mt-9">
             <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
@@ -109,7 +147,11 @@ export default function Billing() {
             </ul>
             <div className="flex justify-center">
               <PayPalScriptProvider options={initialOptions}>
-                <ButtonWrapperStarter type="subscription" />
+                <ButtonWrapperStarter
+                  disable={havingPlan}
+                  userid={userId}
+                  type="subscription"
+                />
               </PayPalScriptProvider>
             </div>
             <br />
@@ -161,7 +203,11 @@ export default function Billing() {
             </ul>
             <div className="flex justify-center">
               <PayPalScriptProvider options={initialOptions}>
-                <ButtonWrapperPro type="subscription" />
+                <ButtonWrapperPro
+                  disable={havingPlan}
+                  userid={userId}
+                  type="subscription"
+                />
               </PayPalScriptProvider>
             </div>
             <br />
@@ -209,7 +255,11 @@ export default function Billing() {
             </ul>
             <div className="flex justify-center">
               <PayPalScriptProvider options={initialOptions}>
-                <ButtonWrapperEnterprise type="subscription" />
+                <ButtonWrapperEnterprise
+                  disable={havingPlan}
+                  userid={userId}
+                  type="subscription"
+                />
               </PayPalScriptProvider>
             </div>
             <br />
@@ -295,7 +345,15 @@ export default function Billing() {
     </div>
   );
 }
-const ButtonWrapperStarter = ({ type }: any) => {
+const ButtonWrapperStarter = ({
+  disable,
+  userid,
+  type,
+}: {
+  disable: any;
+  userid: any;
+  type: any;
+}) => {
   const router = useRouter();
   const [{ options, isInitial, isPending, isResolved, isRejected }, dispatch] =
     usePayPalScriptReducer();
@@ -310,14 +368,31 @@ const ButtonWrapperStarter = ({ type }: any) => {
       },
     });
   }
+
+  console.log(userid);
   console.log(` is pending :${isPending}`);
 
+  const addPlan = async (id: string) => {
+    try {
+      await setDoc(doc(db, "users", id), {
+        plan: "starter",
+        start_date: Date.now(),
+        end_date: 0,
+        used_char: 0,
+      });
+
+      console.log("great! .");
+    } catch (e) {
+      console.error("Error:", e);
+    }
+  };
   return (
     <>
       {isPending ? (
         <LoaderIcon />
       ) : (
         <PayPalButtons
+          disabled={disable}
           createSubscription={(data, actions) => {
             return actions.subscription.create({
               plan_id: "P-86S718199T297924TMX654VA",
@@ -334,6 +409,8 @@ const ButtonWrapperStarter = ({ type }: any) => {
           onApprove={(data, action) => {
             console.log(data.subscriptionID);
             alert(" subscribtion success");
+
+            addPlan(userid);
             router.push("/dashboard");
             return Promise.resolve();
           }}
@@ -354,7 +431,15 @@ const ButtonWrapperStarter = ({ type }: any) => {
   );
 };
 
-const ButtonWrapperPro = ({ type }: any) => {
+const ButtonWrapperPro = ({
+  disable,
+  userid,
+  type,
+}: {
+  disable: any;
+  userid: any;
+  type: any;
+}) => {
   const router = useRouter();
   const [{ options, isInitial, isPending, isResolved, isRejected }, dispatch] =
     usePayPalScriptReducer();
@@ -377,6 +462,7 @@ const ButtonWrapperPro = ({ type }: any) => {
         <LoaderIcon />
       ) : (
         <PayPalButtons
+          disabled={disable}
           createSubscription={(data, actions) => {
             return actions.subscription.create({
               plan_id: "P-86S718199T297924TMX654VA",
@@ -413,7 +499,15 @@ const ButtonWrapperPro = ({ type }: any) => {
   );
 };
 
-const ButtonWrapperEnterprise = ({ type }: any) => {
+const ButtonWrapperEnterprise = ({
+  disable,
+  userid,
+  type,
+}: {
+  disable: any;
+  userid: any;
+  type: any;
+}) => {
   const router = useRouter();
   const [{ options, isInitial, isPending, isResolved, isRejected }, dispatch] =
     usePayPalScriptReducer();
@@ -436,6 +530,7 @@ const ButtonWrapperEnterprise = ({ type }: any) => {
         <LoaderIcon />
       ) : (
         <PayPalButtons
+          disabled={disable}
           createSubscription={(data, actions) => {
             return actions.subscription.create({
               plan_id: "P-86S718199T297924TMX654VA",
