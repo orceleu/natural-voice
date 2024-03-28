@@ -5,15 +5,9 @@ import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
-  ReactPayPalScriptOptions,
-  getScriptID,
-  destroySDKScript,
-  PayPalMessages,
-  usePayPalHostedFields,
 } from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
 import { CheckCircleIcon, LoaderIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -23,7 +17,6 @@ import { auth } from "@/app/firebase/config";
 import { signOut, onAuthStateChanged, User } from "firebase/auth";
 import { db } from "../firebase/config";
 
-import Link from "next/link";
 import {
   Accordion,
   AccordionContent,
@@ -378,7 +371,7 @@ const ButtonWrapperStarter = ({
         plan: "starter",
         start_date: Date.now(),
         end_date: 0,
-        used_char: 0,
+        used_char: 40000,
       });
 
       console.log("great! .");

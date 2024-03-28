@@ -7,7 +7,14 @@ import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
 import { Player } from "react-simple-player";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import { collection, addDoc, getDoc, doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase/config";
 import {
   Drawer,
@@ -266,18 +273,17 @@ export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [userName, setUserName] = useState("");
   const [userId, setUserid] = useState("");
-  const [todos, setTodos] = useState<string[]>([]);
-  const [havingPlan, setHavingPlan] = useState(false);
 
-  const addTodo = async (e: any) => {
-    e.preventDefault();
+  const [havingPlan, setHavingPlan] = useState(true);
+  //users utilisation
+  const [usedCharCurrent, setUsedCharCurrent] = useState(0);
+  const [planType, setplanType] = useState("");
+  const [planTypeValue, setplanTypeValue] = useState(0);
 
+  const addUsedChar = async () => {
     try {
-      await setDoc(doc(db, "users", userId), {
-        plan: "starter",
-        start_date: Date.now(),
-        end_date: 0,
-        used_char: 0,
+      await updateDoc(doc(db, "users", userId), {
+        used_char: usedCharCurrent - textvalue.length,
       });
 
       console.log("great! .");
@@ -291,6 +297,9 @@ export default function Dashboard() {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       setHavingPlan(true);
+      setUsedCharCurrent(docSnap.data().used_char);
+      setplanType(` ${docSnap.data().plan}`);
+
       console.log(`
         Currrent Plan:
         ${docSnap.data().plan}\n
@@ -304,7 +313,7 @@ export default function Dashboard() {
       console.log(Date.now());
     } else {
       // docSnap.data() will be undefined in this case
-      console.log("error while getting plan !");
+      console.log("no plan found!");
       setHavingPlan(false);
     }
   };
@@ -500,6 +509,8 @@ export default function Dashboard() {
           voice_sample: urlExempleVoice,
         })
         .then((res) => {
+          addUsedChar();
+          fetchPost();
           console.log(res.data);
           const { output } = res.data;
           setText(output);
@@ -555,7 +566,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div> {dashBoardDesktop()}</div>
+      <div> {dashBoardDesktop()} </div>
       <div> {dashBoardMobile()}</div>
     </div>
   );
@@ -587,29 +598,33 @@ export default function Dashboard() {
 
         <div className="mx-3">
           {/* Contenu de la partie droite */}
-
-          {havingPlan ? (
-            <>
-              <p>great</p>
-            </>
-          ) : (
-            <div className=" start-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-              <div className="flex items-center mx-auto">
-                <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
-                  <span>please select a plan to get started.</span>
+          <div className="my-3">
+            {havingPlan ? (
+              <>
+                <p>
+                  char: <span>{usedCharCurrent} </span> left
                 </p>
+              </>
+            ) : (
+              <div className=" start-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div className="flex items-center mx-auto">
+                  <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
+                    <span>please select a plan to get started.</span>
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <Button
+                    onClick={() => {
+                      router.push("/billing");
+                    }}
+                  >
+                    select a plan
+                  </Button>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Button
-                  onClick={() => {
-                    router.push("/billing");
-                  }}
-                >
-                  select a plan
-                </Button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
+
           <p>Voice selected:</p>
           <p className=" text-green-500">{nameVoiceSelected}</p>
           <p>Language selected:</p>
@@ -1222,7 +1237,9 @@ export default function Dashboard() {
           <div className="w-full mx-3 mt-5">
             {havingPlan ? (
               <>
-                <p>great</p>
+                <p>
+                  char: <span>{usedCharCurrent} </span> left
+                </p>
               </>
             ) : (
               <div className=" start-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
