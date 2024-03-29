@@ -449,6 +449,20 @@ const ButtonWrapperPro = ({
   }
   console.log(` is pending :${isPending}`);
 
+  const addPlan = async (id: string) => {
+    try {
+      await setDoc(doc(db, "users", id), {
+        plan: "pro",
+        start_date: Date.now(),
+        end_date: 0,
+        used_char: 100000,
+      });
+
+      console.log("great! .");
+    } catch (e) {
+      console.error("Error:", e);
+    }
+  };
   return (
     <>
       {isPending ? (
@@ -458,7 +472,7 @@ const ButtonWrapperPro = ({
           disabled={disable}
           createSubscription={(data, actions) => {
             return actions.subscription.create({
-              plan_id: "P-86S718199T297924TMX654VA",
+              plan_id: "P-7N242784T6989522DMYC6ACY",
               application_context: {
                 shipping_preference: "NO_SHIPPING",
                 return_url: "http://localhost:3000/billing",
@@ -472,6 +486,7 @@ const ButtonWrapperPro = ({
           onApprove={(data, action) => {
             console.log(data.subscriptionID);
             alert(" subscribtion success");
+            addPlan(userid);
             router.push("/dashboard");
             return Promise.resolve();
           }}

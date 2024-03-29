@@ -80,6 +80,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 
 const frameworks = [
   {
@@ -599,6 +600,7 @@ export default function Dashboard() {
         <div className="mx-3">
           {/* Contenu de la partie droite */}
           <div className="my-3">
+            <Badge variant="secondary">{planType}</Badge>
             {havingPlan ? (
               <>
                 <p>
@@ -1233,8 +1235,10 @@ export default function Dashboard() {
         {/* Partie droite */}
         <div className="w-3/4 bg-white  lg:flex flex-row ">
           {/* Contenu de la partie droite */}
+
           <Separator orientation="vertical" />
           <div className="w-full mx-3 mt-5">
+            <Badge variant="secondary">{planType}</Badge>
             {havingPlan ? (
               <>
                 <p>
@@ -1265,8 +1269,6 @@ export default function Dashboard() {
                 <p className=" text-green-500">{nameVoiceSelected}</p>
               </div>
 
-              <div className="App"></div>
-
               <div className="ml-auto mr-10 ">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -1280,7 +1282,11 @@ export default function Dashboard() {
                         Profile
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          router.push("/billing");
+                        }}
+                      >
                         Billing
                         <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                       </DropdownMenuItem>
