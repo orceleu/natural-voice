@@ -53,11 +53,7 @@ export default function Billing() {
       console.log(`
         Currrent Plan:
         ${docSnap.data().plan}\n
-        start date:
-       ${docSnap.data().start_date}\n
-        end date:
-       ${docSnap.data().end_date}\n
-        used char:
+       used char:
        ${docSnap.data().used_char}
       `);
       console.log(Date.now());
@@ -71,7 +67,7 @@ export default function Billing() {
   useEffect(() => {
     if (userId !== "") {
       fetchPost();
-      console.log(userId);
+      // console.log(userId);
     }
   }, [userId]);
 
@@ -361,24 +357,32 @@ const ButtonWrapperStarter = ({
       },
     });
   }
-
-  console.log(userid);
-  console.log(` is pending :${isPending}`);
-
+  var varPlanId = "";
   const addPlan = async (id: string) => {
     try {
       await setDoc(doc(db, "users", id), {
         plan: "starter",
-        start_date: Date.now(),
-        end_date: 0,
         used_char: 40000,
+        plan_id: varPlanId,
       });
 
-      console.log("great! .");
+      console.log("inserted to users! .");
+    } catch (e) {
+      console.error("Error:", e);
+    }
+
+    try {
+      await setDoc(doc(db, "usersPlan", varPlanId), {
+        start_date: Date.now(),
+        end_date: 0,
+      });
+
+      console.log("inseted to userPlan! .");
     } catch (e) {
       console.error("Error:", e);
     }
   };
+
   return (
     <>
       {isPending ? (
@@ -400,10 +404,17 @@ const ButtonWrapperStarter = ({
             });
           }}
           onApprove={(data, action) => {
-            console.log(data.subscriptionID);
             alert(" subscribtion success");
 
+            console.log(data.subscriptionID);
+
+            varPlanId =
+              data.subscriptionID?.toString() ??
+              "no string found in data subscription";
+
+            console.log(varPlanId);
             addPlan(userid);
+
             router.push("/dashboard");
             return Promise.resolve();
           }}
@@ -447,7 +458,6 @@ const ButtonWrapperPro = ({
       },
     });
   }
-  console.log(` is pending :${isPending}`);
 
   const addPlan = async (id: string) => {
     try {
@@ -530,7 +540,6 @@ const ButtonWrapperEnterprise = ({
       },
     });
   }
-  console.log(` is pending :${isPending}`);
 
   return (
     <>

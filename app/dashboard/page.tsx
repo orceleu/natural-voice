@@ -304,10 +304,7 @@ export default function Dashboard() {
       console.log(`
         Currrent Plan:
         ${docSnap.data().plan}\n
-        start date:
-       ${docSnap.data().start_date}\n
-        end date:
-       ${docSnap.data().end_date}\n
+       
         used char:
        ${docSnap.data().used_char}
       `);

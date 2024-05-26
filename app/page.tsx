@@ -53,6 +53,8 @@ import {
 } from "@/components/ui/accordion";
 import SampleLanguage from "./componentCustom/SampleLanguage";
 import { AlertTriangle, Check } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import VoiceTest from "./trytestingvoice/VoiceTest";
 
 export default function Home() {
   const textCard = [
@@ -164,7 +166,8 @@ export default function Home() {
               img4={anthonyremovebgpreview}
             />
           </div>
-
+          <VoiceTest />
+          <br />
           <div className="flex justify-center mt-11 md:mt-[100px]">
             <Button asChild size="lg">
               <Link href="/dashboard"> get started</Link>
@@ -193,7 +196,7 @@ export default function Home() {
         </p>
         <Separator className="my-10" />
 
-        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px]">
+        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px] ">
           {textCard.map((txt) => (
             <Card key={txt.id}>
               <CardHeader>

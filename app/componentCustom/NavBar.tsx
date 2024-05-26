@@ -17,8 +17,8 @@ export default function NavBar() {
     <header className="bg-white  p-4 fixed top-0 left-0 right-0 z-50 shadow-sm">
       <nav className="container px-1 md:px-6 mx-auto flex items-center justify-between">
         <div className="flex items-center ">
-          <a href="#" className="font-bold text-lg ">
-            SpeechLab
+          <a href="/" className="font-bold text-lg ">
+            Vividvoice
           </a>
         </div>
         <div className="hidden md:flex items-center space-x-4">
