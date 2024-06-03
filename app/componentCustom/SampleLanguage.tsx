@@ -98,7 +98,7 @@ const SampleLanguage: React.FC<Props> = ({
     <>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {sampleLanguage.map((item, index) => (
-          <div className="bg-gray-50 rounded-[30px] grid" key={index}>
+          <div className="bg-gray-50 rounded-sm grid" key={index}>
             <Image
               src={item.flag}
               alt=""

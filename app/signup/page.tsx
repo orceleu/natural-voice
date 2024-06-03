@@ -18,6 +18,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
+import axios from "axios";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -44,10 +45,12 @@ export default function SignUp() {
     provider.setCustomParameters({ app: "natural-voice" });
     try {
       await signInWithPopup(auth, provider);
+      // createCustomerId(email);
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleSignUp = async (e: any) => {
     e.preventDefault();
     console.log({ email, password });
@@ -56,6 +59,8 @@ export default function SignUp() {
       console.log({ res });
       setEmail("");
       setPassword("");
+      // createCustomerId(email);
+
       toast({
         title: "Account created",
       });

@@ -168,10 +168,12 @@ export default function Home() {
           </div>
           <VoiceTest />
           <br />
-          <div className="flex justify-center mt-11 md:mt-[100px]">
-            <Button asChild size="lg">
+          <Separator />
+
+          <div className="flex justify-center mt-11 md:mt-[100px] ">
+            <button className="w-[200px] h-[70px] rounded-[50px] bg-emerald-500 hover:bg-lime-700 text-white font-bold">
               <Link href="/dashboard"> get started</Link>
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -182,15 +184,13 @@ export default function Home() {
       <br />
       <br />
 
-      <div className="flex justify-center mt-11 md:mt-[200px] mx-10 md:mx-[70px] shadow-md rounded-md">
-        <Image src={screennaturalvoice} alt="" className="rounded-md" />
+      <div className="flex justify-center mt-11 md:mt-[200px] mx-10 md:mx-[100px] shadow-md rounded-md">
+        <Image src={screennaturalvoice} alt="" className="rounded-md " />
       </div>
       <br />
       <br />
-      <br />
-      <br />
-      <br />
-      <div className="container mx-auto  py-8">
+
+      <div className="container mx-auto  py-8 md:mt-[100px]">
         <p className=" text-3xl md:text-5xl text-center my-[100px]">
           why use ai SpeechLab ?
         </p>
@@ -201,11 +201,9 @@ export default function Home() {
             <Card key={txt.id}>
               <CardHeader>
                 <Image src={txt.img} alt="" className="h-[100px] w-[100px] " />
-                <CardTitle>
-                  <p className="font-bold text-center">{txt.title}</p>
-                </CardTitle>
-                <CardDescription>
-                  <p className="text-center">{txt.desc}</p>
+                <CardTitle className="text-center">{txt.title}</CardTitle>
+                <CardDescription className="text-center">
+                  {txt.desc}
                 </CardDescription>
               </CardHeader>
               <CardFooter>
@@ -215,11 +213,11 @@ export default function Home() {
           ))}
         </div>
         <Separator className="my-10" />
-        <div className="md:mx-[100px]">
-          <p className="text-3xl md:text-5xl font-bold mt-[200px]">
+        <div className="md:mx-[100px] bg-slate-800 p-[50px] md:mt-[200px]">
+          <p className="text-3xl md:text-5xl font-bold text-white">
             AI Voice Generator in 12 Languages.
           </p>
-          <p className=" md:font-thin my-10  md:text-xl">
+          <p className=" md:font-thin my-10  md:text-xl text-white">
             Our AI voice generator supports 12 languages and all diverse accents
             - just select the appropriate accent and enter text in your language
             of choice. VoiceLab allows you to create voices and use them in any

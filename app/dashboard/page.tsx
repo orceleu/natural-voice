@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { AudioWaveformIcon, SendIcon, SettingsIcon } from "lucide-react";
@@ -257,7 +257,7 @@ export default function Dashboard() {
   const [screenShotseconds, setSreenShotSeconds] = useState("");
 
   const [progresspercent, setProgresspercent] = useState(0);
-
+  const cus_Id = useRef("");
   const { toast } = useToast();
   const router = useRouter();
   const [openIndrawer, setOpenIndrawer] = React.useState(false);
@@ -273,6 +273,8 @@ export default function Dashboard() {
   const [uploadIsLoaded, setUploadLoaded] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState<string | null>("");
+
   const [userId, setUserid] = useState("");
 
   const [havingPlan, setHavingPlan] = useState(true);
@@ -297,25 +299,26 @@ export default function Dashboard() {
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setHavingPlan(true);
-      setUsedCharCurrent(docSnap.data().used_char);
-      setplanType(` ${docSnap.data().plan}`);
-
-      console.log(`
-        Currrent Plan:
-        ${docSnap.data().plan}\n
-       
-        used char:
-       ${docSnap.data().used_char}
-      `);
-      console.log(Date.now());
+      // setHavingPlan(true);
+      // setUsedCharCurrent(docSnap.data().used_char);
+      //setplanType(` ${docSnap.data().plan}`);
+      cus_Id.current = docSnap.data().cus_id as string;
+      getCustomerAlldata();
     } else {
       // docSnap.data() will be undefined in this case
       console.log("no plan found!");
       setHavingPlan(false);
     }
   };
-
+  const getCustomerAlldata = async () => {
+    const docRef = doc(db, "usersPlan", "cus_QE54kSUDTrIWaP"); // replace with customerID
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setHavingPlan(true);
+      setUsedCharCurrent(docSnap.data().used_char);
+      setplanType(` ${docSnap.data().plan}`);
+    }
+  };
   useEffect(() => {
     if (userId !== "") {
       fetchPost();
@@ -435,10 +438,12 @@ export default function Dashboard() {
       setUser(currentUser);
       if (currentUser) {
         const name = currentUser?.displayName;
+        const userEmail = currentUser?.email;
         const uiid = currentUser?.uid;
         console.log(currentUser?.displayName);
         if (name !== undefined && name !== null) {
           setUserName(name);
+          setUserEmail(userEmail);
           setUserid(uiid);
         } else {
         }

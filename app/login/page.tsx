@@ -18,6 +18,7 @@ import {
   User,
 } from "firebase/auth";
 import { Separator } from "@/components/ui/separator";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");

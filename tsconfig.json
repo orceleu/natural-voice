@@ -28,7 +28,11 @@
     ".next/types/**/*.ts",
     "app/api/speak/route.js",
     "app/firebase/AuthContext.ts",
-    "app/firebase/AuthContext.ts"
+    "app/firebase/AuthContext.ts",
+    "app/api/webhook/route.js",
+    "app/api/createUser/route.js",
+    "app/api/checkout/route.js",
+    "app/api/webhook/route.js"
   ],
   "exclude": ["node_modules"]
 }

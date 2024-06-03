@@ -22,6 +22,7 @@ import { franc, francAll } from "franc";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { SendIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 const defauldVoice =
   "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnthony.mp3?alt=media&token=1da13aec-26ae-4612-9018-ff0ceb6a0b9d";
 const axiosInstance = axios.create();
@@ -159,60 +160,67 @@ export default function VoiceTest() {
   }
 
   return (
-    <div className=" flex justify-center bg-amber-600 rounded-lg ">
-      <div className="p-5">
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={open}
-              className="w-[200px] justify-between"
-            >
-              {languagevalue
-                ? frameworks.find(
-                    (framework) => framework.value === languagevalue
-                  )?.label
-                : "Select language..."}
-              <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
-            <Command>
-              <CommandInput placeholder="Search language..." className="h-9" />
-              <CommandEmpty>No language found.</CommandEmpty>
-              <CommandGroup>
-                {frameworks.map((framework) => (
-                  <CommandItem
-                    key={framework.value}
-                    value={framework.value}
-                    onSelect={(currentValue) => {
-                      setLanguageValue(
-                        currentValue === languagevalue ? "" : currentValue
-                      );
-                      setOpen(false);
-                      console.log(` language selected: ${languagevalue}`);
-                    }}
-                  >
-                    {framework.label}
-                    <CheckIcon
-                      className={cn(
-                        "ml-auto h-4 w-4",
-                        languagevalue === framework.value
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </Command>
-          </PopoverContent>
-        </Popover>
+    <div className=" flex justify-center ">
+      <div className="p-5 shadow-lg ">
+        <div className="flex items-center space-x-5">
+          {" "}
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={open}
+                className="w-[200px] justify-between"
+              >
+                {languagevalue
+                  ? frameworks.find(
+                      (framework) => framework.value === languagevalue
+                    )?.label
+                  : "Select language..."}
+                <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  placeholder="Search language..."
+                  className="h-9"
+                />
+                <CommandEmpty>No language found.</CommandEmpty>
+                <CommandGroup>
+                  {frameworks.map((framework) => (
+                    <CommandItem
+                      key={framework.value}
+                      value={framework.value}
+                      onSelect={(currentValue) => {
+                        setLanguageValue(
+                          currentValue === languagevalue ? "" : currentValue
+                        );
+                        setOpen(false);
+                        console.log(` language selected: ${languagevalue}`);
+                      }}
+                    >
+                      {framework.label}
+                      <CheckIcon
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          languagevalue === framework.value
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          <Button variant="outline">upload voices</Button>
+        </div>
         <br />
         <Textarea
           placeholder="Test it yourself."
-          className="h-[200px] my-5"
+          className="h-[200px] my-5 "
           value={text}
           maxLength={200}
           onChange={(e: any) => {
@@ -220,22 +228,17 @@ export default function VoiceTest() {
             detectTheLanguage();
           }}
         />{" "}
-        <p className="my-1">
+        <p className="my-1 ">
           <span>{text.length}</span>/200 Char
         </p>
         <AudioPlayer audioUrl={urlaudio} />
         <br />
         <div className="flex justify-end ">
-          <Button
-            disabled={isActive}
-            variant="outline"
-            size="icon"
-            onClick={handleClick}
-          >
+          <Button disabled={isActive} variant="outline" onClick={handleClick}>
             {isLoaded ? (
               <ReloadIcon className=" h-5 w-5 animate-spin" />
             ) : (
-              <SendIcon className="h-5 w-5" />
+              <p>Test now</p>
             )}
           </Button>
         </div>

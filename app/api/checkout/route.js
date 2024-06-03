@@ -12,10 +12,11 @@ const stripe = new Stripe(
   }
 );
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req) {
   // Create or update subscription
-  //const { customerId, priceId } = await req.body;
-
+  const { price_Id, customer_Id } = await req.json();
+  console.log(price_Id);
+  console.log(customer_Id);
   /* const subscription = await stripe.subscriptions.create({
     customer: "cus_QARIKwkbeUgpGB",
     items: [{ price: "price_1PFdXUHMq3uIqhfsb82b423Q" }],
@@ -47,7 +48,7 @@ export async function POST(req: NextApiRequest) {
   */
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
-    customer: "cus_QAmpZ87sNdWvQd",
+    customer: "cus_QE4yDGGDlYdo54",
     line_items: [
       {
         price: "price_1PFdXUHMq3uIqhfsb82b423Q", // Remplacez par l'ID de votre prix
@@ -59,31 +60,4 @@ export async function POST(req: NextApiRequest) {
     cancel_url: "http://localhost:3000/checkout/cancel",
   });
   return NextResponse.json({ session: `${session.url}` });
-}
-
-async function createPaymentLink(userId: any) {
-  /* const userDoc = await db.collection("users").doc(userId).get();
-   if (!userDoc.exists) {
-     throw new Error("User not found");
-   }
- 
-   const userData = userDoc.data();
-   const customerId = userData.stripeCustomerId;
- */
-  // Créer un lien de paiement avec le customerId existant
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    customer: "cus_QAloUZ421YjV6C",
-    line_items: [
-      {
-        price: "price_1PFdXUHMq3uIqhfsb82b423Q", // Remplacez par l'ID de votre prix
-        quantity: 1,
-      },
-    ],
-    mode: "subscription",
-    success_url: "https://votre-site/success",
-    cancel_url: "https://votre-site/cancel",
-  });
-
-  return session.url;
 }

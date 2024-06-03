@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import {
   PayPalScriptProvider,
@@ -13,7 +13,6 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { collection, addDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { auth } from "@/app/firebase/config";
-
 import { signOut, onAuthStateChanged, User } from "firebase/auth";
 import { db } from "../firebase/config";
 
@@ -25,16 +24,20 @@ import {
 } from "@/components/ui/accordion";
 
 import { CheckCircledIcon, CheckIcon } from "@radix-ui/react-icons";
+import axios from "axios";
 //import googlepay from '@paypal/googlepay-components'
 export default function Billing() {
   //secret: EHJu3f2e_krcmRT-dVmVkjmN3LLIksgIDsORtuebjym3hgvGPczJD9eggDg_isb9DcfMdgqOnsRFCRu1
   //client id:AYUz6PJaJRmYWImq2oPBnPZPpGC7lYb6e729pLHW3J4bQ8zo9nidGQJMIbctio-XMvovPYX9QzvKUgxf
   const router = useRouter();
-  const [status, setStatus] = useState("");
   const [havingPlan, setHavingPlan] = useState(false);
-  const [userId, setUserid] = useState("");
+  //const [userId, setUserid] = useState("");
+  const userId = useRef("");
   const [user, setUser] = useState<User | null>(null);
-
+  //const [userEmail, setUserEmail] = useState<string | null>("");
+  const useremail = useRef<string | null>("");
+  const cus_id = useRef("");
+  const selected_plan = useRef("");
   const initialOptions: any = {
     "client-id":
       "ATZl5eLAOWOORW9XV8ZBo5YRhjn0j7k34UmfHmXgXVZ2QU-DYVaNnB7jqxarzFYpGkvapgPuqrVkafc5",
@@ -46,30 +49,33 @@ export default function Billing() {
   };
 
   const fetchPost = async () => {
-    const docRef = doc(db, "users", userId);
+    const docRef = doc(db, "users", userId.current);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       setHavingPlan(true);
-      console.log(`
-        Currrent Plan:
-        ${docSnap.data().plan}\n
-       used char:
-       ${docSnap.data().used_char}
-      `);
-      console.log(Date.now());
+
+      cus_id.current = docSnap.data().cus_id as string;
     } else {
       // docSnap.data() will be undefined in this case
       console.log("no plan setup!");
       setHavingPlan(false);
     }
   };
-
+  const getCustomerAlldata = async () => {
+    const docRef = doc(db, "usersPlan", "cus_QE54kSUDTrIWaP"); // replace with customerID
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setHavingPlan(true);
+      //setUsedCharCurrent(docSnap.data().used_char);
+      // setplanType(` ${docSnap.data().plan}`);
+    }
+  };
   useEffect(() => {
-    if (userId !== "") {
+    if (userId.current !== "") {
       fetchPost();
       // console.log(userId);
     }
-  }, [userId]);
+  }, [userId.current]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -77,9 +83,12 @@ export default function Billing() {
       if (currentUser) {
         const name = currentUser?.displayName;
         const uiid = currentUser?.uid;
+        const userEmail = currentUser?.email;
         console.log(currentUser?.displayName);
-        if (name !== undefined && name !== null) {
-          setUserid(uiid);
+        if (name !== undefined && name !== null && useremail !== null) {
+          // setUserid(uiid);
+          userId.current = uiid;
+          useremail.current = userEmail;
         } else {
         }
       }
@@ -90,6 +99,47 @@ export default function Billing() {
     return () => unsubscribe();
   }, [user]);
 
+  async function selectPlan(price_id: string, customer_id: string) {
+    console.log(price_id);
+    console.log(customer_id);
+    await axios
+      .post("/api/checkout", { price_Id: price_id, customer_Id: customer_id })
+      .then((res) => {
+        console.log(res.data);
+
+        router.push(`${res.data.session}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  const addPlan = async (firebaseUserId: string, stripeCustomerId: string) => {
+    try {
+      await setDoc(doc(db, "users", firebaseUserId), {
+        cus_id: stripeCustomerId,
+      });
+
+      console.log("inserted to users! .");
+      selectPlan(selected_plan.current, stripeCustomerId);
+    } catch (e) {
+      console.error("Error:", e);
+    }
+  };
+  async function createCustomerId(email: string) {
+    //cree un stripe customerId  a partir de l'email
+
+    console.log(email);
+    await axios
+      .post("/api/createUser", { email_user: email })
+      .then((res) => {
+        //console.log(res.data.user);
+        cus_id.current = res.data.user as string;
+        addPlan(userId.current, cus_id.current);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <div>
       <div className="mx-10 md:mx-[100px]">
@@ -135,13 +185,27 @@ export default function Billing() {
               </li>
             </ul>
             <div className="flex justify-center">
-              <PayPalScriptProvider options={initialOptions}>
-                <ButtonWrapperStarter
-                  disable={havingPlan}
-                  userid={userId}
-                  type="subscription"
-                />
-              </PayPalScriptProvider>
+              <Button
+                onClick={() => {
+                  selected_plan.current = "price_1PFdXUHMq3uIqhfsb82b423Q";
+                  //utiliser le custom id deja existant
+
+                  if (havingPlan == true) {
+                    // select_customerID_in_database();
+                    // sil pa gen custom id nan base de donnee a autrement ,selectPlan() direct
+                    addPlan(userId.current, cus_id.current);
+                  } else {
+                    if (
+                      useremail.current !== null &&
+                      useremail.current !== ""
+                    ) {
+                      createCustomerId(useremail.current);
+                    }
+                  }
+                }}
+              >
+                select
+              </Button>
             </div>
             <br />
             <div className="flex justify-center">
@@ -194,7 +258,7 @@ export default function Billing() {
               <PayPalScriptProvider options={initialOptions}>
                 <ButtonWrapperPro
                   disable={havingPlan}
-                  userid={userId}
+                  userid={userId.current}
                   type="subscription"
                 />
               </PayPalScriptProvider>
@@ -246,7 +310,7 @@ export default function Billing() {
               <PayPalScriptProvider options={initialOptions}>
                 <ButtonWrapperEnterprise
                   disable={havingPlan}
-                  userid={userId}
+                  userid={userId.current}
                   type="subscription"
                 />
               </PayPalScriptProvider>
