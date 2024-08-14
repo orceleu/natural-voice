@@ -194,8 +194,8 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="grid mx-10 md:mx-[100px]">
-        <div className="flex justify-between w-full h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
+      <div className="grid mx-2 md:mx-[100px]">
+        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
           <p className="text 4xl font-bold underline my-auto m-5">
             {" "}
             Text to speech for content creator.
@@ -210,7 +210,7 @@ export default function Home() {
             <Image
               src={contentCreatorIllustration}
               alt=""
-              className="size-[300px] md:size-[400px]  rounded-md"
+              className="size-[200px] md:size-[400px]  rounded-md"
             />
           </div>
         </div>
