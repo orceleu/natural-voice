@@ -100,7 +100,7 @@ export default function Home() {
   ];
 
   return (
-    <main>
+    <main className=" bg-gradient-to-b from-green-50 to-white">
       <NavBar />
       <br />
       <br />
@@ -147,7 +147,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-11">
+      <div className="mt-11 ">
         <div className=" md:mx-[100px]">
           <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
             GENERATE REALISTIC VOICE WITH OUR MODEL.
@@ -216,7 +216,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className=" flex items-center">
+      <div className=" flex items-center mt-10">
         <Image
           src={flechedesign}
           alt=""
@@ -254,7 +254,14 @@ export default function Home() {
           {textCard.map((txt) => (
             <Card key={txt.id}>
               <CardHeader>
-                <Image src={txt.img} alt="" className="h-[100px] w-[100px] " />
+                <div className="flex justify-center">
+                  <Image
+                    src={txt.img}
+                    alt=""
+                    className="h-[100px] w-[100px] "
+                  />
+                </div>
+
                 <CardTitle className="text-center">{txt.title}</CardTitle>
                 <CardDescription className="text-center">
                   {txt.desc}
