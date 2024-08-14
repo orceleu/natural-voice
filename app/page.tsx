@@ -176,8 +176,8 @@ export default function Home() {
           <Separator />
 
           <div className="flex justify-center mt-11 md:mt-[100px] ">
-            <button className="w-[200px] h-[70px] rounded-[50px] bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
-              <Link href="/dashboard"> get started</Link>
+            <button className="w-[200px] h-[50px] rounded-sm bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
+              <Link href="/dashboard"> Get started</Link>
             </button>
           </div>
         </div>
@@ -195,22 +195,35 @@ export default function Home() {
       </div>
 
       <div className="grid mx-2 md:mx-[100px]">
-        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-[30px] bg-gradient-to-r from-yellow-100 to-green-100 my-10">
-          <p className="text 4xl font-bold underline my-auto m-3">
-            {" "}
-            Text to speech for content creator.
-          </p>
+        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
+          <div className="grid gap-4 ">
+            <p className="text-3xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-10">
+              Text to speech for :
+            </p>
+            <p className="text 2xl font-bold  my-auto m-3 md:ml-10">
+              * content creator.
+            </p>
+            <p className="text 2xl font-bold  my-auto m-3 md:ml-10">
+              {" "}
+              * Marketer.
+            </p>
+            <p className="text 2xl font-bold  my-auto m-3 md:ml-10">
+              {" "}
+              * Audio book.
+            </p>
+          </div>
+
           <div className="grid gap-3 m-3 ">
             <Image
               src={tiktokcreator}
               alt=""
-              className="h-[100px] w-[150px] shadow-md rounded-[30px]"
+              className="h-[100px] w-[150px] shadow-md rounded-md"
             />
 
             <Image
               src={contentCreatorIllustration}
               alt=""
-              className="size-[200px] md:size-[400px]  rounded-[30px]"
+              className="size-[170px] md:size-[400px]  rounded-md"
             />
           </div>
         </div>
@@ -234,15 +247,16 @@ export default function Home() {
 
       <br />
       <div className="flex justify-center mt-11 md:mt-[100px] ">
-        <button className="w-[200px] h-[70px] rounded-[50px] bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
-          <Link href="/dashboard"> get started</Link>
+        <button className="w-[200px] h-[50px] rounded-sm bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
+          <Link href="/dashboard"> Get started</Link>
         </button>
       </div>
       <br />
 
       <div className="container mx-auto  py-8 md:mt-[100px]">
-        <p className=" text-3xl md:text-5xl text-center my-[100px]">
-          why use ai SpeechLab ?
+        <p className=" text-3xl md:text-5xl text-center my-[100px] font-bold">
+          WHY USE AI <span className="text-yellow-500">Vivid</span>
+          <span className="text-green-500">voice </span>?
         </p>
         <p className="text-center my-[10px]">
           Our model is able to catch the context of the text for a comprehensive
@@ -279,10 +293,13 @@ export default function Home() {
             AI Voice Generator in 12 Languages.
           </p>
           <p className=" md:font-thin my-10  md:text-xl text-white">
-            Our AI voice generator supports 12 languages and all diverse accents
-            - just select the appropriate accent and enter text in your language
-            of choice. VoiceLab allows you to create voices and use them in any
-            language.
+            Our AI voice generator supports{" "}
+            <span className="font-bold underline">12 languages</span> and all
+            diverse accents - just select the appropriate accent and enter text
+            in your language of choice.{" "}
+            <span className="text-yellow-500 font-bold">Vivid</span>
+            <span className="text-green-500 font-bold">voice</span> allows you
+            to create voices and use them in any language.
           </p>
 
           <SampleLanguage
@@ -325,7 +342,7 @@ export default function Home() {
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
-                <Button asChild className="bg-emerald-700">
+                <Button asChild className="bg-green-500">
                   <Link href="/signup">Get access</Link>
                 </Button>
               </div>
@@ -337,7 +354,7 @@ export default function Home() {
                 <br />
                 <p className="text-center font-semibold"> Most popular*</p>
               </div>
-              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+              <p className="text-3xl font-semibold mt-10 text-center text-green-500">
                 Pro
               </p>
               <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
@@ -351,7 +368,7 @@ export default function Home() {
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
-                <Button asChild className="bg-emerald-700">
+                <Button asChild className="bg-green-500">
                   <Link href="/signup">Get access</Link>
                 </Button>
               </div>
@@ -359,7 +376,7 @@ export default function Home() {
             </Card>
 
             <Card className=" max-w-sm mt-9">
-              <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
+              <p className="text-3xl font-semibold mt-10 text-center text-green-500">
                 Premium
               </p>
               <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
@@ -373,7 +390,7 @@ export default function Home() {
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
-                <Button asChild className="bg-emerald-700">
+                <Button asChild className="bg-green-500">
                   <Link href="/signup">Get access</Link>
                 </Button>
               </div>
@@ -398,7 +415,7 @@ export default function Home() {
                 How do I make my own AI voice?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500 ">
-                To create your own AI voice at SpeechLab, go to the setting,
+                To create your own AI voice at Vividvoice, go to the setting,
                 upload your best quality voice and select it. Voice Design
                 allows you to customize the speaker s identityfor unique voices
                 in your scripts, while Voice Cloning mimics real voices. This
@@ -408,7 +425,7 @@ export default function Home() {
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
-                How much does using SpeechLab AI voice generator cost?
+                How much does using Vividvoice AI voice generator cost?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500">
                 The Starter Plan is $8 per month, offering 40,000 characters and
@@ -418,7 +435,7 @@ export default function Home() {
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
-                Can I use SpeechLab AI voice generator for free?
+                Can I use Vividvoice AI voice generator for free?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500">
                 No,with this model we are unable to offer free plan
@@ -426,7 +443,7 @@ export default function Home() {
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
-                How many languages does SpeechLab support?
+                How many languages does Vividvoice support?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500">
                 SpeechLab support 12 language for the moment
@@ -437,7 +454,7 @@ export default function Home() {
                 What is an AI voice generator?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500">
-                SpeechLab AI voice generator transforms text to spoken audio
+                Vividvoice AI voice generator transforms text to spoken audio
                 that sounds like a natural human voice, complete with realistic
                 intonation and accents. It offers a wide range of voice options
                 across various languages and dialects. Designed for ease of use,

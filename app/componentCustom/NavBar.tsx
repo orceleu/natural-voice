@@ -23,24 +23,24 @@ export default function NavBar() {
           </a>
         </div>
         <div className="hidden md:flex items-center space-x-4">
-          <a href="/" className=" hover:text-emerald-700 ">
+          <a href="/" className=" hover:text-green-500 ">
             Home
           </a>
-          <a href="#" className=" hover:text-emerald-700">
+          <a href="#" className=" hover:text-green-700">
             Blog
           </a>
-          <a href="/pricing" className=" hover:text-emerald-700">
+          <a href="/pricing" className=" hover:text-green-700">
             Pricing
           </a>
-          <a href="#" className=" hover:text-emerald-700">
+          <a href="#" className=" hover:text-green-700">
             Contact
           </a>
 
-          <a href="/signup" className="text-emerald-700 underline">
+          <a href="/signup" className="text-green-500 underline">
             sign up
           </a>
           <Button
-            className="bg-emerald-500 hover:bg-emerald-300 "
+            className="bg-green-500 hover:bg-green-300 "
             onClick={() => {
               router.push("/login");
             }}
@@ -50,7 +50,7 @@ export default function NavBar() {
         </div>
         <div className="md:hidden">
           <Button
-            className=" mr-5  bg-emerald-500 hover:bg-emerald-300"
+            className=" mr-5  bg-green-500 hover:bg-green-300"
             onClick={() => {
               router.push("/login");
             }}
@@ -60,7 +60,7 @@ export default function NavBar() {
 
           <button
             onClick={toggleMenu}
-            className="text-black hover:text-emerald-700"
+            className="text-black hover:text-green-700"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,22 +82,22 @@ export default function NavBar() {
       {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden bg-white py-2 ">
-          <a href="/" className="block px-10 py-2 hover:text-emerald-700">
+          <a href="/" className="block px-10 py-2 hover:text-green-700">
             Home
           </a>
-          <a href="#" className="block  px-10 py-2 hover:text-emerald-700">
+          <a href="#" className="block  px-10 py-2 hover:text-green-700">
             Blog
           </a>
-          <a href="#" className="block  px-10 py-2 hover:text-emerald-700">
+          <a href="#" className="block  px-10 py-2 hover:text-green-700">
             Pricing
           </a>
-          <a href="#" className="block px-10 py-2 hover:text-emerald-700">
+          <a href="#" className="block px-10 py-2 hover:text-green-700">
             Contact
           </a>
 
           <a
             href="/signup"
-            className="text-emerald-700 ml-5 underline hover:text-emerald-800 "
+            className="text-emerald-700 ml-5 underline hover:text-green-800 "
           >
             sign up
           </a>

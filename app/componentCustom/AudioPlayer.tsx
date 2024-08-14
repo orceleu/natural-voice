@@ -7,7 +7,7 @@ interface AudioPlayerProps {
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
   return (
-    <div className="max-w-xs mx-auto p-4 bg-gray-200 rounded-lg shadow-md">
+    <div className="max-w-xs mx-auto p-4  rounded-lg ">
       <audio controls src={audioUrl}></audio>
     </div>
   );
