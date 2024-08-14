@@ -189,28 +189,28 @@ export default function Home() {
       <br />
       <br />
       <div className="flex justify-center">
-        <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-green-500 to-green-500 my-10">
+        <p className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-green-500 to-green-500 my-10">
           Online AI text-to-speech converter
         </p>
       </div>
 
       <div className="grid mx-2 md:mx-[100px]">
-        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
-          <p className="text 4xl font-bold underline my-auto m-5">
+        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-[30px] bg-gradient-to-r from-yellow-100 to-green-100 my-10">
+          <p className="text 4xl font-bold underline my-auto m-3">
             {" "}
             Text to speech for content creator.
           </p>
-          <div className="grid gap-3 m-5 ">
+          <div className="grid gap-3 m-3 ">
             <Image
               src={tiktokcreator}
               alt=""
-              className="h-[100px] w-[150px] shadow-md rounded-md"
+              className="h-[100px] w-[150px] shadow-md rounded-[30px]"
             />
 
             <Image
               src={contentCreatorIllustration}
               alt=""
-              className="size-[200px] md:size-[400px]  rounded-md"
+              className="size-[200px] md:size-[400px]  rounded-[30px]"
             />
           </div>
         </div>
