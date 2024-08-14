@@ -24,8 +24,11 @@ import img4 from "../public/img4.svg";
 import img6 from "../public/img6.svg";
 import podcast from "../public/podcast.svg";
 import audioconv from "../public/audioconv.svg";
-
+import flechedesign from "../public/flecheDesign.png";
+import flechedesign2 from "../public/flecheDesign2.png";
+import tiktokcreator from "../public/tiktokcreator.jpg";
 import usaflag from "../public/flag/usaflag.png";
+import contentCreatorIllustration from "../public/contentcreatorillustration.png";
 import franceflag from "../public/flag/franceflag.png";
 import italyflag from "../public/flag/italyflag.png";
 import russiaflag from "../public/flag/russiaflag.png";
@@ -192,14 +195,43 @@ export default function Home() {
       </div>
 
       <div className="grid mx-10 md:mx-[100px]">
-        <div className="flex justify-between w-full h-[500px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10"></div>
-        <div className="w-full h-[500px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10"></div>
-        <div className="w-full h-[500px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10"></div>
+        <div className="flex justify-between w-full h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
+          <p className="text 4xl font-bold underline my-auto m-5">
+            {" "}
+            Text to speech for content creator.
+          </p>
+          <div className="grid gap-3 m-5 ">
+            <Image
+              src={tiktokcreator}
+              alt=""
+              className="h-[100px] w-[150px] shadow-md rounded-md"
+            />
+
+            <Image
+              src={contentCreatorIllustration}
+              alt=""
+              className="size-[300px] md:size-[400px]  rounded-md"
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex justify-center mt-11 md:mt-[200px] mx-10 md:mx-[100px] shadow-md rounded-md">
-        <Image src={screennaturalvoice} alt="" className="rounded-md " />
+      <div className=" flex items-center">
+        <Image
+          src={flechedesign}
+          alt=""
+          className="rounded-sm size-[50px] md:size-[150px]"
+        />
+        <div className="flex justify-center gap-2 mt-11 md:mt-[200px] mx-5 md:mx-[70px] shadow-md rounded-md">
+          <Image src={screennaturalvoice} alt="" className="rounded-md " />
+        </div>
+        <Image
+          src={flechedesign2}
+          alt=""
+          className="rounded-sm size-[50px] md:size-[150px]"
+        />
       </div>
+
       <br />
       <div className="flex justify-center mt-11 md:mt-[100px] ">
         <button className="w-[200px] h-[70px] rounded-[50px] bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
