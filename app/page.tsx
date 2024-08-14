@@ -66,7 +66,7 @@ export default function Home() {
     },
     {
       id: "2",
-      title: "Clone your own voice",
+      title: "Clone any voice",
       desc: "Upload your voice and replicate it",
       img: podcast,
     },
@@ -149,12 +149,14 @@ export default function Home() {
           <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
             GENERATE REALISTIC VOICE WITH OUR MODEL.
           </p>
+          <p className="text-center   ">(trained for narration and spot.)</p>
           <div className="mx-5">
-            <p className=" md:font-thin  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 ">
+            <p className=" md:font-thin  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-yellow-600 to-green-500 ">
               You can choose from over 12 languages and 50 voices to convert
               your texts into speech and get your audio file
             </p>
           </div>
+
           <p className="text-center my-10 text-emerald-500 font-mono text-lg underline">
             sample
           </p>
@@ -171,7 +173,7 @@ export default function Home() {
           <Separator />
 
           <div className="flex justify-center mt-11 md:mt-[100px] ">
-            <button className="w-[200px] h-[70px] rounded-[50px] bg-emerald-500 hover:bg-lime-700 text-white font-bold">
+            <button className="w-[200px] h-[70px] rounded-[50px] bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
               <Link href="/dashboard"> get started</Link>
             </button>
           </div>
@@ -183,16 +185,36 @@ export default function Home() {
       <br />
       <br />
       <br />
+      <div className="flex justify-center">
+        <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-green-500 to-green-500 my-10">
+          Online AI text-to-speech converter
+        </p>
+      </div>
+
+      <div className="grid mx-10 md:mx-[100px]">
+        <div className="flex justify-between w-full h-[500px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10"></div>
+        <div className="w-full h-[500px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10"></div>
+        <div className="w-full h-[500px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10"></div>
+      </div>
 
       <div className="flex justify-center mt-11 md:mt-[200px] mx-10 md:mx-[100px] shadow-md rounded-md">
         <Image src={screennaturalvoice} alt="" className="rounded-md " />
       </div>
       <br />
+      <div className="flex justify-center mt-11 md:mt-[100px] ">
+        <button className="w-[200px] h-[70px] rounded-[50px] bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
+          <Link href="/dashboard"> get started</Link>
+        </button>
+      </div>
       <br />
 
       <div className="container mx-auto  py-8 md:mt-[100px]">
         <p className=" text-3xl md:text-5xl text-center my-[100px]">
           why use ai SpeechLab ?
+        </p>
+        <p className="text-center my-[10px]">
+          Our model is able to catch the context of the text for a comprehensive
+          speech
         </p>
         <Separator className="my-10" />
 
@@ -245,6 +267,7 @@ export default function Home() {
         <br />
         <br />
         <br />
+
         <div className="mx-10 md:mx-[100px]">
           <p className="text-3xl mt-[200px]">Pricing</p>
           <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
