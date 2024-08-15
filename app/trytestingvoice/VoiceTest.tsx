@@ -31,7 +31,9 @@ axiosInstance.defaults.timeout = 240000;
 export default function VoiceTest() {
   const [languagevalue, setLanguageValue] = useState("en");
   const [open, setOpen] = useState(false);
-  const [text, setText] = useState("hello,this is a test");
+  const [text, setText] = useState(
+    "You can choose from over 12 languages and 50 voices to convert your texts into speech and get your audio file"
+  );
   const [urlaudio, seturlAudio] = useState("");
 
   const [isActive, activeButtonSubmit] = useState(false);
