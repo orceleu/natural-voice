@@ -47,15 +47,24 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
         {person.map((item, index) => (
           <div className="bg-gray-50 rounded-[30px] grid" key={index}>
             <Image
+              key={index + 3}
               src={item.picture}
               alt=""
               className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 "
             />
-            <h3 className="text-sm font-semibold my-auto mx-auto">
-              <p>{item.name}</p>
+            <h3
+              key={index + 1}
+              className="text-sm font-semibold my-auto mx-auto"
+            >
+              <p key={index + 4}>{item.name}</p>
             </h3>
-            <div className="mx-auto mb-auto mt-1">
-              <Player src={item.audioUrl} height={40} hideVolume />
+            <div key={index + 2} className="mx-auto mb-auto mt-1">
+              <Player
+                key={index + 5}
+                src={item.audioUrl}
+                height={40}
+                hideVolume
+              />
             </div>
           </div>
         ))}
