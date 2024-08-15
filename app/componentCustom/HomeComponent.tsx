@@ -56,7 +56,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
               key={index + 1}
               className="text-sm font-semibold my-auto mx-auto"
             >
-              <p key={index + 4}>{item.name}</p>
+              <p key={index + 4} className="font-mono">{item.name}</p>
             </h3>
             <div key={index + 2} className="mx-auto mb-auto mt-1">
               <Player

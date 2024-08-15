@@ -55,7 +55,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SampleLanguage from "./componentCustom/SampleLanguage";
-import { AlertTriangle, Check } from "lucide-react";
+import { AlertTriangle, Check, Circle, CircleIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import VoiceTest from "./trytestingvoice/VoiceTest";
 
@@ -201,25 +201,40 @@ export default function Home() {
 
       <div className="grid mx-2 md:mx-[100px]">
         <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
-          <div className="grid gap-1 ">
-            <p className="text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-10">
+          <div className="flex flex-col gap-1 items-center ">
+            <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
               Text to speech for :
             </p>
-            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
-              * content creator.
-            </p>
-            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
-              {" "}
-              * Marketer.
-            </p>
-            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
-              {" "}
-              * Product developer.
-            </p>
-            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
-              {" "}
-              * Educator.
-            </p>
+            <div className="flex items-center gap-1   my-auto m-3 md:ml-10">
+              <CircleIcon className="text-yellow-500" />
+              <p className="text-gray-500 text-center md:2xl font-serif ">
+                Content creator.
+              </p>
+            </div>
+
+            <div className="flex items-center  gap-1 my-auto m-3 md:ml-10">
+              <CircleIcon className="text-yellow-500" />
+              <p className="text-gray-500 text-center md:2xl font-serif  ">
+                {" "}
+                Marketer.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
+              <CircleIcon className="text-yellow-500" />
+              <p className="text-gray-500 text-center md:2xl font-serif ">
+                {" "}
+                Product developer.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
+              <CircleIcon className="text-yellow-500" />
+              <p className="text-gray-500 font-serif text-center md:2xl  ">
+                {" "}
+                Educator.
+              </p>
+            </div>
           </div>
 
           <div className="grid gap-2 m-3 ">
@@ -244,8 +259,8 @@ export default function Home() {
           alt=""
           className="rounded-sm size-[50px] md:size-[150px]"
         />
-        <div className="flex justify-center gap-2 mt-11 md:mt-[200px] mx-5 md:mx-[70px] shadow-md rounded-md">
-          <Image src={screennaturalvoice} alt="" className="rounded-md " />
+        <div className="flex justify-center gap-2 mt-11 md:mt-[200px] mx-5 md:mx-[70px] shadow-md rounded-md border-[7px]">
+          <Image src={screennaturalvoice} alt="" className="rounded-sm " />
         </div>
         <Image
           src={flechedesign2}
@@ -275,7 +290,7 @@ export default function Home() {
 
         <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px] ">
           {textCard.map((txt) => (
-            <Card key={txt.id}>
+            <Card key={txt.id} className="bg-gray-100">
               <CardHeader>
                 <div className="flex justify-center">
                   <Image
