@@ -100,7 +100,7 @@ export default function Home() {
   ];
 
   return (
-    <main className=" bg-gradient-to-b from-green-50 to-white">
+    <main>
       <NavBar />
       <br />
       <br />
@@ -147,7 +147,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-11 ">
+      <div className="  bg-gradient-to-b from-green-50 to-white">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <div className=" md:mx-[100px]">
           <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
             GENERATE REALISTIC VOICE WITH OUR MODEL.
@@ -196,24 +201,28 @@ export default function Home() {
 
       <div className="grid mx-2 md:mx-[100px]">
         <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
-          <div className="grid gap-4 ">
-            <p className="text-3xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-10">
+          <div className="grid gap-1 ">
+            <p className="text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-10">
               Text to speech for :
             </p>
-            <p className="text 2xl font-bold  my-auto m-3 md:ml-10">
+            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
               * content creator.
             </p>
-            <p className="text 2xl font-bold  my-auto m-3 md:ml-10">
+            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
               {" "}
               * Marketer.
             </p>
-            <p className="text 2xl font-bold  my-auto m-3 md:ml-10">
+            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
               {" "}
-              * Audio book.
+              * Product developer.
+            </p>
+            <p className="text xl md:2xl font-bold  my-auto m-3 md:ml-10">
+              {" "}
+              * Educator.
             </p>
           </div>
 
-          <div className="grid gap-3 m-3 ">
+          <div className="grid gap-2 m-3 ">
             <Image
               src={tiktokcreator}
               alt=""
@@ -223,7 +232,7 @@ export default function Home() {
             <Image
               src={contentCreatorIllustration}
               alt=""
-              className="size-[170px] md:size-[400px]  rounded-md"
+              className="w-[250px] h-[200px] md:size-[400px]  rounded-md"
             />
           </div>
         </div>
@@ -446,7 +455,7 @@ export default function Home() {
                 How many languages does Vividvoice support?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500">
-                SpeechLab support 12 language for the moment
+                Vividvoice support 12 language for the moment
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
