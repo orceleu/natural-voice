@@ -147,7 +147,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="  bg-gradient-to-b from-green-50 to-white">
+      <div className="  bg-gradient-to-b from-emerald-50 to-white">
         <br />
         <br />
         <br />
@@ -159,7 +159,7 @@ export default function Home() {
           </p>
           <p className="text-center   ">(trained for narration and spot.)</p>
           <div className="mx-5">
-            <p className=" md:font-thin  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-yellow-600 to-green-500 ">
+            <p className=" font-serif  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5  bg-clip-text text-gray-600">
               You can choose from over 12 languages and 50 voices to convert
               your texts into speech and get your audio file
             </p>
@@ -181,7 +181,7 @@ export default function Home() {
           <Separator />
 
           <div className="flex justify-center mt-11 md:mt-[100px] ">
-            <button className="w-[200px] h-[50px] rounded-sm bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
+            <button className="w-[200px] h-[50px] rounded-sm bg-emerald-600  hover:bg-emerald-500 text-white font-bold">
               <Link href="/dashboard"> Get started</Link>
             </button>
           </div>
@@ -200,7 +200,7 @@ export default function Home() {
       </div>
 
       <div className="grid mx-2 md:mx-[100px]">
-        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-gradient-to-r from-yellow-100 to-green-100 my-10">
+        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-emerald-100 my-10">
           <div className="flex flex-col gap-1 items-center ">
             <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
               Text to speech for :
@@ -259,7 +259,7 @@ export default function Home() {
           alt=""
           className="rounded-sm size-[50px] md:size-[150px]"
         />
-        <div className="flex justify-center gap-2 mt-11 md:mt-[200px] mx-5 md:mx-[70px] shadow-md rounded-md border-[7px]">
+        <div className="flex justify-center gap-2 mt-11 md:mt-[200px] mx-5 md:mx-[70px] shadow-md rounded-md border-[5px] border-emerald-600">
           <Image src={screennaturalvoice} alt="" className="rounded-sm " />
         </div>
         <Image
@@ -268,10 +268,23 @@ export default function Home() {
           className="rounded-sm size-[50px] md:size-[150px]"
         />
       </div>
+      <div className="flex justify-center my-5 ">
+        <iframe
+          className="w-full h-[250px] md:h-[500px] m-10 md:m-[200px] rounded-md border-[5px] border-emerald-600"
+          src={`https://www.youtube.com/embed/fPq50rwItiY?si=CbB1e9XaxNivOxF-`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
+      </div>
 
       <br />
+      <div className="flex justify-center mx-10 ">
+        <Separator />
+      </div>
+
       <div className="flex justify-center mt-11 md:mt-[100px] ">
-        <button className="w-[200px] h-[50px] rounded-sm bg-gradient-to-r from-yellow-400 to-green-400  hover:bg-blue-100 text-white font-bold">
+        <button className="w-[200px] h-[50px] rounded-sm bg-emerald-600 hover:bg-emerald-500 text-white font-bold">
           <Link href="/dashboard"> Get started</Link>
         </button>
       </div>
@@ -280,7 +293,7 @@ export default function Home() {
       <div className="container mx-auto  py-8 md:mt-[100px]">
         <p className=" text-3xl md:text-5xl text-center my-[100px] font-bold">
           WHY USE AI <span className="text-yellow-500">Vivid</span>
-          <span className="text-green-500">voice </span>?
+          <span className="text-emerald-600">voice </span>?
         </p>
         <p className="text-center my-[10px]">
           Our model is able to catch the context of the text for a comprehensive
@@ -322,7 +335,7 @@ export default function Home() {
             diverse accents - just select the appropriate accent and enter text
             in your language of choice.{" "}
             <span className="text-yellow-500 font-bold">Vivid</span>
-            <span className="text-green-500 font-bold">voice</span> allows you
+            <span className="text-emerald-600 font-bold">voice</span> allows you
             to create voices and use them in any language.
           </p>
 
