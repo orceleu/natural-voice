@@ -40,6 +40,7 @@ import portugalflag from "../public/flag/portugalflag.svg";
 import polandflag from "../public/flag/polandflag.svg";
 import neerlandaisflag from "../public/flag/neerlandaisflag.png";
 import arabicflag from "../public/flag/arabicflag.png";
+import textts from "../public/text-to-speech.png";
 
 import {
   Card,
@@ -157,7 +158,9 @@ export default function Home() {
           <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
             GENERATE REALISTIC VOICE WITH OUR MODEL.
           </p>
-          <p className="text-center   ">(trained for narration and spot.)</p>
+          <p className="text-center font-serif text-gray-600 ">
+            (trained for narration and spot.)
+          </p>
           <div className="mx-5">
             <p className=" font-serif  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5  bg-clip-text text-gray-600">
               You can choose from over 12 languages and 50 voices to convert
@@ -193,13 +196,11 @@ export default function Home() {
       <br />
       <br />
       <br />
-      <div className="flex justify-center">
-        <p className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-green-500 to-green-500 my-10">
-          Online AI text-to-speech converter
-        </p>
+      <div className="flex justify-center mx-10 md:mx-[100px] my-10">
+        <Image src={textts} alt="" className="" />
       </div>
 
-      <div className="grid mx-2 md:mx-[100px]">
+      <div className="grid mx-2 md:mx-[100px] mt-[100px]">
         <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-emerald-100 my-10">
           <div className="flex flex-col gap-1 items-center ">
             <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
@@ -223,7 +224,6 @@ export default function Home() {
             <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
               <CircleIcon className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif ">
-                {" "}
                 Product developer.
               </p>
             </div>
@@ -231,7 +231,6 @@ export default function Home() {
             <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
               <CircleIcon className="text-yellow-500" />
               <p className="text-gray-500 font-serif text-center md:2xl  ">
-                {" "}
                 Educator.
               </p>
             </div>
@@ -259,7 +258,7 @@ export default function Home() {
           alt=""
           className="rounded-sm size-[50px] md:size-[150px]"
         />
-        <div className="flex justify-center gap-2 mt-11 md:mt-[200px] mx-5 md:mx-[70px] shadow-md rounded-md border-[5px] border-emerald-600">
+        <div className="flex justify-center gap-2 mt-11  md:mt-[200px] mx-5 md:mx-[70px] shadow-lg rounded-md border-[5px] border-emerald-600">
           <Image src={screennaturalvoice} alt="" className="rounded-sm " />
         </div>
         <Image
@@ -270,7 +269,7 @@ export default function Home() {
       </div>
       <div className="flex justify-center my-5 ">
         <iframe
-          className="w-full h-[250px] md:h-[500px] m-10 md:m-[200px] rounded-md border-[5px] border-emerald-600"
+          className="w-full h-[200px] shadow-lg md:h-[500px] m-10 md:m-[200px] rounded-md border-[5px] border-emerald-600"
           src={`https://www.youtube.com/embed/fPq50rwItiY?si=CbB1e9XaxNivOxF-`}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -291,14 +290,11 @@ export default function Home() {
       <br />
 
       <div className="container mx-auto  py-8 md:mt-[100px]">
-        <p className=" text-3xl md:text-5xl text-center my-[100px] font-bold">
+        <p className=" text-3xl md:text-5xl text-center my-[100px] font-serif">
           WHY USE AI <span className="text-yellow-500">Vivid</span>
           <span className="text-emerald-600">voice </span>?
         </p>
-        <p className="text-center my-[10px]">
-          Our model is able to catch the context of the text for a comprehensive
-          speech
-        </p>
+
         <Separator className="my-10" />
 
         <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px] ">
@@ -313,8 +309,10 @@ export default function Home() {
                   />
                 </div>
 
-                <CardTitle className="text-center">{txt.title}</CardTitle>
-                <CardDescription className="text-center">
+                <CardTitle className="text-center font-serif">
+                  {txt.title}
+                </CardTitle>
+                <CardDescription className="text-center font-serif">
                   {txt.desc}
                 </CardDescription>
               </CardHeader>
@@ -326,10 +324,10 @@ export default function Home() {
         </div>
         <Separator className="my-10" />
         <div className="md:mx-[100px] bg-slate-800 p-[50px] md:mt-[200px]">
-          <p className="text-3xl md:text-5xl font-bold text-white">
+          <p className="text-3xl md:text-5xl font-serif text-white">
             AI Voice Generator in 12 Languages.
           </p>
-          <p className=" md:font-thin my-10  md:text-xl text-white">
+          <p className="font-serif my-10  md:text-xl text-white">
             Our AI voice generator supports{" "}
             <span className="font-bold underline">12 languages</span> and all
             diverse accents - just select the appropriate accent and enter text
@@ -362,7 +360,9 @@ export default function Home() {
         <br />
 
         <div className="mx-10 md:mx-[100px]">
-          <p className="text-3xl mt-[200px] text-center font-bold">Pricing</p>
+          <p className="text-3xl md:text-4xl mt-[200px] text-center font-serif ">
+            Pricing
+          </p>
           <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
             <Card className=" max-w-sm mt-9">
               <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
@@ -372,7 +372,7 @@ export default function Home() {
                 8$/month
               </p>
               <Separator className="my-4" />
-              <ul className="text-lg font-thin text-center mb-4">
+              <ul className="text-lg font-serif  text-center mb-4">
                 <li>New content creators, students</li>
                 <li>40,000 char/Month</li>
                 <li> 5 custom voice</li>
@@ -394,11 +394,11 @@ export default function Home() {
               <p className="text-3xl font-semibold mt-10 text-center text-green-500">
                 Pro
               </p>
-              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+              <p className=" font-serif  text-md text-center text-fuchsia-700 mt-1">
                 22$/month
               </p>
               <Separator className="my-4" />
-              <ul className="text-lg font-thin text-center mb-4">
+              <ul className="text-lg font-serif  text-center mb-4">
                 <li>Content creators, freelancers</li>
                 <li>100,000 char/Month</li>
                 <li> 15 custom voice</li>
@@ -416,11 +416,11 @@ export default function Home() {
               <p className="text-3xl font-semibold mt-10 text-center text-green-500">
                 Premium
               </p>
-              <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
+              <p className=" font-serif  text-md text-center text-fuchsia-700 mt-1">
                 50$/month
               </p>
               <Separator className="my-4" />
-              <ul className="text-lg font-thin text-center mb-4">
+              <ul className="text-lg font-serif  text-center mb-4">
                 <li>Corporations, public entities, agencies, MCNs</li>
                 <li>250,000 char/Month</li>
                 <li> 30 custom voice</li>
@@ -442,16 +442,16 @@ export default function Home() {
         <br />
         <br />
 
-        <p className="font-bold text-center text-3xl md:text-5xl mt-[200px] mb-[100px]">
+        <p className="font-serif text-center text-3xl md:text-5xl mt-[200px] mb-[100px]">
           Frequently asked questions.
         </p>
         <div className="mx-[50px] md:mx-[100px]">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
                 How do I make my own AI voice?
               </AccordionTrigger>
-              <AccordionContent className="md:text-xl text-gray-500 ">
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
                 To create your own AI voice at Vividvoice, go to the setting,
                 upload your best quality voice and select it. Voice Design
                 allows you to customize the speaker s identityfor unique voices
@@ -461,36 +461,36 @@ export default function Home() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
                 How much does using Vividvoice AI voice generator cost?
               </AccordionTrigger>
-              <AccordionContent className="md:text-xl text-gray-500">
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
                 The Starter Plan is $8 per month, offering 40,000 characters and
                 up to 5 custom voices. the pro plan is 22$/month and offering
                 100,000 characters and up to 15 voices.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
                 Can I use Vividvoice AI voice generator for free?
               </AccordionTrigger>
-              <AccordionContent className="md:text-xl text-gray-500">
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
                 No,with this model we are unable to offer free plan
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
                 How many languages does Vividvoice support?
               </AccordionTrigger>
-              <AccordionContent className="md:text-xl text-gray-500">
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
                 Vividvoice support 12 language for the moment
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
-              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
                 What is an AI voice generator?
               </AccordionTrigger>
-              <AccordionContent className="md:text-xl text-gray-500">
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
                 Vividvoice AI voice generator transforms text to spoken audio
                 that sounds like a natural human voice, complete with realistic
                 intonation and accents. It offers a wide range of voice options
@@ -500,10 +500,10 @@ export default function Home() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-6">
-              <AccordionTrigger className=" text-xl mb:text-2xl font-semibold">
+              <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
                 How do I use AI voice generators to turn text into audio?
               </AccordionTrigger>
-              <AccordionContent className="md:text-xl text-gray-500">
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
                 Step 1 involves selecting a voice and adjusting settings to your
                 liking. In Step 2, you input your text into the provided box,
                 ensuring it s in one of the supported languages. For Step 3, you
@@ -519,23 +519,32 @@ export default function Home() {
       <Separator className="my-4" />
       <div className="container mx-auto px-4">
         <footer className="flex flex-col lg:flex-row justify-between items-center">
-          <p className="text-sm lg:order-2">
+          <p className="text-sm lg:order-2 font-serif ">
             &copy; 2024 Mon Entreprise. Tous droits réservés.
           </p>
           <div className="flex lg:order-1 lg:justify-center lg:mt-0 mt-4">
-            <Link href="/pages/signup" className="text-sm hover:text-gray-400">
+            <Link
+              href="/pages/signup"
+              className="text-sm hover:text-gray-400 font-serif "
+            >
               sign up
             </Link>
             <Link
               href="/pages/login"
-              className="text-sm hover:text-gray-400 ml-4"
+              className="text-sm hover:text-gray-400 ml-4 font-serif "
             >
               login
             </Link>
-            <Link href="#" className="text-sm hover:text-gray-400 ml-4">
+            <Link
+              href="#"
+              className="text-sm hover:text-gray-400 ml-4 font-serif "
+            >
               pricing
             </Link>
-            <Link href="#" className="text-sm hover:text-gray-400 ml-4">
+            <Link
+              href="#"
+              className="text-sm hover:text-gray-400 ml-4 font-serif "
+            >
               term & condition
             </Link>
           </div>

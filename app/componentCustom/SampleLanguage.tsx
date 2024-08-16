@@ -104,7 +104,7 @@ const SampleLanguage: React.FC<Props> = ({
               alt=""
               className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 "
             />
-            <h3 className="text-sm font-semibold my-auto mx-auto">
+            <h3 className="text-sm font-serif  my-auto mx-auto">
               <p>{item.name}</p>
             </h3>
             <div className="mx-auto mb-auto mt-1">
