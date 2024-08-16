@@ -64,32 +64,32 @@ export default function Home() {
   const textCard = [
     {
       id: "1",
-      title: "emotive based voice,(Like human)",
-      desc: "Genarate voice with accent or no, with emotion based on your sample voicve.",
+      title: "Emotive based voice,(Like human)",
+      desc: "Genarate voice with accent or no, with emotion based on your sample voice.",
       img: img6,
     },
     {
       id: "2",
       title: "Clone any voice",
-      desc: "Upload your voice and replicate it",
+      desc: "Upload 30sec voice and replicate it",
       img: podcast,
     },
     {
       id: "3",
-      title: "all generated voice is 100% original",
-      desc: "no voice gererated is exactly the same.",
+      title: "All generated voice are 100% original",
+      desc: "No voice gererated is exactly the same.",
       img: audioconv,
     },
     {
       id: "4",
       title: "Simple to use",
-      desc: "Upload, enter your text ,and generate.",
+      desc: "Upload/select, paste your text ,and generate.",
       img: img4,
     },
     {
       id: "5",
       title: "Emotion transfer",
-      desc: "pitch based on your emotion",
+      desc: "Pitch based on your emotion and the context of the text.",
       img: img2,
     },
     {
@@ -184,7 +184,7 @@ export default function Home() {
           <Separator />
 
           <div className="flex justify-center mt-11 md:mt-[100px] ">
-            <button className="w-[200px] h-[50px] rounded-sm bg-emerald-600  hover:bg-emerald-500 text-white font-bold">
+            <button className="w-[200px] h-[50px] rounded-sm underline bg-emerald-600 shadow-lg  hover:bg-emerald-500 text-white font-bold">
               <Link href="/dashboard"> Get started</Link>
             </button>
           </div>
@@ -201,7 +201,7 @@ export default function Home() {
       </div>
 
       <div className="grid mx-2 md:mx-[100px] mt-[100px]">
-        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-md bg-emerald-100 my-10">
+        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-br-[200px] rounded-bl-lg rounded-tl-lg rounded-tr-lg bg-yellow-100 my-10">
           <div className="flex flex-col gap-1 items-center ">
             <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
               Text to speech for :
@@ -246,7 +246,7 @@ export default function Home() {
             <Image
               src={contentCreatorIllustration}
               alt=""
-              className="w-[250px] h-[200px] md:size-[400px]  rounded-md"
+              className="w-[250px] h-[200px] md:size-[400px] shadow-lg  rounded-md"
             />
           </div>
         </div>
@@ -258,7 +258,7 @@ export default function Home() {
           alt=""
           className="rounded-sm size-[50px] md:size-[150px]"
         />
-        <div className="flex justify-center gap-2 mt-11  md:mt-[200px] mx-5 md:mx-[70px] shadow-lg rounded-md border-[5px] border-emerald-600">
+        <div className="flex justify-center gap-2 mt-12  md:mt-[250px] mx-5 md:mx-[70px] shadow-lg rounded-md border-[5px] border-emerald-600">
           <Image src={screennaturalvoice} alt="" className="rounded-sm " />
         </div>
         <Image
@@ -283,7 +283,7 @@ export default function Home() {
       </div>
 
       <div className="flex justify-center mt-11 md:mt-[100px] ">
-        <button className="w-[200px] h-[50px] rounded-sm bg-emerald-600 hover:bg-emerald-500 text-white font-bold">
+        <button className="w-[200px] h-[50px]  bg-emerald-600 shadow-lg underline rounded-sm hover:bg-emerald-500 text-white font-bold">
           <Link href="/dashboard"> Get started</Link>
         </button>
       </div>
@@ -299,7 +299,7 @@ export default function Home() {
 
         <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px] ">
           {textCard.map((txt) => (
-            <Card key={txt.id} className="bg-gray-100">
+            <Card key={txt.id} className="bg-gray-100 hover:bg-transparent">
               <CardHeader>
                 <div className="flex justify-center">
                   <Image
@@ -364,7 +364,7 @@ export default function Home() {
             Pricing
           </p>
           <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
-            <Card className=" max-w-sm mt-9">
+            <Card className=" max-w-sm mt-9 bg-gray-100">
               <p className="text-3xl font-semibold mt-10 text-center text-emerald-700">
                 Basic
               </p>
@@ -379,19 +379,19 @@ export default function Home() {
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
-                <Button asChild className="bg-green-500">
+                <Button asChild className="bg-emerald-600">
                   <Link href="/signup">Get access</Link>
                 </Button>
               </div>
               <br />
             </Card>
 
-            <Card className=" max-w-sm mt-9">
+            <Card className=" max-w-sm mt-9 bg-emerald-100">
               <div className="w-full bg-stone-100 h-[55px] rounded-t-md">
                 <br />
                 <p className="text-center font-semibold"> Most popular*</p>
               </div>
-              <p className="text-3xl font-semibold mt-10 text-center text-green-500">
+              <p className="text-3xl font-semibold mt-10 text-center text-emerald-600">
                 Pro
               </p>
               <p className=" font-serif  text-md text-center text-fuchsia-700 mt-1">
@@ -405,15 +405,15 @@ export default function Home() {
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
-                <Button asChild className="bg-green-500">
+                <Button asChild className="bg-emerald-600">
                   <Link href="/signup">Get access</Link>
                 </Button>
               </div>
               <br />
             </Card>
 
-            <Card className=" max-w-sm mt-9">
-              <p className="text-3xl font-semibold mt-10 text-center text-green-500">
+            <Card className=" max-w-sm mt-9 bg-yellow-100">
+              <p className="text-3xl font-semibold mt-10 text-center text-emerald-600">
                 Premium
               </p>
               <p className=" font-serif  text-md text-center text-fuchsia-700 mt-1">
@@ -427,7 +427,7 @@ export default function Home() {
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
-                <Button asChild className="bg-green-500">
+                <Button asChild className="bg-emerald-600">
                   <Link href="/signup">Get access</Link>
                 </Button>
               </div>
@@ -442,7 +442,7 @@ export default function Home() {
         <br />
         <br />
 
-        <p className="font-serif text-center text-3xl md:text-5xl mt-[200px] mb-[100px]">
+        <p className="font-serif text-center text-3xl md:text-5xl mt-[200px] mb-[100px] underline ">
           Frequently asked questions.
         </p>
         <div className="mx-[50px] md:mx-[100px]">

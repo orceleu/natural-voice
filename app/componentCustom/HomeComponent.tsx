@@ -45,7 +45,10 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {person.map((item, index) => (
-          <div className="bg-gray-50 rounded-[30px] grid" key={index}>
+          <div
+            className="bg-gray-50 hover:bg-transparent  rounded-[30px] border-[1px] grid"
+            key={index}
+          >
             <Image
               key={index + 3}
               src={item.picture}
@@ -56,7 +59,9 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
               key={index + 1}
               className="text-sm font-semibold my-auto mx-auto"
             >
-              <p key={index + 4} className="font-mono">{item.name}</p>
+              <p key={index + 4} className="font-mono">
+                {item.name}
+              </p>
             </h3>
             <div key={index + 2} className="mx-auto mb-auto mt-1">
               <Player
