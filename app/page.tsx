@@ -59,6 +59,7 @@ import SampleLanguage from "./componentCustom/SampleLanguage";
 import { AlertTriangle, Check, Circle, CircleIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import VoiceTest from "./trytestingvoice/VoiceTest";
+import { AvatarIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
   const textCard = [
@@ -188,6 +189,16 @@ export default function Home() {
               <Link href="/dashboard"> Get started</Link>
             </button>
           </div>
+          <div className="flex justify-center my-4">
+            <div className="flex items-center gap-1">
+              <AvatarIcon />
+              <AvatarIcon />
+              <AvatarIcon />
+              <p className="text-gray-600 font-serif">
+                And join 1300+ customers.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -196,7 +207,7 @@ export default function Home() {
       <br />
       <br />
       <br />
-      <div className="flex justify-center mx-10 md:mx-[100px] my-10">
+      <div className="flex justify-center mx-10 md:mx-[200px] my-10">
         <Image src={textts} alt="" className="" />
       </div>
 
@@ -209,7 +220,7 @@ export default function Home() {
             <div className="flex items-center gap-1   my-auto m-3 md:ml-10">
               <CircleIcon className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif ">
-                Content creator.
+                Content creator.🎬
               </p>
             </div>
 
@@ -217,21 +228,21 @@ export default function Home() {
               <CircleIcon className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif  ">
                 {" "}
-                Marketer.
+                Marketer.📊
               </p>
             </div>
 
             <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
               <CircleIcon className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif ">
-                Product developer.
+                Product developer.🧑‍💻
               </p>
             </div>
 
             <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
               <CircleIcon className="text-yellow-500" />
               <p className="text-gray-500 font-serif text-center md:2xl  ">
-                Educator.
+                Educator.🎓
               </p>
             </div>
           </div>
@@ -256,20 +267,20 @@ export default function Home() {
         <Image
           src={flechedesign}
           alt=""
-          className="rounded-sm size-[50px] md:size-[150px]"
+          className="rounded-sm size-[30px] md:size-[130px]"
         />
-        <div className="flex justify-center gap-2 mt-12  md:mt-[250px] mx-5 md:mx-[70px] shadow-lg rounded-md border-[5px] border-emerald-600">
+        <div className="flex justify-center gap-2 mt-12  md:mt-[250px] mx-5 md:mx-[70px] shadow-lg shadow-gray-800 rounded-lg border-[5px] border-emerald-600">
           <Image src={screennaturalvoice} alt="" className="rounded-sm " />
         </div>
         <Image
           src={flechedesign2}
           alt=""
-          className="rounded-sm size-[50px] md:size-[150px]"
+          className="rounded-sm size-[30px] md:size-[130px]"
         />
       </div>
       <div className="flex justify-center my-5 ">
         <iframe
-          className="w-full h-[200px] shadow-lg md:h-[500px] m-10 md:m-[200px] rounded-md border-[5px] border-emerald-600"
+          className="w-full h-[200px] shadow-lg shadow-gray-800 md:h-[460px] m-10 md:m-[200px] rounded-lg border-[5px] border-emerald-600"
           src={`https://www.youtube.com/embed/fPq50rwItiY?si=CbB1e9XaxNivOxF-`}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -323,7 +334,7 @@ export default function Home() {
           ))}
         </div>
         <Separator className="my-10" />
-        <div className="md:mx-[100px] bg-slate-800 p-[50px] md:mt-[200px]">
+        <div className="md:mx-[100px] bg-slate-800 p-[50px] md:mt-[200px] rounded-[20px]">
           <p className="text-3xl md:text-5xl font-serif text-white">
             AI Voice Generator in 12 Languages.
           </p>
@@ -360,7 +371,7 @@ export default function Home() {
         <br />
 
         <div className="mx-10 md:mx-[100px]">
-          <p className="text-3xl md:text-4xl mt-[200px] text-center font-serif ">
+          <p className="text-3xl md:text-4xl mt-[200px] text-center font-serif md:my-[100px]">
             Pricing
           </p>
           <div className=" grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
@@ -386,7 +397,7 @@ export default function Home() {
               <br />
             </Card>
 
-            <Card className=" max-w-sm mt-9 bg-emerald-100">
+            <Card className=" max-w-sm mt-9 bg-emerald-100 border-[3px] border-emerald-500">
               <div className="w-full bg-stone-100 h-[55px] rounded-t-md">
                 <br />
                 <p className="text-center font-semibold"> Most popular*</p>
@@ -475,15 +486,17 @@ export default function Home() {
                 Can I use Vividvoice AI voice generator for free?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500 font-serif ">
-                No,with this model we are unable to offer free plan
+                This model is running on GPU Nvidia A100 witch cost...
+                Unfortunately we are unable to offer free plan.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger className=" text-xl mb:text-2xl font-serif ">
-                How many languages does Vividvoice support?
+                Does youtube monetize AI voice generated?
               </AccordionTrigger>
               <AccordionContent className="md:text-xl text-gray-500 font-serif ">
-                Vividvoice support 12 language for the moment
+                Yes,all generated voices are yours thus,you can use it on any
+                platform.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
