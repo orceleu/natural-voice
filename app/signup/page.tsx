@@ -133,7 +133,15 @@ export default function SignUp() {
             <Button onClick={handleSignInGoogle}>sign up with Google</Button>
           </div>
           <br />
-
+          <p className="text-center">
+            Already have account?{" "}
+            <span
+              onClick={() => router.push("/login")}
+              className="text-emerald-500"
+            >
+              Login
+            </span>
+          </p>
           <br />
           <br />
         </Card>

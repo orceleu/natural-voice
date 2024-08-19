@@ -46,7 +46,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {person.map((item, index) => (
           <div
-            className="bg-gray-50 hover:bg-transparent  rounded-[30px] border-[1px] grid"
+            className="bg-gray-50 animate-slidein  rounded-[30px] grid"
             key={index}
           >
             <Image

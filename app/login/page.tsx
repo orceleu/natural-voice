@@ -19,6 +19,7 @@ import {
 } from "firebase/auth";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -125,6 +126,15 @@ export default function Login() {
           <Button onClick={handleLoginGoogle}>Login with Google</Button>
         </div>
         <br />
+        <p className="text-center">
+          Dont have any account?{" "}
+          <span
+            onClick={() => router.push("/signup")}
+            className="text-emerald-500"
+          >
+            sign up
+          </span>
+        </p>
         <br />
         <br />
       </Card>

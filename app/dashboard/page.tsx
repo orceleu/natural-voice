@@ -444,11 +444,11 @@ export default function Dashboard() {
         const name = currentUser?.displayName;
         const userEmail = currentUser?.email;
         const uiid = currentUser?.uid;
+        setUserEmail(userEmail);
+        setUserid(uiid);
         console.log(currentUser?.displayName);
         if (name !== undefined && name !== null) {
           setUserName(name);
-          setUserEmail(userEmail);
-          setUserid(uiid);
         } else {
         }
       }
@@ -465,8 +465,7 @@ export default function Dashboard() {
   function detectTheLanguage() {
     /*
  English: en 🇺🇸 French: fr 🇫🇷 German: de 🇩🇪 Spanish: es 🇪🇸 Italian: it 🇮🇹 Portuguese: pt 🇵🇹 Czech: cs 🇨🇿 Polish: pl 🇵🇱 Russian: ru 🇷🇺 Dutch: nl 🇳🇱 Turksih: tr 🇹🇷 Arabic: ar 🇦🇪 Mandarin Chinese: zh-cn 🇨🇳
-
-    */
+ */
     var detectedLangauge = franc(remplacerPointsParPointVirgules(textvalue));
     var finalDetectedLanguage = "fr";
     if (detectedLangauge == "fra") {

@@ -61,8 +61,8 @@ export async function POST(req) {
       userId: `${user_Id}`,
     },
     mode: "subscription",
-    success_url: "http://localhost:3000/checkout/success",
-    cancel_url: "http://localhost:3000/checkout/cancel",
+    success_url: "https://natural-voice.vercel.app/checkout/success",
+    cancel_url: "https://natural-voice.vercel.app/checkout/cancel",
     customer_email: customer_Email,
   });
   return NextResponse.json({ session: `${session.url}` });

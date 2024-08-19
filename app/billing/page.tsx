@@ -75,13 +75,10 @@ export default function Billing() {
         const name = currentUser?.displayName;
         const uiid = currentUser?.uid;
         const userEmail = currentUser?.email;
+        userId.current = uiid;
+        useremail.current = userEmail;
         console.log(currentUser?.displayName);
-        if (name !== undefined && name !== null && useremail !== null) {
-          // setUserid(uiid);
-          userId.current = uiid;
-          useremail.current = userEmail;
-        } else {
-        }
+        console.log(uiid);
       }
       if (currentUser == null) {
         router.push("/login");
