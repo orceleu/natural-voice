@@ -155,54 +155,56 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="  bg-gradient-to-b from-emerald-50 to-white">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div className=" md:mx-[100px]">
-          <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
-            GENERATE REALISTIC VOICE WITH OUR MODEL.
-          </p>
-          <p className="text-center font-serif text-gray-600 ">
-            (trained for narration and spot.)
-          </p>
-          <div className="mx-5">
-            <p className=" font-serif  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5  bg-clip-text text-gray-600">
-              You can choose from over 12 languages and 50 voices to convert
-              your texts into speech and get your audio file
-            </p>
-          </div>
-
-          <p className="text-center my-10 text-emerald-500 font-mono text-lg underline">
-            sample
-          </p>
-          <div className="mx-10 my-10">
-            <HomeComponent
-              img1={claireremovebg}
-              img2={emmaremovebgpreview}
-              img3={danielremovebgpreview}
-              img4={anthonyremovebgpreview}
-            />
-          </div>
-          <VoiceTest />
+      <div className="  bg-gradient-to-b from-emerald-50 to-white ">
+        <div className="bg-gridline w-full">
           <br />
-          <Separator />
-
-          <div className="flex justify-center mt-11 md:mt-[100px] ">
-            <button className="w-[200px] h-[50px] rounded-sm underline bg-emerald-600 shadow-lg  hover:bg-emerald-500 text-white font-bold">
-              <Link href="/dashboard"> Get started</Link>
-            </button>
-          </div>
-          <div className="flex justify-center my-4">
-            <div className="flex items-center gap-1">
-              <AvatarIcon />
-              <AvatarIcon />
-              <AvatarIcon />
-              <p className="text-gray-600 font-serif">
-                And join 1300+ customers.
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className=" md:mx-[100px]  ">
+            <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
+              GENERATE REALISTIC VOICE WITH OUR MODEL.
+            </p>
+            <p className="text-center font-serif text-gray-600 ">
+              (trained for narration and spot.)
+            </p>
+            <div className="mx-5">
+              <p className=" font-serif  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5  bg-clip-text text-gray-600">
+                You can choose from over 12 languages and 50 voices to convert
+                your texts into speech and get your audio file
               </p>
+            </div>
+
+            <p className="text-center my-10 text-emerald-500 font-mono text-lg underline">
+              sample
+            </p>
+            <div className="mx-10 my-10">
+              <HomeComponent
+                img1={claireremovebg}
+                img2={emmaremovebgpreview}
+                img3={danielremovebgpreview}
+                img4={anthonyremovebgpreview}
+              />
+            </div>
+            <VoiceTest />
+            <br />
+            <Separator />
+
+            <div className="flex justify-center mt-11 md:mt-[100px] ">
+              <button className="w-[200px] h-[50px] rounded-sm underline bg-emerald-600 shadow-lg  hover:bg-emerald-500 text-white font-bold">
+                <Link href="/dashboard"> Get started</Link>
+              </button>
+            </div>
+            <div className="flex justify-center my-4">
+              <div className="flex items-center gap-1">
+                <AvatarIcon />
+                <AvatarIcon />
+                <AvatarIcon />
+                <p className="text-gray-600 font-serif">
+                  And join 1300+ customers.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -275,25 +277,29 @@ export default function Home() {
           alt=""
           className="rounded-sm size-[30px] md:size-[130px]"
         />
-        <div className="flex justify-center gap-2 mt-12  md:mt-[250px] mx-5 md:mx-[70px] shadow-lg shadow-gray-800 rounded-lg border-[5px] border-emerald-600">
-          <Image src={screennaturalvoice} alt="" className="rounded-sm " />
+        <div className="w-full bg-gridline md:mt-[250px]">
+          <div className="flex justify-center gap-2 mt-12   mx-5 md:mx-[70px] shadow-lg shadow-gray-800 rounded-lg border-[5px] border-emerald-600">
+            <Image src={screennaturalvoice} alt="" className="rounded-sm " />
+          </div>
         </div>
+
         <Image
           src={flechedesign2}
           alt=""
           className="rounded-sm size-[30px] md:size-[130px]"
         />
       </div>
-      <div className="flex justify-center my-5 ">
-        <iframe
-          className="w-full h-[200px] shadow-lg shadow-gray-800 md:h-[460px] m-10 md:m-[200px] rounded-lg border-[5px] border-emerald-600"
-          src={`https://www.youtube.com/embed/fPq50rwItiY?si=CbB1e9XaxNivOxF-`}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+      <div className="w-full bg-gridline md:mt-[50px]">
+        <div className="flex justify-center my-5 ">
+          <iframe
+            className="w-full h-[200px] shadow-lg shadow-gray-800 md:h-[460px] m-10 md:m-[200px] rounded-lg border-[5px] border-emerald-600"
+            src={`https://www.youtube.com/embed/fPq50rwItiY?si=CbB1e9XaxNivOxF-`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
-
       <br />
       <div className="flex justify-center mx-10 ">
         <Separator />

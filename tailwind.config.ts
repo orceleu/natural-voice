@@ -83,6 +83,14 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         slidein: "slidein 1s ease 500ms",
       },
+
+      backgroundImage: {
+        gridline:
+          "  linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        gridline: "40px 40px",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
