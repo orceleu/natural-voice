@@ -49,27 +49,18 @@ export default function Billing() {
   };
 
   const fetchPost = async () => {
-    const docRef = doc(db, "users", userId.current);
+    const docRef = doc(db, "usersPlan", userId.current);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
+      //cus_id.current = docSnap.data().having_plan as string;
       setHavingPlan(true);
-
-      cus_id.current = docSnap.data().cus_id as string;
     } else {
       // docSnap.data() will be undefined in this case
       console.log("no plan setup!");
       setHavingPlan(false);
     }
   };
-  const getCustomerAlldata = async () => {
-    const docRef = doc(db, "usersPlan", "cus_QE54kSUDTrIWaP"); // replace with customerID
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setHavingPlan(true);
-      //setUsedCharCurrent(docSnap.data().used_char);
-      // setplanType(` ${docSnap.data().plan}`);
-    }
-  };
+
   useEffect(() => {
     if (userId.current !== "") {
       fetchPost();
@@ -99,11 +90,20 @@ export default function Billing() {
     return () => unsubscribe();
   }, [user]);
 
-  async function selectPlan(price_id: string, customer_id: string) {
+  async function selectPlan(
+    price_id: string,
+
+    stripeCustomerEmail: string,
+    userId: string
+  ) {
     console.log(price_id);
-    console.log(customer_id);
+
     await axios
-      .post("/api/checkout", { price_Id: price_id, customer_Id: customer_id })
+      .post("/api/checkout", {
+        price_Id: price_id,
+        user_Id: userId,
+        customer_Email: stripeCustomerEmail,
+      })
       .then((res) => {
         console.log(res.data);
 
@@ -113,33 +113,56 @@ export default function Billing() {
         console.log(error);
       });
   }
-  const addPlan = async (firebaseUserId: string, stripeCustomerId: string) => {
+  const addPlan = async (
+    firebaseUserId: string,
+    stripeCustomerEmail: string
+  ) => {
+    selectPlan(selected_plan.current, stripeCustomerEmail, firebaseUserId);
+    /* const docRef = doc(db, "users", firebaseUserId); // replace with firebase auth ID
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const cus_id = docSnap.data().cus_id as string;
+
+     
+    }*/
+    // addCusId("");
+  };
+  /* async function addCusId(cus_id: string) {
     try {
-      await setDoc(doc(db, "users", firebaseUserId), {
-        cus_id: stripeCustomerId,
+      await setDoc(doc(db, "users", userId.current), {
+        cus_id: cus_id,
       });
 
       console.log("inserted to users! .");
-      selectPlan(selected_plan.current, stripeCustomerId);
+      if (useremail.current !== null && useremail.current !== "") {
+        selectPlan(selected_plan.current, cus_id, useremail.current,userId.current);
+      } else {
+        console.log("user email null!!");
+        router.push("/login");
+      }
     } catch (e) {
       console.error("Error:", e);
     }
-  };
-  async function createCustomerId(email: string) {
+  }*/
+
+  /*async function createCustomerId(email: string) {
     //cree un stripe customerId  a partir de l'email
 
     console.log(email);
     await axios
       .post("/api/createUser", { email_user: email })
       .then((res) => {
-        //console.log(res.data.user);
+        console.log(res.data.user);
         cus_id.current = res.data.user as string;
-        addPlan(userId.current, cus_id.current);
+        // addPlan(userId.current, cus_id.current);
+        addCusId(cus_id.current);
+        //selectPlan(selected_plan.current, cus_id.current);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+  }*/
   return (
     <div>
       <div className="mx-10 md:mx-[100px]">
@@ -187,22 +210,12 @@ export default function Billing() {
             <div className="flex justify-center">
               <Button
                 onClick={() => {
-                  selected_plan.current = "price_1PFdXUHMq3uIqhfsb82b423Q";
-                  //utiliser le custom id deja existant
-
-                  if (havingPlan == true) {
-                    // select_customerID_in_database();
-                    // sil pa gen custom id nan base de donnee a autrement ,selectPlan() direct
-                    addPlan(userId.current, cus_id.current);
-                  } else {
-                    if (
-                      useremail.current !== null &&
-                      useremail.current !== ""
-                    ) {
-                      createCustomerId(useremail.current);
-                    }
+                  selected_plan.current = "price_1Pp8vvHMq3uIqhfsUZwVE60I";
+                  if (useremail.current !== null && useremail.current !== "") {
+                    addPlan(userId.current, useremail.current);
                   }
                 }}
+                disabled={havingPlan}
               >
                 select
               </Button>
@@ -523,20 +536,7 @@ const ButtonWrapperPro = ({
     });
   }
 
-  const addPlan = async (id: string) => {
-    try {
-      await setDoc(doc(db, "users", id), {
-        plan: "pro",
-        start_date: Date.now(),
-        end_date: 0,
-        used_char: 100000,
-      });
-
-      console.log("great! .");
-    } catch (e) {
-      console.error("Error:", e);
-    }
-  };
+  const addPlan = async (id: string) => {};
   return (
     <>
       {isPending ? (

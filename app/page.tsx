@@ -56,7 +56,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SampleLanguage from "./componentCustom/SampleLanguage";
-import { AlertTriangle, Check, Circle, CircleIcon } from "lucide-react";
+import {
+  AlertTriangle,
+  Check,
+  CheckCircle,
+  Circle,
+  CircleIcon,
+} from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import VoiceTest from "./trytestingvoice/VoiceTest";
 import { AvatarIcon } from "@radix-ui/react-icons";
@@ -211,21 +217,21 @@ export default function Home() {
         <Image src={textts} alt="" className="" />
       </div>
 
-      <div className="grid mx-2 md:mx-[100px] mt-[100px]">
+      <div className="animate-slidein grid mx-2 md:mx-[100px] mt-[100px]">
         <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-br-[200px] rounded-bl-lg rounded-tl-lg rounded-tr-lg bg-yellow-100 my-10">
           <div className="flex flex-col gap-1 items-center ">
             <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
               Text to speech for :
             </p>
             <div className="flex items-center gap-1   my-auto m-3 md:ml-10">
-              <CircleIcon className="text-yellow-500" />
+              <CheckCircle className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif ">
                 Content creator.🎬
               </p>
             </div>
 
             <div className="flex items-center  gap-1 my-auto m-3 md:ml-10">
-              <CircleIcon className="text-yellow-500" />
+              <CheckCircle className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif  ">
                 {" "}
                 Marketer.📊
@@ -233,14 +239,14 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
-              <CircleIcon className="text-yellow-500" />
+              <CheckCircle className="text-yellow-500" />
               <p className="text-gray-500 text-center md:2xl font-serif ">
                 Product developer.🧑‍💻
               </p>
             </div>
 
             <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
-              <CircleIcon className="text-yellow-500" />
+              <CheckCircle className="text-yellow-500" />
               <p className="text-gray-500 font-serif text-center md:2xl  ">
                 Educator.🎓
               </p>

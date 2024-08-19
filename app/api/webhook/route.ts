@@ -23,7 +23,9 @@ export async function POST(req: NextRequest) {
   try {
     if (!sig || !endpointSecret) return;
     event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
-    console.log(event.id);
+    //console.log(event.id);
+    const subscription = event.data.object as Stripe.Subscription;
+    const customerId = subscription.customer as string;
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
     // On error, log and return the error message.
@@ -42,13 +44,16 @@ export async function POST(req: NextRequest) {
   console.log("✅ Success:", event.id);
 
   switch (event.type) {
-    case "customer.subscription.created": {
-      const subscription = event.data.object as Stripe.Subscription;
+    //"customer.subscription.created"
+    case "checkout.session.completed": {
+      const subscription = event.data.object;
       const subscriptionId = subscription.id;
       const customerId = subscription.customer as string;
+      const userId = subscription.metadata?.userId as string;
+      console.log(userId);
 
       console.log(`Subscription ID: ${subscriptionId}`);
-      addCustomerSub_Id(subscriptionId, customerId);
+      addCustomerSub_Id(subscriptionId, customerId, userId);
       /*const response1 = await db
         .insert(OrderTable)
         .values({
@@ -79,12 +84,14 @@ export async function POST(req: NextRequest) {
 
 const addCustomerSub_Id = async (
   stripe_subscription_id: string,
-  stripe_customer_id: string
+  stripe_customer_id: string,
+  userId: string
 ) => {
   try {
-    await setDoc(doc(db, "usersPlan", stripe_customer_id), {
+    await setDoc(doc(db, "usersPlan", userId), {
       having_plan: true,
       subscription_id: stripe_subscription_id,
+      customer_id: stripe_customer_id,
       plan: "starter",
       used_char: 40000,
     });

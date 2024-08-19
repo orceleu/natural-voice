@@ -285,7 +285,7 @@ export default function Dashboard() {
 
   const addUsedChar = async () => {
     try {
-      await updateDoc(doc(db, "users", userId), {
+      await updateDoc(doc(db, "usersPlan", userId), {
         used_char: usedCharCurrent - textvalue.length,
       });
 
@@ -296,27 +296,31 @@ export default function Dashboard() {
   };
 
   const fetchPost = async () => {
-    const docRef = doc(db, "users", userId);
+    const docRef = doc(db, "usersPlan", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      // setHavingPlan(true);
-      // setUsedCharCurrent(docSnap.data().used_char);
-      //setplanType(` ${docSnap.data().plan}`);
-      cus_Id.current = docSnap.data().cus_id as string;
-      getCustomerAlldata();
+      setHavingPlan(true);
+      // cus_Id.current = docSnap.data().having_plan
+      getCustomerAlldata(userId);
     } else {
       // docSnap.data() will be undefined in this case
       console.log("no plan found!");
       setHavingPlan(false);
     }
   };
-  const getCustomerAlldata = async () => {
-    const docRef = doc(db, "usersPlan", "cus_QE54kSUDTrIWaP"); // replace with customerID
+  const getCustomerAlldata = async (userId: string) => {
+    const docRef = doc(db, "usersPlan", userId); // replace with customerID
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setHavingPlan(true);
-      setUsedCharCurrent(docSnap.data().used_char);
-      setplanType(` ${docSnap.data().plan}`);
+      if (docSnap.data().having_plan == true) {
+        setHavingPlan(true);
+        setUsedCharCurrent(docSnap.data().used_char);
+        setplanType(` ${docSnap.data().plan}`);
+      } else {
+        setHavingPlan(false);
+      }
+    } else {
+      setHavingPlan(false);
     }
   };
   useEffect(() => {

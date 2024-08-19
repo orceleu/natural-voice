@@ -14,9 +14,11 @@ const stripe = new Stripe(
 
 export async function POST(req) {
   // Create or update subscription
-  const { price_Id, customer_Id } = await req.json();
+  const { price_Id, user_Id, customer_Email } = await req.json();
+
   console.log(price_Id);
-  console.log(customer_Id);
+  console.log(user_Id);
+  console.log(customer_Email);
   /* const subscription = await stripe.subscriptions.create({
     customer: "cus_QARIKwkbeUgpGB",
     items: [{ price: "price_1PFdXUHMq3uIqhfsb82b423Q" }],
@@ -48,16 +50,20 @@ export async function POST(req) {
   */
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
-    customer: "cus_QE4yDGGDlYdo54",
+
     line_items: [
       {
-        price: "price_1PFdXUHMq3uIqhfsb82b423Q", // Remplacez par l'ID de votre prix
+        price: `${price_Id}`, // Remplacez par l'ID de votre prix
         quantity: 1,
       },
     ],
+    metadata: {
+      userId: `${user_Id}`,
+    },
     mode: "subscription",
     success_url: "http://localhost:3000/checkout/success",
     cancel_url: "http://localhost:3000/checkout/cancel",
+    customer_email: customer_Email,
   });
   return NextResponse.json({ session: `${session.url}` });
 }
