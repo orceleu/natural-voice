@@ -192,7 +192,7 @@ export default function Home() {
             <Separator />
 
             <div className="flex justify-center mt-11 md:mt-[100px] ">
-              <button className="w-[200px] h-[50px] rounded-sm underline bg-emerald-600 shadow-lg  hover:bg-emerald-500 text-white font-bold">
+              <button className="w-[200px] h-[50px] rounded-sm underline bg-emerald-600 shadow-lg shadow-emerald-100  hover:bg-emerald-500 text-white font-bold">
                 <Link href="/dashboard"> Get started</Link>
               </button>
             </div>
@@ -306,7 +306,7 @@ export default function Home() {
       </div>
 
       <div className="flex justify-center mt-11 md:mt-[100px] ">
-        <button className="w-[200px] h-[50px]  bg-emerald-600 shadow-lg underline rounded-sm hover:bg-emerald-500 text-white font-bold">
+        <button className="w-[200px] h-[50px] shadow-emerald-100  bg-emerald-600 shadow-lg underline rounded-sm hover:bg-emerald-500 text-white font-bold">
           <Link href="/dashboard"> Get started</Link>
         </button>
       </div>

@@ -81,7 +81,8 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        slidein: "slidein 1s ease 500ms",
+        slidein1: "slidein 1s ease 500ms",
+        slidein: "slidein 2s ease 1000ms",
       },
 
       backgroundImage: {
