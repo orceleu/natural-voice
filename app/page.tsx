@@ -1,16 +1,10 @@
 import Image from "next/image";
 import HomeComponent from "./componentCustom/HomeComponent";
-import daniel from "../public/daniel.png";
-import michael from "../public/michael.png";
-import emma from "../public/emma.png";
-import claire from "../public/claire.png";
-import claireremovebgpreview from "../public/claireremovebgpreview.png";
-import claireremovebg from "../public/claireremovebg.png";
 
-import danielremovebgpreview from "../public/danielremovebgpreview.png";
-import emmaremovebgpreview from "../public/emmaremovebgpreview.png";
-import anthonyremovebgpreview from "../public/anthonyremovebgpreview.png";
-
+import rihanna from "../public/rihanna.jpeg";
+import snoopdog from "../public/snoopdog.jpg";
+import trump from "../public/donaltrump.jpg";
+import drake from "../public/drake.jpg";
 import screennaturalvoice from "../public/screennaturalvoice.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
@@ -181,10 +175,10 @@ export default function Home() {
             </p>
             <div className="mx-10 my-10">
               <HomeComponent
-                img1={claireremovebg}
-                img2={emmaremovebgpreview}
-                img3={danielremovebgpreview}
-                img4={anthonyremovebgpreview}
+                img1={rihanna}
+                img2={trump}
+                img3={snoopdog}
+                img4={drake}
               />
             </div>
             <VoiceTest />

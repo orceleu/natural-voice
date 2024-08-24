@@ -19,25 +19,32 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
       name: "Rihanna",
       picture: img1,
       audioUrl:
-        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDanielGenerate.wav?alt=media&token=8f3f9605-706b-4dbc-9ac4-75fb3c212043",
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FRihannaoriginal.mp3?alt=media&token=df26ad63-92ea-48ae-ba5a-7b99265713e4",
+      audioClone:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FRihannaclone.wav?alt=media&token=ebbc1652-417d-4153-8c7f-6acb0d454c5d",
     },
     {
       name: "Trump",
       picture: img2,
       audioUrl:
-        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDanielGenerate.wav?alt=media&token=8f3f9605-706b-4dbc-9ac4-75fb3c212043",
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Ftrumporiginal.mp3?alt=media&token=d82cdf77-b991-49c2-a993-36ce26848912",
+      audioClone:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Ftrumpclone.wav?alt=media&token=0819b32c-7088-43f9-8f15-db9bf906bec3",
     },
     {
       name: "Snoop dog",
       picture: img3,
       audioUrl:
-        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FDanielGenerate.wav?alt=media&token=8f3f9605-706b-4dbc-9ac4-75fb3c212043",
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fsnoopdogoriginal.mp3?alt=media&token=d7962900-57ba-4458-ba7c-69c115ba85ce",
+      audioClone:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fsnoopdogclone.wav?alt=media&token=900ebed4-036f-46b5-95d4-53878d0c6d54",
     },
     {
       name: "Drake",
       picture: img4,
       audioUrl:
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnhonyGenerate.wav?alt=media&token=8544ae0a-3abb-4b07-8f30-7f90e3ae8126 ",
+      audioClone: "",
     },
   ];
 
@@ -82,7 +89,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
                   <p className="text-gray-500 font-mono">(Cloned)</p>
                   <Player
                     key={index + 5}
-                    src={item.audioUrl}
+                    src={item.audioClone}
                     height={40}
                     hideVolume
                   />
