@@ -4,7 +4,7 @@ import HomeComponent from "./componentCustom/HomeComponent";
 import rihanna from "../public/rihanna.jpeg";
 import snoopdog from "../public/snoopdog.jpg";
 import trump from "../public/donaltrump.jpg";
-import drake from "../public/drake.jpg";
+import gadelmaleh from "../public/gadelmaleh.jpg";
 import screennaturalvoice from "../public/screennaturalvoice.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
@@ -157,7 +157,7 @@ export default function Home() {
           <br />
           <br />
           <div className=" md:mx-[100px]  ">
-            <p className="text-center font-bold  text-lg md:text-xl lg:text-3xl xl:text-3xl">
+            <p className="text-center font-bold  text-lg md:text-3xl  md:my-5 xl:text-5xl xl:my-10">
               GENERATE REALISTIC VOICE WITH OUR MODEL.
             </p>
             <p className="text-center font-serif text-gray-600 ">
@@ -173,17 +173,16 @@ export default function Home() {
             <p className="text-center my-10 text-emerald-500 font-mono text-lg underline">
               sample
             </p>
-            <div className="mx-10 my-10">
+            <div className="mx-10 my-10 ">
               <HomeComponent
                 img1={rihanna}
                 img2={trump}
                 img3={snoopdog}
-                img4={drake}
+                img4={gadelmaleh}
               />
             </div>
             <VoiceTest />
             <br />
-            <Separator />
 
             <div className="flex justify-center mt-11 md:mt-[100px] ">
               <button className="w-[200px] h-[50px] rounded-sm underline bg-emerald-600 shadow-lg shadow-emerald-100  hover:bg-emerald-500 text-white font-bold">

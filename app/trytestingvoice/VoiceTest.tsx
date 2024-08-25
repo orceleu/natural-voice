@@ -162,8 +162,8 @@ export default function VoiceTest() {
   }
 
   return (
-    <div className=" flex justify-center ">
-      <div className="p-5 shadow-lg rounded-md bg-white">
+    <div className=" flex justify-center md:mt-[100px]">
+      <div className="p-5 shadow-lg rounded-[20px] bg-white">
         <div className="flex items-center space-x-5">
           {" "}
           <Popover open={open} onOpenChange={setOpen}>

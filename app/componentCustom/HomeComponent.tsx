@@ -22,14 +22,16 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FRihannaoriginal.mp3?alt=media&token=df26ad63-92ea-48ae-ba5a-7b99265713e4",
       audioClone:
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FRihannaclone.wav?alt=media&token=ebbc1652-417d-4153-8c7f-6acb0d454c5d",
+      lang: "en",
     },
     {
-      name: "Trump",
+      name: "Donald Trump",
       picture: img2,
       audioUrl:
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Ftrumporiginal.mp3?alt=media&token=d82cdf77-b991-49c2-a993-36ce26848912",
       audioClone:
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Ftrumpclone.wav?alt=media&token=0819b32c-7088-43f9-8f15-db9bf906bec3",
+      lang: "en",
     },
     {
       name: "Snoop dog",
@@ -38,13 +40,16 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fsnoopdogoriginal.mp3?alt=media&token=d7962900-57ba-4458-ba7c-69c115ba85ce",
       audioClone:
         "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fsnoopdogclone.wav?alt=media&token=900ebed4-036f-46b5-95d4-53878d0c6d54",
+      lang: "en",
     },
     {
-      name: "Drake",
+      name: "Gad Elmaleh",
       picture: img4,
       audioUrl:
-        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnhonyGenerate.wav?alt=media&token=8544ae0a-3abb-4b07-8f30-7f90e3ae8126 ",
-      audioClone: "",
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fgadelmaleh.mp3?alt=media&token=cacc52d9-ebd7-4601-9837-a4c2f60ef040",
+      audioClone:
+        "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fgadelmalehclone.wav?alt=media&token=476c485c-1be6-4cba-8399-567f11423954",
+      lang: "fr",
     },
   ];
 
@@ -64,14 +69,15 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
               key={index + 3}
               src={item.picture}
               alt=""
-              className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 "
+              className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 shadow-md "
             />
             <h3
               key={index + 1}
               className="text-sm font-semibold my-auto mx-auto"
             >
               <p key={index + 4} className="font-mono">
-                {item.name}
+                <span className="mx-1">{item.name}</span>
+                <span className=" text-gray-400">({item.lang})</span>
               </p>
             </h3>
             <div key={index + 2} className="mx-auto mb-auto mt-1">
