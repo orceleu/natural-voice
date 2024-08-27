@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { setTimeout } from "timers";
-export default function page() {
+export default function Success() {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => router.replace("/dashboard"), 2000);
