@@ -40,7 +40,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
+import Stripe from "stripe";
 import {
   ref,
   getDownloadURL,
@@ -241,14 +241,15 @@ const defauldVoice =
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 
-// Renders errors or successfull transactions on the screen.
-function Message({ content }: any) {
-  return <>{content}</>;
-}
+const stripe = new Stripe(
+  "sk_test_51OpACQHMq3uIqhfsV1UgHf7wnUXqJVB2OqsI4CIPPnwfNGQJDiXyASrIr9FBKSKi9zFM384gtwbchxvPGCMmnBrM00Bfs91kOz",
+  {
+    apiVersion: "2024-04-10",
+    typescript: true,
+  }
+);
 
 export default function Dashboard() {
-  const [message, setMessage] = useState("");
-
   const [changed, setChange] = useState(false);
   const [stringList, setStringList] = useState<Item[]>([]);
   const [urlExempleVoice, seturlExempleVoice] = useState(defauldVoice);
@@ -275,12 +276,11 @@ export default function Dashboard() {
   const [userEmail, setUserEmail] = useState<string | null>("");
 
   const [userId, setUserid] = useState("");
-
+  const subscriptionId = useRef("");
   const [havingPlan, setHavingPlan] = useState(true);
   //users utilisation
   const [usedCharCurrent, setUsedCharCurrent] = useState(0);
   const [planType, setplanType] = useState("");
-  const [planTypeValue, setplanTypeValue] = useState(0);
 
   const addUsedChar = async () => {
     try {
@@ -315,6 +315,11 @@ export default function Dashboard() {
         setHavingPlan(true);
         setUsedCharCurrent(docSnap.data().used_char);
         setplanType(` ${docSnap.data().plan}`);
+        subscriptionId.current = docSnap.data().subscription_id;
+        const subscription = await stripe.subscriptions.retrieve(
+          `${docSnap.data().subscription_id}`
+        );
+        console.log(`subscription data:${subscription}`);
       } else {
         setHavingPlan(false);
       }

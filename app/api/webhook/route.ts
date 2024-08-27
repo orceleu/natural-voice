@@ -24,8 +24,6 @@ export async function POST(req: NextRequest) {
     if (!sig || !endpointSecret) return;
     event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
     //console.log(event.id);
-    const subscription = event.data.object as Stripe.Subscription;
-    const customerId = subscription.customer as string;
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
     // On error, log and return the error message.
@@ -45,30 +43,17 @@ export async function POST(req: NextRequest) {
 
   switch (event.type) {
     //"customer.subscription.created"
+    //'payment_intent.succeeded'
     case "checkout.session.completed": {
       const subscription = event.data.object;
-      const subscriptionId = subscription.id;
+      const subscriptionId = subscription.subscription as string;
       const customerId = subscription.customer as string;
       const userId = subscription.metadata?.userId as string;
       // console.log(userId);
-
       //console.log(`Subscription ID: ${subscriptionId}`);
       addCustomerSub_Id(subscriptionId, customerId, userId);
       break;
     }
-
-    case "customer.subscription.deleted":
-      const checkoutSessionAsyncPaymentSucceeded = event.data.object;
-
-      break;
-    case "customer.subscription.paused":
-      const checkoutSessionCompleted: any = event.data.object;
-
-      break;
-    default:
-    // console.log(`Unhandled event type ${event.type}`);
-    //customer.subscription.resumed
-    //customer.subscription.updated
   }
   // Return a response to acknowledge receipt of the event.
   return NextResponse.json({ received: true });
