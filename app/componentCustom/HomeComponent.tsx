@@ -69,7 +69,7 @@ const HomeComponent: React.FC<Props> = ({ img1, img2, img3, img4 }) => {
               key={index + 3}
               src={item.picture}
               alt=""
-              className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 shadow-md "
+              className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 shadow-md shadow-yellow-300"
             />
             <h3
               key={index + 1}

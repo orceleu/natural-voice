@@ -258,7 +258,7 @@ export default function Dashboard() {
   const [screenShotseconds, setSreenShotSeconds] = useState("");
 
   const [progresspercent, setProgresspercent] = useState(0);
-  const cus_Id = useRef("");
+  const clean_voice = useRef(true);
   const { toast } = useToast();
   const router = useRouter();
   const [openIndrawer, setOpenIndrawer] = React.useState(false);
@@ -343,7 +343,7 @@ export default function Dashboard() {
     } else {
       if (file && file.type.startsWith("audio/")) {
         //console.log("est un fichier audio");
-        console.log(`${file.size / 1024} KB`);
+        //console.log(`${file.size / 1024} KB`);
         if (file.size > 1000000) {
           toast({
             variant: "destructive",
@@ -353,7 +353,7 @@ export default function Dashboard() {
           setUploadLoaded(true);
           const storageRef = ref(
             storage,
-            `users/${user?.uid}/customVoice(${stringList.length + 1})`
+            `users/${user?.uid}/customvoice_${stringList.length + 1}`
           );
           const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -512,7 +512,7 @@ export default function Dashboard() {
         .post("https://server-natural-voice.onrender.com", {
           text: text,
           language: languagevalue,
-          clean_voice: false,
+          clean_voice: clean_voice.current,
           voice_sample: urlExempleVoice,
         })
         .then((res) => {
@@ -637,6 +637,25 @@ export default function Dashboard() {
           <p className=" text-green-500">{nameVoiceSelected}</p>
           <p>Language selected:</p>
           <p className=" text-green-500">{languagevalue}</p>
+          <div className="items-top flex space-x-2">
+            <Checkbox
+              id="terms1"
+              onCheckedChange={(e: boolean) => {
+                clean_voice.current = e;
+                console.log(clean_voice.current);
+              }}
+              defaultChecked={true}
+            />
+            <div className="grid gap-1.5 leading-none">
+              <label
+                htmlFor="terms1"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Clean voice
+              </label>
+              <p className="text-sm text-muted-foreground">(for microphone )</p>
+            </div>
+          </div>
           <div className=" grid w-full   ">
             <br />
             <div className="flex justify-center">
@@ -1273,6 +1292,27 @@ export default function Dashboard() {
               <div>
                 <p>Voice selected:</p>
                 <p className=" text-green-500">{nameVoiceSelected}</p>
+                <div className="items-top flex space-x-2">
+                  <Checkbox
+                    id="terms2"
+                    onCheckedChange={(e: boolean) => {
+                      clean_voice.current = e;
+                      console.log(clean_voice.current);
+                    }}
+                    defaultChecked={true}
+                  />
+                  <div className="grid gap-1.5 leading-none">
+                    <label
+                      htmlFor="terms2"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Clean voice
+                    </label>
+                    <p className="text-sm text-muted-foreground">
+                      (for microphone )
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="ml-auto mr-10 ">
