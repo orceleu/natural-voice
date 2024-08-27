@@ -6,7 +6,7 @@ import { AudioWaveformIcon, SendIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
 import { Player } from "react-simple-player";
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { MinusIcon, PlusIcon, QuestionMarkIcon } from "@radix-ui/react-icons";
 
 import {
   collection,
@@ -254,8 +254,6 @@ export default function Dashboard() {
   const [urlExempleVoice, seturlExempleVoice] = useState(defauldVoice);
   const [nameVoiceSelected, setNameVoiceSelected] = useState("");
   const [verifystringList, setverifyStringList] = useState<string[]>([]);
-  const [seconds, setSeconds] = useState(0);
-  const [screenShotseconds, setSreenShotSeconds] = useState("");
 
   const [progresspercent, setProgresspercent] = useState(0);
   const clean_voice = useRef(true);
@@ -500,10 +498,6 @@ export default function Dashboard() {
   const handleClick = async () => {
     setLoaded(true);
     activeButtonSubmit(true);
-    let secondeToScreen = seconds;
-    const interval = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1);
-    }, 1000); // Mettre à jour chaque seconde
 
     var text = remplacerPointsParPointVirgules(textvalue);
 
@@ -523,14 +517,6 @@ export default function Dashboard() {
           setText(output);
           setLoaded(false);
           activeButtonSubmit(false);
-          setSreenShotSeconds(`${secondeToScreen} sec`);
-          setTimeout(() => {
-            clearInterval(interval);
-          }, 500);
-
-          setTimeout(() => {
-            setSeconds(0);
-          }, 3000);
         })
         .catch((error) => {
           console.log(error);
@@ -610,7 +596,7 @@ export default function Dashboard() {
             {havingPlan ? (
               <>
                 <p>
-                  char: <span>{usedCharCurrent} </span> left
+                  Remaining: <span>{usedCharCurrent} </span>
                 </p>
               </>
             ) : (
@@ -672,7 +658,7 @@ export default function Dashboard() {
                   handleActiveButton();
                 }}
                 value={textvalue}
-                className="h-[200px]"
+                className="h-[400px]"
               />
 
               <p className="text-sm text-muted-foreground">
@@ -712,6 +698,10 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+
+          <Button className="fixed bottom-5 end-5 bg-green-600 hover:bg-green-300 ">
+            <QuestionMarkIcon className="size-4" />
+          </Button>
         </div>
       </div>
     );
@@ -1267,7 +1257,7 @@ export default function Dashboard() {
             {havingPlan ? (
               <>
                 <p>
-                  char: <span>{usedCharCurrent} </span> left
+                  Remaining: <span>{usedCharCurrent} </span>
                 </p>
               </>
             ) : (
@@ -1381,8 +1371,6 @@ export default function Dashboard() {
               </div>
               <div className=" flex justify-center">
                 <div className=" grid gap-2">
-                  <p>{seconds}</p>
-                  <p>{screenShotseconds}</p>
                   <div className="flex justify-center space-x-4 mt-4">
                     <Button
                       onClick={handleClick}
@@ -1414,6 +1402,10 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
+
+            <Button className="fixed bottom-10 end-10 bg-green-600 hover:bg-green-300 ">
+              <QuestionMarkIcon className="h-7 w-7" />
+            </Button>
           </div>
         </div>
       </div>

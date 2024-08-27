@@ -50,19 +50,11 @@ export async function POST(req: NextRequest) {
       const subscriptionId = subscription.id;
       const customerId = subscription.customer as string;
       const userId = subscription.metadata?.userId as string;
-      console.log(userId);
+      // console.log(userId);
 
-      console.log(`Subscription ID: ${subscriptionId}`);
+      //console.log(`Subscription ID: ${subscriptionId}`);
       addCustomerSub_Id(subscriptionId, customerId, userId);
-      /*const response1 = await db
-        .insert(OrderTable)
-        .values({
-          userId: checkoutSessionCompleted?.metadata.userId,
-          itemCount: 1,
-          total: checkoutSessionCompleted?.amount_total as any,
-          isComplete: true,
-        })
-        .returning();*/ break;
+      break;
     }
 
     case "customer.subscription.deleted":
