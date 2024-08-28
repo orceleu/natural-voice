@@ -32,7 +32,7 @@ export default function VoiceTest() {
   const [languagevalue, setLanguageValue] = useState("en");
   const [open, setOpen] = useState(false);
   const [text, setText] = useState(
-    "You can choose from over 12 languages and 50 voices to convert your texts into speech and get your audio file"
+    "You can choose from over 12 languages,clone or 15 preregistrered voices to convert your texts into speech and get your audio file"
   );
   const [urlaudio, seturlAudio] = useState("");
 

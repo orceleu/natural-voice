@@ -15,7 +15,7 @@ import { stripe } from "@/app/lib/stripe";
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = headers().get("stripe-signature") as string;
-  const endpointSecret = "whsec_BFdu7rDG6fRaHNCxZR5JU9jZiQO7bBDD";
+  const endpointSecret = "whsec_Ve8S1lEtc8UnL6LRxa8dCVKz5BZmZP6Q";
   // "whsec_4776402dd66d977d463c3a5e20708000ee5bc49a7bb524d1d6765eeda1b7f520";
 
   //console.log(`body:${body}`);
@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
   switch (event.type) {
     //"customer.subscription.created"
     //'payment_intent.succeeded'
+
     case "checkout.session.completed": {
       const subscription = event.data.object;
       const subscriptionId = subscription.subscription as string;

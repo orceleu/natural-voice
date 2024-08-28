@@ -319,7 +319,7 @@ export default function Dashboard() {
         const subscription = await stripe.subscriptions.retrieve(
           `${docSnap.data().subscription_id}`
         );
-        console.log(`subscription data:${subscription}`);
+        console.log(`subscription data:${subscription.status}`);
       } else {
         setHavingPlan(false);
       }

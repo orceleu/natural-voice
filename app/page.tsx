@@ -153,9 +153,7 @@ export default function Home() {
         <div className="bg-gridline w-full">
           <br />
           <br />
-          <br />
-          <br />
-          <br />
+
           <div className=" md:mx-[100px]  ">
             <p className="text-center font-bold  text-lg md:text-3xl  md:my-5 xl:text-5xl xl:my-10">
               GENERATE REALISTIC VOICE WITH OUR MODEL.

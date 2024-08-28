@@ -1,14 +1,9 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
-import {
-  PayPalScriptProvider,
-  PayPalButtons,
-  usePayPalScriptReducer,
-} from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { CheckCircleIcon, LoaderIcon } from "lucide-react";
+import { CheckCircleIcon, LoaderIcon, LockIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { collection, addDoc, getDoc, doc, setDoc } from "firebase/firestore";
@@ -23,30 +18,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { CheckCircledIcon, CheckIcon } from "@radix-ui/react-icons";
+import { CheckCircledIcon, CheckIcon, ReloadIcon } from "@radix-ui/react-icons";
 import axios from "axios";
-//import googlepay from '@paypal/googlepay-components'
 export default function Billing() {
-  //secret: EHJu3f2e_krcmRT-dVmVkjmN3LLIksgIDsORtuebjym3hgvGPczJD9eggDg_isb9DcfMdgqOnsRFCRu1
-  //client id:AYUz6PJaJRmYWImq2oPBnPZPpGC7lYb6e729pLHW3J4bQ8zo9nidGQJMIbctio-XMvovPYX9QzvKUgxf
   const router = useRouter();
   const [havingPlan, setHavingPlan] = useState(false);
-  //const [userId, setUserid] = useState("");
   const userId = useRef("");
   const [user, setUser] = useState<User | null>(null);
-  //const [userEmail, setUserEmail] = useState<string | null>("");
   const useremail = useRef<string | null>("");
-  const cus_id = useRef("");
   const selected_plan = useRef("");
-  const initialOptions: any = {
-    "client-id":
-      "ATZl5eLAOWOORW9XV8ZBo5YRhjn0j7k34UmfHmXgXVZ2QU-DYVaNnB7jqxarzFYpGkvapgPuqrVkafc5",
-    "enable-funding": "card",
 
-    "data-sdk-integration-source": "integrationbuilder_sc",
-    vault: "true",
-    intent: "subscription",
-  };
+  const [clickedBase, setClickedBase] = useState(false);
+  const [clickedPro, setClickedPro] = useState(false);
+  const [clickedPremium, setClickedpremium] = useState(false);
 
   const fetchPost = async () => {
     const docRef = doc(db, "usersPlan", userId.current);
@@ -206,7 +190,10 @@ export default function Billing() {
             </ul>
             <div className="flex justify-center">
               <Button
+                className="bg-emerald-600 hover:bg-emerald-500"
                 onClick={() => {
+                  setClickedBase(true);
+                  setHavingPlan(true);
                   selected_plan.current = "price_1Pp8vvHMq3uIqhfsUZwVE60I";
                   if (useremail.current !== null && useremail.current !== "") {
                     addPlan(userId.current, useremail.current);
@@ -214,7 +201,16 @@ export default function Billing() {
                 }}
                 disabled={havingPlan}
               >
-                select
+                {clickedBase ? (
+                  <>
+                    <p>
+                      Processing...
+                      <LockIcon className="h-5 w-5 " />
+                    </p>
+                  </>
+                ) : (
+                  <p>Select</p>
+                )}
               </Button>
             </div>
             <br />
@@ -265,13 +261,29 @@ export default function Billing() {
               </li>
             </ul>
             <div className="flex justify-center">
-              <PayPalScriptProvider options={initialOptions}>
-                <ButtonWrapperPro
-                  disable={havingPlan}
-                  userid={userId.current}
-                  type="subscription"
-                />
-              </PayPalScriptProvider>
+              <Button
+                className="bg-emerald-600 hover:bg-emerald-500"
+                onClick={() => {
+                  setClickedPro(true);
+                  setHavingPlan(true);
+                  selected_plan.current = "price_1Pp8vvHMq3uIqhfsUZwVE60I";
+                  if (useremail.current !== null && useremail.current !== "") {
+                    addPlan(userId.current, useremail.current);
+                  }
+                }}
+                disabled={havingPlan}
+              >
+                {clickedPro ? (
+                  <>
+                    <p>
+                      Processing...
+                      <LockIcon className="h-5 w-5 " />
+                    </p>
+                  </>
+                ) : (
+                  <p>Select</p>
+                )}
+              </Button>
             </div>
             <br />
             <div className="flex justify-center">
@@ -317,13 +329,29 @@ export default function Billing() {
               </li>
             </ul>
             <div className="flex justify-center">
-              <PayPalScriptProvider options={initialOptions}>
-                <ButtonWrapperEnterprise
-                  disable={havingPlan}
-                  userid={userId.current}
-                  type="subscription"
-                />
-              </PayPalScriptProvider>
+              <Button
+                className="bg-emerald-600 hover:bg-emerald-500"
+                onClick={() => {
+                  setClickedpremium(true);
+                  setHavingPlan(true);
+                  selected_plan.current = "price_1Pp8vvHMq3uIqhfsUZwVE60I";
+                  if (useremail.current !== null && useremail.current !== "") {
+                    addPlan(userId.current, useremail.current);
+                  }
+                }}
+                disabled={havingPlan}
+              >
+                {clickedPremium ? (
+                  <>
+                    <p>
+                      Processing...
+                      <LockIcon className="h-5 w-5 " />
+                    </p>
+                  </>
+                ) : (
+                  <p>Select</p>
+                )}
+              </Button>
             </div>
             <br />
             <div className="flex justify-center">
@@ -408,239 +436,3 @@ export default function Billing() {
     </div>
   );
 }
-const ButtonWrapperStarter = ({
-  disable,
-  userid,
-  type,
-}: {
-  disable: any;
-  userid: any;
-  type: any;
-}) => {
-  const router = useRouter();
-  const [{ options, isInitial, isPending, isResolved, isRejected }, dispatch] =
-    usePayPalScriptReducer();
-  const [currency, setCurrency] = useState(options.currency);
-  function onCurrencyChange({ target: { value } }: any) {
-    setCurrency(value);
-    dispatch({
-      type: "resetOptions",
-      value: {
-        ...options,
-        currency: value,
-      },
-    });
-  }
-  var varPlanId = "";
-  const addPlan = async (id: string) => {
-    try {
-      await setDoc(doc(db, "users", id), {
-        plan: "starter",
-        used_char: 40000,
-        plan_id: varPlanId,
-      });
-
-      console.log("inserted to users! .");
-    } catch (e) {
-      console.error("Error:", e);
-    }
-
-    try {
-      await setDoc(doc(db, "usersPlan", varPlanId), {
-        start_date: Date.now(),
-        end_date: 0,
-      });
-
-      console.log("inseted to userPlan! .");
-    } catch (e) {
-      console.error("Error:", e);
-    }
-  };
-
-  return (
-    <>
-      {isPending ? (
-        <LoaderIcon />
-      ) : (
-        <PayPalButtons
-          disabled={disable}
-          createSubscription={(data, actions) => {
-            return actions.subscription.create({
-              plan_id: "P-86S718199T297924TMX654VA",
-              application_context: {
-                shipping_preference: "NO_SHIPPING",
-                return_url: "http://localhost:3000/billing",
-                cancel_url: "http://localhost:3000/dashboard",
-                payment_method: {
-                  payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
-                },
-              },
-            });
-          }}
-          onApprove={(data, action) => {
-            alert(" subscribtion success");
-
-            console.log(data.subscriptionID);
-
-            varPlanId =
-              data.subscriptionID?.toString() ??
-              "no string found in data subscription";
-
-            console.log(varPlanId);
-            addPlan(userid);
-
-            router.push("/dashboard");
-            return Promise.resolve();
-          }}
-          onError={(err) => {
-            console.log(err);
-
-            return Promise.resolve();
-          }}
-          style={{
-            color: "white",
-            label: "pay",
-            shape: "pill",
-          }}
-          displayOnly={["vaultable"]}
-        />
-      )}
-    </>
-  );
-};
-
-const ButtonWrapperPro = ({
-  disable,
-  userid,
-  type,
-}: {
-  disable: any;
-  userid: any;
-  type: any;
-}) => {
-  const router = useRouter();
-  const [{ options, isInitial, isPending, isResolved, isRejected }, dispatch] =
-    usePayPalScriptReducer();
-  const [currency, setCurrency] = useState(options.currency);
-  function onCurrencyChange({ target: { value } }: any) {
-    setCurrency(value);
-    dispatch({
-      type: "resetOptions",
-      value: {
-        ...options,
-        currency: value,
-      },
-    });
-  }
-
-  const addPlan = async (id: string) => {};
-  return (
-    <>
-      {isPending ? (
-        <LoaderIcon />
-      ) : (
-        <PayPalButtons
-          disabled={disable}
-          createSubscription={(data, actions) => {
-            return actions.subscription.create({
-              plan_id: "P-7N242784T6989522DMYC6ACY",
-              application_context: {
-                shipping_preference: "NO_SHIPPING",
-                return_url: "http://localhost:3000/billing",
-                cancel_url: "http://localhost:3000/dashboard",
-                payment_method: {
-                  payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
-                },
-              },
-            });
-          }}
-          onApprove={(data, action) => {
-            console.log(data.subscriptionID);
-            alert(" subscribtion success");
-            addPlan(userid);
-            router.push("/dashboard");
-            return Promise.resolve();
-          }}
-          onError={(err) => {
-            console.log(err);
-
-            return Promise.resolve();
-          }}
-          style={{
-            color: "blue",
-            label: "pay",
-            shape: "pill",
-          }}
-          displayOnly={["vaultable"]}
-        />
-      )}
-    </>
-  );
-};
-
-const ButtonWrapperEnterprise = ({
-  disable,
-  userid,
-  type,
-}: {
-  disable: any;
-  userid: any;
-  type: any;
-}) => {
-  const router = useRouter();
-  const [{ options, isInitial, isPending, isResolved, isRejected }, dispatch] =
-    usePayPalScriptReducer();
-  const [currency, setCurrency] = useState(options.currency);
-  function onCurrencyChange({ target: { value } }: any) {
-    setCurrency(value);
-    dispatch({
-      type: "resetOptions",
-      value: {
-        ...options,
-        currency: value,
-      },
-    });
-  }
-
-  return (
-    <>
-      {isPending ? (
-        <LoaderIcon />
-      ) : (
-        <PayPalButtons
-          disabled={disable}
-          createSubscription={(data, actions) => {
-            return actions.subscription.create({
-              plan_id: "P-86S718199T297924TMX654VA",
-              application_context: {
-                shipping_preference: "NO_SHIPPING",
-                return_url: "http://localhost:3000/billing",
-                cancel_url: "http://localhost:3000/dashboard",
-                payment_method: {
-                  payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
-                },
-              },
-            });
-          }}
-          onApprove={(data, action) => {
-            console.log(data.subscriptionID);
-            alert(" subscribtion success");
-            router.push("/dashboard");
-            return Promise.resolve();
-          }}
-          onError={(err) => {
-            console.log(err);
-
-            return Promise.resolve();
-          }}
-          style={{
-            color: "gold",
-            label: "pay",
-            shape: "pill",
-          }}
-          displayOnly={["vaultable"]}
-        />
-      )}
-    </>
-  );
-};
