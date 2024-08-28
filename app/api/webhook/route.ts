@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { buffer } from "micro";
 import {
   collection,
   addDoc,
@@ -13,19 +12,15 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { stripe } from "@/app/lib/stripe";
 const endpointSecret = "whsec_Ve8S1lEtc8UnL6LRxa8dCVKz5BZmZP6Q";
-export async function POST(req: any) {
-  const body = await buffer(req);
+export async function POST(req: NextRequest) {
+  const body = await req.text();
   const sig = headers().get("stripe-signature") as string;
 
   // "whsec_4776402dd66d977d463c3a5e20708000ee5bc49a7bb524d1d6765eeda1b7f520";
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(
-      body.toString(),
-      sig,
-      endpointSecret
-    );
+    event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
     //console.log(event.id);
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
