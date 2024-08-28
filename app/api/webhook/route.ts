@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { buffer } from "micro";
 import {
   collection,
   addDoc,
@@ -11,18 +12,20 @@ import { db } from "../../firebase/config";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 import { stripe } from "@/app/lib/stripe";
-
-export async function POST(req: NextRequest) {
-  const body = await req.text();
+const endpointSecret = "whsec_Ve8S1lEtc8UnL6LRxa8dCVKz5BZmZP6Q";
+export async function POST(req: any) {
+  const body = await buffer(req);
   const sig = headers().get("stripe-signature") as string;
-  const endpointSecret = "whsec_Ve8S1lEtc8UnL6LRxa8dCVKz5BZmZP6Q";
+
   // "whsec_4776402dd66d977d463c3a5e20708000ee5bc49a7bb524d1d6765eeda1b7f520";
 
-  //console.log(`body:${body}`);
   let event: Stripe.Event;
   try {
-    if (!sig || !endpointSecret) return;
-    event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+    event = stripe.webhooks.constructEvent(
+      body.toString(),
+      sig,
+      endpointSecret
+    );
     //console.log(event.id);
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
@@ -39,6 +42,7 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
+
   console.log("✅ Success:", event.id);
 
   switch (event.type) {
@@ -52,6 +56,16 @@ export async function POST(req: NextRequest) {
       const userId = subscription.metadata?.userId as string;
       // console.log(userId);
       //console.log(`Subscription ID: ${subscriptionId}`);
+      /* if (!subscription) {
+        return NextResponse.json(
+          {
+            error: "server error",
+          },
+          {
+            status: 500,
+          }
+        );
+      }*/
       addCustomerSub_Id(subscriptionId, customerId, userId);
       break;
     }
