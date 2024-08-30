@@ -237,7 +237,7 @@ interface Item {
   url: string;
 }
 const defauldVoice =
-  "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2FAnthony.mp3?alt=media&token=1da13aec-26ae-4612-9018-ff0ceb6a0b9d";
+  "https://firebasestorage.googleapis.com/v0/b/natural-voice-28245.appspot.com/o/publicVoice%2Fcustomvoice_5.mp3?alt=media&token=1e11dc37-fde3-4dd6-a23e-a577558b3460";
 const axiosInstance = axios.create();
 axiosInstance.defaults.timeout = 240000;
 
@@ -274,14 +274,39 @@ export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState<string | null>("");
-
+  const [takingTime, setTakingTime] = useState(false);
   const [userId, setUserid] = useState("");
   const subscriptionId = useRef("");
   const [havingPlan, setHavingPlan] = useState(true);
   //users utilisation
   const [usedCharCurrent, setUsedCharCurrent] = useState(0);
   const [planType, setplanType] = useState("");
+  const timerId = useRef<NodeJS.Timeout | null>(null);
 
+  const startTimer = () => {
+    if (timerId.current) {
+      clearTimer(); // S'assurer qu'aucun autre timer ne tourne
+    }
+
+    //setIsRunning(true);
+    timerId.current = setTimeout(() => {
+      console.log("Le timer a été déclenché après 60 secondes.");
+      setTakingTime(true);
+      //clearTimer(); // Réinitialiser après l'exécution
+    }, 60000); // 60000ms = 60s
+  };
+
+  const stopTimer = () => {
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+      setTakingTime(false);
+      clearTimer(); // Réinitialiser après l'arrêt
+    }
+  };
+
+  const clearTimer = () => {
+    timerId.current = null;
+  };
   const addUsedChar = async () => {
     try {
       await updateDoc(doc(db, "usersPlan", userId), {
@@ -503,6 +528,7 @@ export default function Dashboard() {
   const handleClick = async () => {
     setLoaded(true);
     activeButtonSubmit(true);
+    startTimer();
 
     var text = remplacerPointsParPointVirgules(textvalue);
 
@@ -522,11 +548,13 @@ export default function Dashboard() {
           setText(output);
           setLoaded(false);
           activeButtonSubmit(false);
+          stopTimer();
         })
         .catch((error) => {
           console.log(error);
           setLoaded(false);
           activeButtonSubmit(false);
+          stopTimer();
           toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
@@ -542,6 +570,7 @@ export default function Dashboard() {
       activeButtonSubmit(true);
     } else {
       activeButtonSubmit(false);
+
       detectTheLanguage();
     }
   };
@@ -697,6 +726,18 @@ export default function Dashboard() {
                     <TrashIcon className="h-5 w-5" />
                   </Button>
                 </div>
+
+                {takingTime ? (
+                  <div className="w-[300px] p-5 rounded-md bg-slate-300">
+                    <p>
+                      Process take a bit more time than expected,patience all
+                      request will be completed...
+                      <span className="font-semibold underline">
+                        Learn more
+                      </span>
+                    </p>
+                  </div>
+                ) : null}
                 <br />
                 <AudioPlayer audioUrl={text} />
                 <br />
@@ -1401,6 +1442,18 @@ export default function Dashboard() {
                       <TrashIcon className="h-5 w-5" />
                     </Button>
                   </div>
+                  {takingTime ? (
+                    <div className="w-[300px] p-5 rounded-md bg-slate-300">
+                      <p>
+                        Process take a bit more time than expected,patience all
+                        request will be completed...
+                        <span className="font-semibold underline">
+                          Learn more
+                        </span>
+                      </p>
+                    </div>
+                  ) : null}
+
                   <br />
                   <AudioPlayer audioUrl={text} />
                   <br />
@@ -1408,7 +1461,12 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <Button className="fixed bottom-10 end-10 bg-green-600 hover:bg-green-300 ">
+            <Button
+              className="fixed bottom-10 end-10 bg-green-600 hover:bg-green-300 "
+              onClick={() => {
+                router.push("/help");
+              }}
+            >
               <QuestionMarkIcon className="h-7 w-7" />
             </Button>
           </div>
