@@ -11,16 +11,8 @@ import { db } from "../../firebase/config";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 import { stripe } from "@/app/lib/stripe";
-import { NextApiResponse } from "next";
 const endpointSecret = "whsec_Ve8S1lEtc8UnL6LRxa8dCVKz5BZmZP6Q";
-export async function POST(req: NextRequest, res: NextApiResponse) {
-  res.setHeader(
-    "Cache-Control",
-    "no-store, no-cache, must-revalidate, proxy-revalidate"
-  );
-  res.setHeader("Pragma", "no-cache");
-  res.setHeader("Expires", "0");
-  res.setHeader("Surrogate-Control", "no-store");
+export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = headers().get("stripe-signature") as string;
 
