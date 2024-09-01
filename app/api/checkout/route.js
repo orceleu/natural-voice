@@ -1,5 +1,4 @@
 //import { stripe } from "@/app/lib/stripe";
-import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 

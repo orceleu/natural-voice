@@ -457,6 +457,7 @@ export default function Dashboard() {
         alert(error);
       });
   };
+
   useEffect(() => {
     if (userId !== "") {
       listAllFile();
@@ -564,7 +565,29 @@ export default function Dashboard() {
       //alert("click from client");
     }
   };
-
+  const cancelSubscription = async () => {
+    await axios
+      .post("/api/cancelsub", {
+        subscriptionId: subscriptionId.current,
+      })
+      .then((res) => {
+        const { data } = res.data;
+        console.log(data);
+        toast({
+          variant: "default",
+          title: "update",
+          description: `${data}`,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `${error}`,
+        });
+      });
+  };
   const handleActiveButton = () => {
     if (textvalue.length < 5) {
       activeButtonSubmit(true);
@@ -757,10 +780,12 @@ export default function Dashboard() {
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">My...</Button>
+              <Button variant="outline">
+                {userName ? <p>{userName}</p> : <p>My...</p>}
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{userEmail}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem>
@@ -775,8 +800,12 @@ export default function Dashboard() {
                   Billing
                   <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Settings
+                <DropdownMenuItem
+                  onClick={() => {
+                    cancelSubscription();
+                  }}
+                >
+                  Cancel subscription
                   <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
@@ -791,7 +820,6 @@ export default function Dashboard() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <p>{userName}</p>
         </div>
       );
     }
@@ -1354,10 +1382,13 @@ export default function Dashboard() {
               <div className="ml-auto mr-10 ">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline">My...</Button>
+                    <Button variant="outline">
+                      {" "}
+                      {userName ? <p>{userName}</p> : <p>My...</p>}
+                    </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuLabel>{userEmail}</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuItem>
@@ -1372,8 +1403,12 @@ export default function Dashboard() {
                         Billing
                         <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        Settings
+                      <DropdownMenuItem
+                        onClick={() => {
+                          cancelSubscription();
+                        }}
+                      >
+                        Cancel subscription
                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
@@ -1388,7 +1423,6 @@ export default function Dashboard() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <p>{userName}</p>
               </div>
             </div>
 
