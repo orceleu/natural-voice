@@ -11,7 +11,7 @@ fal.config({
   credentials:
     "3acaf80b-c509-4c6d-a9a3-53201a9b9822:2779e88cfa33dbafceb17400f21c6b6d",
 });
-export default function page() {
+export default function SoundEffect() {
   const router = useRouter();
   const [texte, setText] = useState("");
   const [loading, setLoading] = useState(false);
