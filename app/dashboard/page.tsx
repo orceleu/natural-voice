@@ -2,7 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
-import { AudioWaveformIcon, SendIcon, SettingsIcon } from "lucide-react";
+import {
+  ArrowBigRight,
+  AudioWaveformIcon,
+  SendIcon,
+  SettingsIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AudioPlayer from "../componentCustom/AudioPlayer";
 import { Player } from "react-simple-player";
@@ -708,6 +713,13 @@ export default function Dashboard() {
             </div>
             <br />
             <div className="grid w-full gap-1.5">
+              <Button
+                onClick={() => router.push("/sound-effect")}
+                variant="outline"
+              >
+                Go to sound effect generator:
+                <ArrowBigRight />
+              </Button>
               <Textarea
                 placeholder="Type your message here."
                 onChange={(e) => {
@@ -1435,6 +1447,13 @@ export default function Dashboard() {
               </div>
               <br />
               <div className="grid w-full gap-1.5">
+                <Button
+                  onClick={() => router.push("/sound-effect")}
+                  variant="outline"
+                >
+                  Go to sound effect generator:
+                  <ArrowBigRight />
+                </Button>
                 <Textarea
                   placeholder="Type your message here."
                   onChange={(e) => {

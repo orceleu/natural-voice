@@ -389,7 +389,9 @@ export default function Home() {
               <ul className="text-lg font-serif  text-center mb-4">
                 <li>New content creators, students</li>
                 <li>40,000 char/Month</li>
-                <li> 5 custom voice</li>
+                <li> Text to sound generator</li>
+                <li>Voice Cloning</li>
+
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
@@ -415,7 +417,9 @@ export default function Home() {
               <ul className="text-lg font-serif  text-center mb-4">
                 <li>Content creators, freelancers</li>
                 <li>100,000 char/Month</li>
-                <li> 15 custom voice</li>
+                <li> Text to sound generator</li>
+                <li>Voice Cloning</li>
+
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
@@ -437,7 +441,9 @@ export default function Home() {
               <ul className="text-lg font-serif  text-center mb-4">
                 <li>Corporations, public entities, agencies, MCNs</li>
                 <li>250,000 char/Month</li>
-                <li> 30 custom voice</li>
+                <li> Text to sound generator</li>
+                <li>Voice Cloning</li>
+
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
