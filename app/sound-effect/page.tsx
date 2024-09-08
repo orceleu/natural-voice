@@ -21,12 +21,24 @@ import firework from "../../public/firework.jpeg";
 import helicopter from "../../public/helicopter.jpg";
 import keyboard from "../../public/keyboard.jpg";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  QuestionMarkCircledIcon,
+  QuestionMarkIcon,
+} from "@radix-ui/react-icons";
 fal.config({
   credentials:
     "3acaf80b-c509-4c6d-a9a3-53201a9b9822:2779e88cfa33dbafceb17400f21c6b6d",
@@ -34,6 +46,10 @@ fal.config({
 export default function SoundEffect() {
   const router = useRouter();
   const [texte, setText] = useState("");
+  const [step, setStep] = useState("100");
+  const [totalSec, setTotalSec] = useState("20");
+  const [secStart, setSecStart] = useState("1");
+
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const creatsoundinclient = async () => {
@@ -41,9 +57,9 @@ export default function SoundEffect() {
       const result: any = await fal.subscribe("fal-ai/stable-audio", {
         input: {
           prompt: texte,
-          seconds_total: 30,
-          steps: 100,
-          seconds_start: 1,
+          seconds_total: Number(totalSec),
+          steps: Number(step),
+          seconds_start: Number(secStart),
         },
         logs: true,
         onQueueUpdate: (update) => {
@@ -55,9 +71,19 @@ export default function SoundEffect() {
       if (result) {
         setLoading(false);
         router.push(result.audio_file.url as string);
+        toast({
+          variant: "default",
+          title: "Process finished.",
+          description: "Audio downloading... ",
+        });
       }
     } catch (error) {
       setLoading(false);
+      toast({
+        variant: "destructive",
+        title: "Error.",
+        description: `${error}`,
+      });
     }
 
     //console.log(result.audio_file.url as string);
@@ -91,7 +117,7 @@ export default function SoundEffect() {
         <br />
         <br />
         <div className="flex justify-center">
-          <div className="p-3 rounded-md shadow-md max-w-[900px]">
+          <div className="p-3 rounded-[20px] shadow-md max-w-[900px]">
             <p className="text-2xl font-semibold m-5 text-center">Sample.</p>
             <p className="text-gray-400 text-center">
               describe any sound your want and get it in few second.
@@ -155,11 +181,77 @@ export default function SoundEffect() {
                   <div className="m-4">
                     <p className="my-2 "> More parameter.</p>
 
-                    <Input placeholder="Step" />
-                    <br />
-                    <Input placeholder="total second" />
-                    <br />
-                    <Input placeholder="second start" />
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                      <Label htmlFor="step">
+                        Step.
+                        <span>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <QuestionMarkCircledIcon />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>
+                                  The number of steps to denoise the audio for
+                                  Default value: 100
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </span>
+                      </Label>
+                      <Input
+                        placeholder="Step"
+                        value={step}
+                        onChange={(e) => setStep(e.target.value)}
+                      />
+
+                      <Label htmlFor="total sec">
+                        Total second.
+                        <span>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <QuestionMarkCircledIcon />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>
+                                  The duration of the audio clip to generate
+                                  Default value: 20
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </span>
+                      </Label>
+                      <Input
+                        placeholder="total second"
+                        value={totalSec}
+                        onChange={(e) => setTotalSec(e.target.value)}
+                      />
+                      <Label htmlFor="second start">
+                        Second start.
+                        <span>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <QuestionMarkCircledIcon />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>
+                                  The start point of the audio clip to generate
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </span>
+                      </Label>
+                      <Input
+                        placeholder="second start"
+                        value={secStart}
+                        onChange={(e) => setSecStart(e.target.value)}
+                      />
+                    </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>

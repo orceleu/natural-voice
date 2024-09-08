@@ -95,7 +95,7 @@ export default function Home() {
     },
     {
       id: "6",
-      title: "24khz HD voice",
+      title: "48khz HD voice",
       desc: "Hd Voice.",
       img: img3,
     },
@@ -313,7 +313,7 @@ export default function Home() {
 
         <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:mx-[100px] ">
           {textCard.map((txt) => (
-            <Card key={txt.id} className="bg-gray-100 hover:bg-transparent">
+            <Card key={txt.id}>
               <CardHeader>
                 <div className="flex justify-center">
                   <Image
