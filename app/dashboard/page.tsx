@@ -706,11 +706,7 @@ export default function Dashboard() {
           </div>
           <div className=" grid w-full   ">
             <br />
-            <div className="flex justify-center">
-              <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
-                Paste your text and get your voice
-              </p>
-            </div>
+
             <br />
             <div className="grid w-full gap-1.5">
               <Button
@@ -1440,11 +1436,7 @@ export default function Dashboard() {
 
             <div className=" grid w-full   ">
               <br />
-              <div className="flex justify-center">
-                <p className="text-3xl text-center mx-7 mb-7 text-emerald-700 hover:text-emerald-800 font-semibold ">
-                  Paste your text and get your voice
-                </p>
-              </div>
+
               <br />
               <div className="grid w-full gap-1.5">
                 <Button
