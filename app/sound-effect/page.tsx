@@ -117,12 +117,18 @@ export default function SoundEffect() {
         <br />
         <br />
         <div className="flex justify-center">
-          <div className="p-3 rounded-[20px] shadow-md max-w-[900px]">
-            <p className="text-2xl font-semibold m-5 text-center">Sample.</p>
-            <p className="text-gray-400 text-center">
+          <div className="p-3 rounded-md  max-w-[900px]">
+            <p className="text-2xl font-semibold m-5 text-center">
+              Sound effect generator.
+            </p>
+            <p className="text-gray-400 text-center font-serif">
               describe any sound your want and get it in few second.
             </p>
-            <div className="flex justify-center m-5 md:m-10 mb-[50px]">
+            <p className="mt-20 underline font-mono mx-10 text-gray-400">
+              SAMPLE
+            </p>
+
+            <div className="flex justify-center mx-5 md:mx-10 mb-[50px]">
               <ScrollArea className="w-full max-w-[700px] whitespace-nowrap rounded-md border">
                 <div className="flex justify-center m-5 md:m-10">
                   <div className="flex items-center gap-2 ">
@@ -155,6 +161,24 @@ export default function SoundEffect() {
                       src={keyboard}
                       alt=""
                     />
+                    <Image
+                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
+                      onClick={() => setText("Keyboard typing sound effect")}
+                      src={keyboard}
+                      alt=""
+                    />
+                    <Image
+                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
+                      onClick={() => setText("Keyboard typing sound effect")}
+                      src={keyboard}
+                      alt=""
+                    />
+                    <Image
+                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
+                      onClick={() => setText("Keyboard typing sound effect")}
+                      src={keyboard}
+                      alt=""
+                    />
                   </div>
                 </div>
                 <ScrollBar orientation="horizontal" />
@@ -171,24 +195,26 @@ export default function SoundEffect() {
             </div>
 
             <br />
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible className="m-10">
               <AccordionItem value="item-1">
                 <AccordionTrigger>
                   <p className="font-semibold">Additional Settings </p>
                   <Settings />
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="m-4">
-                    <p className="my-2 "> More parameter.</p>
-
+                  <div className=" flex justify-center m-4 ">
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                       <Label htmlFor="step">
-                        Step.
+                        Step:
+                        <span className="text-sm text-gray-400">
+                          ( The number of steps to denoise the audio for Default
+                          value: 100)
+                        </span>
                         <span>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
-                                <QuestionMarkCircledIcon />
+                                <QuestionMarkCircledIcon className="w-4 h-4" />
                               </TooltipTrigger>
                               <TooltipContent>
                                 <p>
@@ -207,12 +233,16 @@ export default function SoundEffect() {
                       />
 
                       <Label htmlFor="total sec">
-                        Total second.
+                        Total second:
+                        <span className="text-sm text-gray-400">
+                          (The duration of the audio clip to generate Default
+                          value: 20)
+                        </span>
                         <span>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
-                                <QuestionMarkCircledIcon />
+                                <QuestionMarkCircledIcon className="h-4 w-4" />
                               </TooltipTrigger>
                               <TooltipContent>
                                 <p>
@@ -230,12 +260,15 @@ export default function SoundEffect() {
                         onChange={(e) => setTotalSec(e.target.value)}
                       />
                       <Label htmlFor="second start">
-                        Second start.
+                        Second start:
+                        <span className="text-sm text-gray-400">
+                          (The start point of the audio clip to generate)
+                        </span>
                         <span>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
-                                <QuestionMarkCircledIcon />
+                                <QuestionMarkCircledIcon className="w-4 h-4" />
                               </TooltipTrigger>
                               <TooltipContent>
                                 <p>
