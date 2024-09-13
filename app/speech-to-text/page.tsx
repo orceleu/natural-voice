@@ -1,14 +1,14 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import React, { useEffect, useRef, useState } from "react";
+
 import {
   ArrowBigLeft,
+  AudioWaveformIcon,
   DeleteIcon,
   LoaderIcon,
   Settings,
   TrashIcon,
 } from "lucide-react";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import * as fal from "@fal-ai/serverless-client";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -20,6 +20,8 @@ import dog from "../../public/dogbarking.jpg";
 import firework from "../../public/firework.jpeg";
 import helicopter from "../../public/helicopter.jpg";
 import keyboard from "../../public/keyboard.jpg";
+import { signOut, onAuthStateChanged, User } from "firebase/auth";
+
 import {
   Tooltip,
   TooltipContent,
@@ -38,21 +40,186 @@ import { Label } from "@/components/ui/label";
 import {
   QuestionMarkCircledIcon,
   QuestionMarkIcon,
+  ReloadIcon,
 } from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { auth, storage } from "../firebase/config";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  listAll,
+  deleteObject,
+} from "firebase/storage";
+
+interface Item {
+  name: string;
+  path: string;
+  url: string;
+}
 fal.config({
   credentials:
     "3acaf80b-c509-4c6d-a9a3-53201a9b9822:2779e88cfa33dbafceb17400f21c6b6d",
 });
-export default function SoundEffect() {
+export default function SpeeToText() {
   const router = useRouter();
   const [texte, setText] = useState("");
   const [step, setStep] = useState("100");
   const [totalSec, setTotalSec] = useState("20");
   const [secStart, setSecStart] = useState("1");
+  const [stringList, setStringList] = useState<Item[]>([]);
+  const [uploadIsLoaded, setUploadLoaded] = useState(false);
+  const [userId, setUserid] = useState("");
+
+  const [user, setUser] = useState<User | null>(null);
 
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  const creatsoundinclient = async () => {
+
+  const audioUrl = useRef("");
+
+  const deleteFile = async (audioPath: string) => {
+    const storageRef2 = await ref(storage, audioPath);
+    deleteObject(storageRef2)
+      .then(() => {
+        //setChange(!changed);
+        const copyfuits = [...stringList];
+        const updateFuits = copyfuits.filter(
+          (fuits) => fuits.path !== audioPath
+        );
+        //setStringList(updateFuits);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  useEffect(() => {
+    if (user?.uid) {
+      deleteFile(`users/${user?.uid}/speechToText/audio`);
+    } else {
+      console.log("uid not found ");
+    }
+  }, [user]);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const file = e.target[0]?.files[0];
+
+    if (!file) {
+      toast({
+        variant: "destructive",
+        title: "No file found.",
+      });
+    } else {
+      if (file && file.type.startsWith("audio/")) {
+        //console.log("est un fichier audio");
+        //console.log(`${file.size / 1024} KB`);
+        if (file.size > 2000000) {
+          toast({
+            variant: "destructive",
+            title: "audio size too large (> 2MB).",
+          });
+        } else {
+          // setUploadLoaded(true);
+          const storageRef = ref(
+            storage,
+            `users/${user?.uid}/speechToText/audio`
+          );
+          const uploadTask = uploadBytesResumable(storageRef, file);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              // setProgresspercent(progress);
+              // if (progresspercent == 100) {
+              //  setChange(!changed);
+              //console.log("upload finished");
+              //}
+            },
+            (error) => {
+              alert(error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                //setAudioUrl(downloadURL);
+                console.log(downloadURL);
+                audioUrl.current = downloadURL;
+              });
+            }
+          );
+        }
+      } else {
+        //console.log("nest pas");
+        toast({
+          variant: "destructive",
+          title: "Only audio file can be uploaded.",
+        });
+      }
+    }
+  };
+
+  const submitSpeech = async () => {
+    try {
+      const result: any = await fal.subscribe("fal-ai/whisper", {
+        input: {
+          audio_url: audioUrl.current,
+          task: "transcribe",
+          chunk_level: "segment",
+          version: "3",
+          batch_size: 64,
+          num_speakers: null,
+        },
+        logs: true,
+        onQueueUpdate: (update) => {
+          if (update.status === "IN_PROGRESS") {
+            update.logs.map((log) => log.message).forEach(console.log);
+          }
+        },
+      });
+
+      if (result) {
+        setLoading(false);
+        setText(result.text as string);
+        console.log(result.text);
+
+        toast({
+          variant: "default",
+          title: "Note.",
+          description: "Process finished... ",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        const name = currentUser?.displayName;
+        const userEmail = currentUser?.email;
+        const uiid = currentUser?.uid;
+        // setUserEmail(userEmail);
+        setUserid(uiid);
+        console.log(currentUser?.displayName);
+        if (name !== undefined && name !== null) {
+          //setUserName(name);
+        } else {
+        }
+      }
+      if (currentUser == null) {
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
+  }, [user]);
+  /* const creatsoundinclient = async () => {
     try {
       const result: any = await fal.subscribe("fal-ai/stable-audio", {
         input: {
@@ -70,7 +237,7 @@ export default function SoundEffect() {
       });
       if (result) {
         setLoading(false);
-        router.push(result.audio_file.url as string);
+        //route.push(result.audio_file.url as string);
         toast({
           variant: "default",
           title: "Process finished.",
@@ -88,19 +255,7 @@ export default function SoundEffect() {
 
     //console.log(result.audio_file.url as string);
   };
-  const generateSoundEffect = async () => {
-    await axios
-      .post("/api/soundeffect", { text: texte })
-      .then((res) => {
-        const { url } = res.data;
-        console.log(url.audio_file.url);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
-  };
+*/
   return (
     <>
       <Button
@@ -119,86 +274,43 @@ export default function SoundEffect() {
         <div className="flex justify-center">
           <div className="p-3 rounded-md  max-w-[900px]">
             <p className="text-2xl font-semibold m-5 text-center">
-              Sound effect generator.
+              Speech to text converter.
             </p>
             <p className="text-gray-400 text-center font-serif">
-              describe any sound your want and get it in few second.
+              Upload your audio and get the text in a few second.
             </p>
-            <p className="mt-20 underline font-mono mx-10 text-gray-400">
-              SAMPLE
-            </p>
-
-            <div className="flex justify-center mx-5 md:mx-10 mb-[50px]">
-              <ScrollArea className="w-full max-w-[700px] whitespace-nowrap rounded-md border">
-                <div className="flex justify-center m-5 md:m-10">
-                  <div className="flex items-center gap-2 ">
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("helicopter sound flying")}
-                      src={helicopter}
-                      alt=""
-                    />
-
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("a dog barking")}
-                      src={dog}
-                      alt=""
-                    />
-
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() =>
-                        setText("Fireworks exploding in the night sky")
-                      }
-                      src={firework}
-                      alt=""
-                    />
-
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("Keyboard typing sound effect")}
-                      src={keyboard}
-                      alt=""
-                    />
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("Keyboard typing sound effect")}
-                      src={keyboard}
-                      alt=""
-                    />
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("Keyboard typing sound effect")}
-                      src={keyboard}
-                      alt=""
-                    />
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("Keyboard typing sound effect")}
-                      src={keyboard}
-                      alt=""
-                    />
-                    <Image
-                      className="size-[100px] rounded-md  hover:bg-slate-300 p-1"
-                      onClick={() => setText("smashing glasses sound")}
-                      src={keyboard}
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </div>
 
             <div className="flex justify-center">
-              <Textarea
-                placeholder="Type your message here.(english only)"
-                className="h-[100px] md:h-[200px] max-w-[700px]"
-                onChange={(e) => setText(e.target.value)}
-                value={texte}
-              />
+              <form onSubmit={handleSubmit}>
+                <div className="grid w-[320px] items-center gap-1.5">
+                  <Label htmlFor="picture">
+                    Upload your voice(mp3,wav)
+                    <AudioWaveformIcon />
+                  </Label>
+                  <Input id="picture" type="file" />
+                </div>
+                <Button
+                  type="submit"
+                  className="my-2"
+                  disabled={uploadIsLoaded}
+                >
+                  {uploadIsLoaded ? (
+                    <ReloadIcon className=" h-5 w-5 animate-spin" />
+                  ) : (
+                    "Upload"
+                  )}
+                </Button>
+              </form>
             </div>
+
+            <Textarea
+              placeholder="result"
+              className="m-3"
+              value={texte}
+              onChange={(e) => {
+                setText(e.target.value);
+              }}
+            />
 
             <br />
             <Accordion type="single" collapsible className="m-10">
@@ -299,25 +411,16 @@ export default function SoundEffect() {
               <div className="flex items-center gap-5 mt-10">
                 <Button
                   onClick={() => {
-                    if (texte !== "") {
-                      //generateSoundEffect();
-                      creatsoundinclient();
-                      setLoading(true);
-                    } else {
-                      console.log("empty texte");
-                      toast({
-                        variant: "destructive",
-                        title: "Text error.",
-                        description: "Empty text",
-                      });
-                    }
+                    //generateSoundEffect();
+                    submitSpeech();
+                    setLoading(true);
                   }}
                   disabled={loading}
                 >
                   {loading ? (
                     <LoaderIcon className="h-5 w-5 animate-spin" />
                   ) : (
-                    <p>Generate</p>
+                    <p>Convert</p>
                   )}
                 </Button>
                 <Button onClick={() => setText("")} variant="destructive">

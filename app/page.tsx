@@ -158,13 +158,13 @@ export default function Home() {
             <p className="text-center font-bold  text-lg md:text-3xl  md:my-5 xl:text-5xl xl:my-10">
               GENERATE REALISTIC VOICE WITH OUR MODEL.
             </p>
-            <p className="text-center font-serif text-gray-600 ">
-              (trained for narration and spot.)
-            </p>
+
             <div className="mx-5">
               <p className=" font-serif  mx-auto max-w-lg text-center  text-md md:text-xl lg:text-xl xl:text-2xl mt-5  bg-clip-text text-gray-600">
                 You can choose from over 12 languages and 50 voices to convert
-                your texts into speech and get your audio file
+                your texts into speech and get your audio file,with other
+                function like speech to text,text to sound effect generator
+                etc...
               </p>
             </div>
 
@@ -211,7 +211,7 @@ export default function Home() {
       </div>
 
       <div className="animate-slidein grid mx-2 md:mx-[100px] mt-[100px]">
-        <div className="flex justify-between w-full h-[300px] md:h-[400px] rounded-br-[200px] rounded-bl-lg rounded-tl-lg rounded-tr-lg bg-yellow-100 my-10">
+        <div className="flex justify-between w-full h-[400px] md:h-[400px] rounded-br-[200px] rounded-bl-lg rounded-tl-lg rounded-tr-lg bg-yellow-100 my-10">
           <div className="flex flex-col gap-1 items-center ">
             <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
               Text to speech for :
@@ -242,6 +242,12 @@ export default function Home() {
               <CheckCircle className="text-yellow-500" />
               <p className="text-gray-500 font-serif text-center md:2xl  ">
                 Educator.🎓
+              </p>
+            </div>
+            <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
+              <CheckCircle className="text-yellow-500" />
+              <p className="text-gray-500 font-serif text-center md:2xl  ">
+                Podcasters
               </p>
             </div>
           </div>
@@ -383,13 +389,13 @@ export default function Home() {
                 Basic
               </p>
               <p className=" font-thin text-md text-center text-fuchsia-700 mt-1">
-                8$/month
+                14$/month
               </p>
               <Separator className="my-4" />
               <ul className="text-lg font-serif  text-center mb-4">
                 <li>New content creators, students</li>
                 <li>40,000 char/Month</li>
-                <li> Text to sound generator</li>
+                <li> Text to sound effect generator</li>
                 <li>Voice Cloning</li>
 
                 <li>commercial use</li>
@@ -417,9 +423,9 @@ export default function Home() {
               <ul className="text-lg font-serif  text-center mb-4">
                 <li>Content creators, freelancers</li>
                 <li>100,000 char/Month</li>
-                <li> Text to sound generator</li>
+                <li> Text to sound effect generator</li>
                 <li>Voice Cloning</li>
-
+                <li>Speech to text converter</li>
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
@@ -441,10 +447,10 @@ export default function Home() {
               <ul className="text-lg font-serif  text-center mb-4">
                 <li>Corporations, public entities, agencies, MCNs</li>
                 <li>250,000 char/Month</li>
-                <li> Text to sound generator</li>
+                <li> Text to sound effect generator</li>
                 <li>Voice Cloning</li>
-
-                <li>commercial use</li>
+                <li>Speech to text converter</li>
+                <li>Commercial use</li>
               </ul>
               <div className="flex justify-center">
                 <Button asChild className="bg-emerald-600">

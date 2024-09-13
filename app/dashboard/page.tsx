@@ -268,8 +268,8 @@ export default function Dashboard() {
   const [openIndrawer, setOpenIndrawer] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [openVoice, setOpenVoice] = React.useState(false);
-  const [languagevalue, setLanguageValue] = React.useState("fr");
-  const [voicevalue, setvoiceValue] = React.useState("fr");
+  const [languagevalue, setLanguageValue] = React.useState("en");
+  const [voicevalue, setvoiceValue] = React.useState("en");
 
   const [text, setText] = useState("");
   const [textvalue, settextValues] = useState("");
@@ -377,7 +377,7 @@ export default function Dashboard() {
       if (file && file.type.startsWith("audio/")) {
         //console.log("est un fichier audio");
         //console.log(`${file.size / 1024} KB`);
-        if (file.size > 1000000) {
+        if (file.size > 2000000) {
           toast({
             variant: "destructive",
             title: "audio size too large (> 1MB).",
@@ -716,6 +716,14 @@ export default function Dashboard() {
                 Go to sound effect generator:
                 <ArrowBigRight />
               </Button>
+
+              <Button
+                onClick={() => router.push("/speech-to-text")}
+                variant="outline"
+              >
+                Go to speech to text converter:
+                <ArrowBigRight />
+              </Button>
               <Textarea
                 placeholder="Type your message here."
                 onChange={(e) => {
@@ -974,6 +982,12 @@ export default function Dashboard() {
 
               <Progress value={progresspercent} className="w-[60%]" />
 
+              <p className="text-sm text-emerald-800 my-3 ">
+                (To achieve perfect cloned voices,ensure clear articulation
+                while reading the provided text and record your voice in a
+                noice-free environment.)
+              </p>
+
               <div className="mx-5">
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1">
@@ -1088,10 +1102,12 @@ export default function Dashboard() {
         {/* Partie gauche */}
         <div className=" max-w-[400px] bg-white ">
           {/* Contenu de la partie gauche */}
-          <p className="font-bold text-center mt-5"> Setting</p>
+          <div className="bg-white p-2 shadow-sm">
+            <p className="font-bold text-center mt-5"> Setting</p>
+          </div>
           <br />
 
-          <ScrollArea className="h-[600px]">
+          <ScrollArea className="h-[500px]">
             <ScrollBar className="bg-white rounded-sm" />
             <div className="grid w-full mx-2">
               <div className="flex items-center space-x-2 mb-5">
@@ -1222,7 +1238,19 @@ export default function Dashboard() {
                   )}
                 </Button>
               </form>
-
+              <p className="text-sm text-emerald-800 my-3 ">
+                (To achieve perfect cloned voices,ensure clear articulation
+                while reading the provided text and record your voice in a
+                noice-free environment.)
+              </p>
+              <p
+                className="my-2 text-sm font-mono underline text-emerald-600"
+                onClick={() => {
+                  alert("text to read");
+                }}
+              >
+                Generate text
+              </p>
               <Progress value={progresspercent} className="w-[60%]" />
 
               <div className="mx-5">
@@ -1236,7 +1264,7 @@ export default function Dashboard() {
                       <div>
                         {stringList.map((item, index) => (
                           <div
-                            className="bg-gray-50 rounded-xl grid w-[320px] my-1"
+                            className="bg-gray-50 rounded-xl grid w-[300px] my-1"
                             key={index}
                           >
                             <div className="mx-auto">
@@ -1444,6 +1472,14 @@ export default function Dashboard() {
                   variant="outline"
                 >
                   Go to sound effect generator:
+                  <ArrowBigRight />
+                </Button>
+
+                <Button
+                  onClick={() => router.push("/speech-to-text")}
+                  variant="outline"
+                >
+                  Go to speech to text converter:
                   <ArrowBigRight />
                 </Button>
                 <Textarea
