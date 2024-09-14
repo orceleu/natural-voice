@@ -777,6 +777,7 @@ export default function Dashboard() {
                     </p>
                   </div>
                 ) : null}
+
                 <br />
                 <AudioPlayer audioUrl={text} />
                 <br />
@@ -962,8 +963,10 @@ export default function Dashboard() {
               <form onSubmit={handleSubmit}>
                 <div className="grid w-[320px] items-center gap-1.5">
                   <Label htmlFor="picture">
-                    Upload your voice(mp3,wav)
-                    <AudioWaveformIcon />
+                    <div className="flex items-center gap-3">
+                      <p>Upload your voice(mp3,wav)</p>
+                      <AudioWaveformIcon />
+                    </div>
                   </Label>
                   <Input id="picture" type="file" />
                 </div>
@@ -980,7 +983,13 @@ export default function Dashboard() {
                 </Button>
               </form>
 
-              <Progress value={progresspercent} className="w-[60%]" />
+              <div>
+                {uploadIsLoaded ? (
+                  <Progress value={progresspercent} className="w-[60%]" />
+                ) : (
+                  <p>-</p>
+                )}
+              </div>
 
               <p className="text-sm text-emerald-800 my-3 ">
                 (To achieve perfect cloned voices,ensure clear articulation
@@ -1221,8 +1230,10 @@ export default function Dashboard() {
               <form onSubmit={handleSubmit}>
                 <div className="grid w-[320px] items-center gap-1.5">
                   <Label htmlFor="picture">
-                    Upload your voice(mp3,wav)
-                    <AudioWaveformIcon />
+                    <div className="flex items-center gap-3">
+                      <p>Upload your voice(mp3,wav)</p>
+                      <AudioWaveformIcon />
+                    </div>
                   </Label>
                   <Input id="picture" type="file" />
                 </div>
@@ -1238,6 +1249,13 @@ export default function Dashboard() {
                   )}
                 </Button>
               </form>
+              <div>
+                {uploadIsLoaded ? (
+                  <Progress value={progresspercent} className="w-[60%]" />
+                ) : (
+                  <p>-</p>
+                )}
+              </div>
               <p className="text-sm text-emerald-800 my-3 ">
                 (To achieve perfect cloned voices,ensure clear articulation
                 while reading the provided text and record your voice in a
@@ -1251,7 +1269,6 @@ export default function Dashboard() {
               >
                 Generate text
               </p>
-              <Progress value={progresspercent} className="w-[60%]" />
 
               <div className="mx-5">
                 <Accordion type="single" collapsible>

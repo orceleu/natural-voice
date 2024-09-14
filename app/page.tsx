@@ -301,7 +301,39 @@ export default function Home() {
       <div className="flex justify-center mx-10 ">
         <Separator />
       </div>
+      <p className="text-center font-semibold text-4xl my-5">
+        All in one platform.{" "}
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-10 mx-4">
+        <div className="flex justify-center p-4 rounded-md bg-slate-100">
+          <p className="md:text-xl text-emerald-600 underline font-mono">
+            Text to speech
+          </p>
+        </div>
+        <div className="flex justify-center p-4 rounded-md bg-yellow-100">
+          <p className="md:text-xl text-emerald-600 underline font-mono">
+            Voice cloning
+          </p>
+        </div>
 
+        <div className="flex justify-center p-4 rounded-md bg-amber-100">
+          <p className="md:text-xl text-emerald-600 underline font-mono">
+            Speech to text{" "}
+          </p>
+        </div>
+
+        <div className="flex justify-center p-4 rounded-md bg-red-100">
+          <p className="md:text-xl  text-emerald-600 underline font-mono">
+            Speech to text translation
+          </p>
+        </div>
+
+        <div className="flex justify-center p-4 rounded-md bg-lime-100">
+          <p className="md:text-xl  text-emerald-600 underline font-mono">
+            Sound effect generator
+          </p>
+        </div>
+      </div>
       <div className="flex justify-center mt-11 md:mt-[100px] ">
         <button className="w-[200px] h-[50px] shadow-emerald-100  bg-emerald-600 shadow-lg underline rounded-sm hover:bg-emerald-500 text-white font-bold">
           <Link href="/dashboard"> Get started</Link>
@@ -397,7 +429,7 @@ export default function Home() {
                 <li>40,000 char/Month</li>
                 <li> Text to sound effect generator</li>
                 <li>Voice Cloning</li>
-
+                <li>Translation</li>
                 <li>commercial use</li>
               </ul>
               <div className="flex justify-center">
@@ -425,6 +457,7 @@ export default function Home() {
                 <li>100,000 char/Month</li>
                 <li> Text to sound effect generator</li>
                 <li>Voice Cloning</li>
+                <li>Translation</li>
                 <li>Speech to text converter</li>
                 <li>commercial use</li>
               </ul>
@@ -449,6 +482,7 @@ export default function Home() {
                 <li>250,000 char/Month</li>
                 <li> Text to sound effect generator</li>
                 <li>Voice Cloning</li>
+                <li>Translation</li>
                 <li>Speech to text converter</li>
                 <li>Commercial use</li>
               </ul>
