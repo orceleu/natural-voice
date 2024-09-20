@@ -17,6 +17,12 @@ interface Props {
   polish: StaticImageData;
   arabic: StaticImageData;
 }
+/*
+ <div className="mx-auto mb-auto mt-1">
+              <Player src={item.audio} height={40} hideVolume />
+            </div>
+
+*/
 const SampleLanguage: React.FC<Props> = ({
   french,
   english,
@@ -94,22 +100,20 @@ const SampleLanguage: React.FC<Props> = ({
       audio: "audio",
     },
   ];
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {sampleLanguage.map((item, index) => (
-          <div className="bg-gray-50 rounded-sm grid" key={index}>
+          <div className="bg-slate-700 rounded-sm grid p-10" key={index}>
             <Image
               src={item.flag}
               alt=""
               className="w-[60px] h-[60px] rounded-[60px] mx-auto my-2 "
             />
-            <h3 className="text-sm font-serif  my-auto mx-auto">
+            <h3 className="text-sm font-serif text-white  my-auto mx-auto">
               <p>{item.name}</p>
             </h3>
-            <div className="mx-auto mb-auto mt-1">
-              <Player src={item.audio} height={40} hideVolume />
-            </div>
           </div>
         ))}
       </div>

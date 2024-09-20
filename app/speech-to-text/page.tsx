@@ -368,43 +368,7 @@ export default function SpeeToText() {
     });
     return () => unsubscribe();
   }, [user]);
-  /* const creatsoundinclient = async () => {
-    try {
-      const result: any = await fal.subscribe("fal-ai/stable-audio", {
-        input: {
-          prompt: texte,
-          seconds_total: Number(totalSec),
-          steps: Number(step),
-          seconds_start: Number(secStart),
-        },
-        logs: true,
-        onQueueUpdate: (update) => {
-          if (update.status === "IN_PROGRESS") {
-            update.logs.map((log) => log.message).forEach(console.log);
-          }
-        },
-      });
-      if (result) {
-        setLoading(false);
-        //route.push(result.audio_file.url as string);
-        toast({
-          variant: "default",
-          title: "Process finished.",
-          description: "Audio downloading... ",
-        });
-      }
-    } catch (error) {
-      setLoading(false);
-      toast({
-        variant: "destructive",
-        title: "Error.",
-        description: `${error}`,
-      });
-    }
 
-    //console.log(result.audio_file.url as string);
-  };
-*/
   return (
     <>
       <Button
@@ -422,7 +386,7 @@ export default function SpeeToText() {
         <br />
         <div className="flex justify-center">
           <div className="p-3 rounded-md w-full max-w-[900px]">
-            <p className="text-2xl font-semibold m-5 text-center">
+            <p className="text-2xl md:text-4xl  font-semibold m-5 md:m-10 text-center">
               Speech to text converter.
             </p>
             <p className="text-gray-400 text-center font-serif my-5">

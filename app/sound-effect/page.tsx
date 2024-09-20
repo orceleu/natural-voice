@@ -118,7 +118,7 @@ export default function SoundEffect() {
         <br />
         <div className="flex justify-center">
           <div className="p-3 rounded-md  max-w-[900px]">
-            <p className="text-2xl font-semibold m-5 text-center">
+            <p className="text-2xl md:text-4xl font-semibold m-5 md:m-10 text-center">
               Sound effect generator.
             </p>
             <p className="text-gray-400 text-center font-serif">

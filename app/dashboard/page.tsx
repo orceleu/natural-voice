@@ -265,11 +265,11 @@ export default function Dashboard() {
   const clean_voice = useRef(true);
   const { toast } = useToast();
   const router = useRouter();
-  const [openIndrawer, setOpenIndrawer] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [openVoice, setOpenVoice] = React.useState(false);
-  const [languagevalue, setLanguageValue] = React.useState("en");
-  const [voicevalue, setvoiceValue] = React.useState("en");
+  const [openIndrawer, setOpenIndrawer] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [openVoice, setOpenVoice] = useState(false);
+  const [languagevalue, setLanguageValue] = useState("en");
+  const [voicevalue, setvoiceValue] = useState("en");
 
   const [text, setText] = useState("");
   const [textvalue, settextValues] = useState("");

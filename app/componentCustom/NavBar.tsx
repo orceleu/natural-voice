@@ -14,7 +14,7 @@ export default function NavBar() {
     setIsOpen(!isOpen);
   };
   return (
-    <header className="bg-white  p-4 fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <header className="bg-white  p-4 fixed top-0 left-0 right-0 z-50 shadow-md">
       <nav className="container px-1 md:px-6 mx-auto flex items-center justify-between">
         <div className="flex items-center ">
           <a href="/" className="font-bold text-lg">

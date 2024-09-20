@@ -211,42 +211,42 @@ export default function Home() {
       </div>
 
       <div className="animate-slidein grid mx-2 md:mx-[100px] mt-[100px]">
-        <div className="flex justify-between w-full h-[400px] md:h-[400px] rounded-br-[200px] rounded-bl-lg rounded-tl-lg rounded-tr-lg bg-yellow-100 my-10">
-          <div className="flex flex-col gap-1 items-center ">
+        <div className="flex justify-between w-full h-[450px] md:h-[400px] rounded-br-[200px] rounded-bl-lg rounded-tl-lg rounded-tr-lg bg-yellow-100 my-16">
+          <div className="grid gap-1 md:gap-3 grid-cols-1 md:grid-cols-2 ">
             <p className=" text-gray-600 text-2xl md:text-4xl font-bold underline text-center my-auto m-3 md:m-5">
               Text to speech for :
             </p>
-            <div className="flex items-center gap-1   my-auto m-3 md:ml-10">
+            <div className="flex items-center gap-1 border-[3px] rounded-sm shadow-md  p-5  my-auto m-3 md:ml-10">
               <CheckCircle className="text-yellow-500" />
-              <p className="text-gray-500 text-center md:2xl font-serif ">
+              <p className="text-gray-500 font-serif text-center md:2xl font-semibold ">
                 Content creator.🎬
               </p>
             </div>
 
-            <div className="flex items-center  gap-1 my-auto m-3 md:ml-10">
+            <div className="flex items-center  gap-1 border-[3px] rounded-sm shadow-md  p-5 my-auto m-3 md:ml-10">
               <CheckCircle className="text-yellow-500" />
-              <p className="text-gray-500 text-center md:2xl font-serif  ">
+              <p className="text-gray-500 font-serif text-center md:2xl font-semibold  ">
                 {" "}
                 Marketer.📊
               </p>
             </div>
 
-            <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
+            <div className="flex items-center gap-1 border-[3px] rounded-sm shadow-md  p-5  my-auto m-3 md:ml-10">
               <CheckCircle className="text-yellow-500" />
-              <p className="text-gray-500 text-center md:2xl font-serif ">
+              <p className="text-gray-500 font-serif text-center md:2xl font-semibold ">
                 Product developer.🧑‍💻
               </p>
             </div>
 
-            <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
+            <div className="flex items-center gap-1 border-[3px] rounded-sm shadow-md  p-5  my-auto m-3 md:ml-10">
               <CheckCircle className="text-yellow-500" />
-              <p className="text-gray-500 font-serif text-center md:2xl  ">
+              <p className="text-gray-500 font-serif text-center md:2xl font-semibold ">
                 Educator.🎓
               </p>
             </div>
-            <div className="flex items-center gap-1  my-auto m-3 md:ml-10">
+            <div className="flex items-center gap-1 border-[3px] rounded-sm shadow-md p-5  my-auto m-3 md:ml-10">
               <CheckCircle className="text-yellow-500" />
-              <p className="text-gray-500 font-serif text-center md:2xl  ">
+              <p className="text-gray-500 font-serif text-center md:2xl  font-semibold">
                 Podcasters
               </p>
             </div>
@@ -304,34 +304,94 @@ export default function Home() {
       <p className="text-center font-semibold text-4xl my-5">
         All in one platform.{" "}
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-10 mx-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-10 mx-5 md:mx-[100px]">
         <div className="flex justify-center p-4 rounded-md bg-slate-100">
-          <p className="md:text-xl text-emerald-600 underline font-mono">
-            Text to speech
-          </p>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="md:text-xl text-emerald-600 underline font-mono ">
+                Text to speech.
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
+                To create your own AI voice at Vividvoice, go to the setting,
+                upload your best quality voice and select it. Voice Design
+                allows you to customize the speaker s identityfor unique voices
+                in your scripts, while Voice Cloning mimics real voices. This
+                ensures variety and exclusivity in your generated voices, as
+                they are entirely artificial and not linked to real people.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
         <div className="flex justify-center p-4 rounded-md bg-yellow-100">
-          <p className="md:text-xl text-emerald-600 underline font-mono">
-            Voice cloning
-          </p>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="md:text-xl text-emerald-600 underline font-mono ">
+                Voice clonning.
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
+                To create your own AI voice at Vividvoice, go to the setting,
+                upload your best quality voice and select it. Voice Design
+                allows you to customize the speaker s identityfor unique voices
+                in your scripts, while Voice Cloning mimics real voices. This
+                ensures variety and exclusivity in your generated voices, as
+                they are entirely artificial and not linked to real people.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
 
         <div className="flex justify-center p-4 rounded-md bg-amber-100">
-          <p className="md:text-xl text-emerald-600 underline font-mono">
-            Speech to text{" "}
-          </p>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="md:text-xl text-emerald-600 underline font-mono ">
+                Speech to text.
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
+                To create your own AI voice at Vividvoice, go to the setting,
+                upload your best quality voice and select it. Voice Design
+                allows you to customize the speaker s identityfor unique voices
+                in your scripts, while Voice Cloning mimics real voices. This
+                ensures variety and exclusivity in your generated voices, as
+                they are entirely artificial and not linked to real people.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
 
         <div className="flex justify-center p-4 rounded-md bg-red-100">
-          <p className="md:text-xl  text-emerald-600 underline font-mono">
-            Speech to text translation
-          </p>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="md:text-xl text-emerald-600 underline font-mono ">
+                Speech to text translation.
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
+                To create your own AI voice at Vividvoice, go to the setting,
+                upload your best quality voice and select it. Voice Design
+                allows you to customize the speaker s identityfor unique voices
+                in your scripts, while Voice Cloning mimics real voices. This
+                ensures variety and exclusivity in your generated voices, as
+                they are entirely artificial and not linked to real people.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
 
         <div className="flex justify-center p-4 rounded-md bg-lime-100">
-          <p className="md:text-xl  text-emerald-600 underline font-mono">
-            Sound effect generator
-          </p>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="md:text-xl  text-emerald-600 underline font-mono ">
+                Sound effect generator.
+              </AccordionTrigger>
+              <AccordionContent className="md:text-xl text-gray-500 font-serif ">
+                To create your own AI voice at Vividvoice, go to the setting,
+                upload your best quality voice and select it. Voice Design
+                allows you to customize the speaker s identityfor unique voices
+                in your scripts, while Voice Cloning mimics real voices. This
+                ensures variety and exclusivity in your generated voices, as
+                they are entirely artificial and not linked to real people.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
       <div className="flex justify-center mt-11 md:mt-[100px] ">
