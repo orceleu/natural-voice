@@ -6,6 +6,7 @@ import {
   AudioWaveformIcon,
   CheckIcon,
   ChevronDownIcon,
+  CopyIcon,
   DeleteIcon,
   LoaderIcon,
   Settings,
@@ -18,7 +19,16 @@ import Image from "next/image";
 import { useToast } from "@/components/ui/use-toast";
 import { signOut, onAuthStateChanged, User } from "firebase/auth";
 import { cn } from "@/lib/utils";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Command,
   CommandEmpty,
@@ -69,6 +79,8 @@ interface Item {
   path: string;
   url: string;
 }
+
+type LanguageType = undefined | string;
 fal.config({
   credentials:
     "3acaf80b-c509-4c6d-a9a3-53201a9b9822:2779e88cfa33dbafceb17400f21c6b6d",
@@ -89,7 +101,9 @@ export default function SpeeToText() {
   const [progresspercent, setProgresspercent] = useState(0);
 
   const [selectedTask, setSelectedTask] = useState("transcribe");
+  const selectedCurrentTask = useRef("transcribe");
   const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const selectedCurrentLanguage = useRef<LanguageType>("en");
   const [isTranslanteMode, setTranslanteMode] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
@@ -97,6 +111,7 @@ export default function SpeeToText() {
   const { toast } = useToast();
 
   const audioUrl = useRef("");
+
   const isTranslante = useRef(false);
   const task = [
     {
@@ -316,12 +331,12 @@ export default function SpeeToText() {
       const result: any = await fal.subscribe("fal-ai/whisper", {
         input: {
           audio_url: audioUrl.current,
-          task: selectedTask,
+          task: selectedCurrentTask.current,
           chunk_level: "segment",
           version: "3",
           batch_size: 64,
           num_speakers: null,
-          language: undefined,
+          language: selectedCurrentLanguage.current,
         },
         logs: true,
         onQueueUpdate: (update) => {
@@ -370,7 +385,7 @@ export default function SpeeToText() {
   }, [user]);
 
   return (
-    <>
+    <div className="bg-yellow-50">
       <Button
         onClick={() => router.back()}
         className="fixed top-5 start-5"
@@ -384,8 +399,59 @@ export default function SpeeToText() {
         <br />
         <br />
         <br />
+        <div className="flex justify-between">
+          <div className="rounded-md w-[200px] h-[200px] shadow-md">
+            <p className="m-6  text-xl font-bold">Export </p>
+            <p className="m-6 font-bold">Download pdf </p>
+            <p className="m-6  font-bold">Download docx</p>
+          </div>
+
+          <div className="ml-auto mr-10 ">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline"> email</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>email</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    Profile
+                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      //router.push("/billing");
+                    }}
+                  >
+                    Billing
+                    <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      //cancelSubscription();
+                    }}
+                  >
+                    Cancel subscription
+                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>GitHub</DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuItem disabled>API</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  Log out
+                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+
         <div className="flex justify-center">
-          <div className="p-3 rounded-md w-full max-w-[900px]">
+          <div className="p-3 rounded-md w-full max-w-[900px] shadow-md">
             <p className="text-2xl md:text-4xl  font-semibold m-5 md:m-10 text-center">
               Speech to text converter.
             </p>
@@ -448,7 +514,7 @@ export default function SpeeToText() {
                         placeholder="Search Task..."
                         className="h-9"
                       />
-                      <CommandEmpty>No Task found.</CommandEmpty>
+                      <CommandEmpty>Task not found.</CommandEmpty>
                       <CommandGroup>
                         {task.map((task: any) => (
                           <CommandItem
@@ -460,6 +526,10 @@ export default function SpeeToText() {
                                   ? ""
                                   : currentValue
                               );
+                              selectedCurrentTask.current = currentValue;
+                              if (currentValue === "transcribe") {
+                                selectedCurrentLanguage.current = undefined;
+                              }
                               setOpen(false);
                               console.log(
                                 ` task selected: ${selectedTask} : ${currentValue}`
@@ -522,9 +592,12 @@ export default function SpeeToText() {
                                       ? ""
                                       : currentValue
                                   );
+                                  selectedCurrentLanguage.current =
+                                    currentValue;
+
                                   setOpenLang(false);
                                   console.log(
-                                    ` language selected: ${selectedLanguage}`
+                                    ` language selected: ${currentValue}`
                                   );
                                 }}
                               >
@@ -554,10 +627,13 @@ export default function SpeeToText() {
               onChange={(e) => {
                 setText(e.target.value);
               }}
+              disabled={false}
             />
 
             <br />
-
+            <Button variant="outline">
+              <CopyIcon />
+            </Button>
             <div className="flex justify-center">
               <div className="flex items-center gap-5 mt-10">
                 <Button
@@ -582,6 +658,6 @@ export default function SpeeToText() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

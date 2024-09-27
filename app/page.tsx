@@ -5,7 +5,7 @@ import rihanna from "../public/rihanna.jpeg";
 import snoopdog from "../public/snoopdog.jpg";
 import trump from "../public/donaltrump.jpg";
 import gadelmaleh from "../public/gadelmaleh.jpg";
-import screennaturalvoice from "../public/screennaturalvoice.png";
+import screennaturalvoice from "../public/capturedashboard.png";
 //import lobservateur from "../public/sound/lobservateur.mp3";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";

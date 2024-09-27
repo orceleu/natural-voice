@@ -197,6 +197,7 @@ export default function SoundEffect() {
                 className="h-[100px] md:h-[200px] max-w-[700px]"
                 onChange={(e) => setText(e.target.value)}
                 value={texte}
+                disabled={false}
               />
             </div>
 

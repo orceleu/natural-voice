@@ -3,7 +3,12 @@ import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { CheckCircleIcon, LoaderIcon, LockIcon } from "lucide-react";
+import {
+  ArrowBigLeft,
+  CheckCircleIcon,
+  LoaderIcon,
+  LockIcon,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { collection, addDoc, getDoc, doc, setDoc } from "firebase/firestore";
@@ -145,7 +150,14 @@ export default function Billing() {
       });
   }*/
   return (
-    <div>
+    <>
+      <Button
+        onClick={() => router.back()}
+        className="fixed top-5 start-5"
+        variant="outline"
+      >
+        <ArrowBigLeft />
+      </Button>
       <div className="mx-10 md:mx-[100px]">
         <p className="text-3xl mt-[200px]">
           Pricing
@@ -433,6 +445,6 @@ export default function Billing() {
           </AccordionItem>
         </Accordion>
       </div>
-    </div>
+    </>
   );
 }

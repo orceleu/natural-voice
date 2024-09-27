@@ -732,6 +732,7 @@ export default function Dashboard() {
                 }}
                 value={textvalue}
                 className="h-[400px]"
+                disabled={!havingPlan}
               />
 
               <p className="text-sm text-muted-foreground">
@@ -1505,12 +1506,14 @@ export default function Dashboard() {
                     settextValues(e.target.value);
                     handleActiveButton();
                   }}
+                  disabled={!havingPlan}
                   value={textvalue}
                   className="h-[300px]"
                 />
 
                 <p className="text-sm text-muted-foreground">
-                  Your message will be copied to the support team.
+                  For more accurate ,Avoid making mistake on spelling and
+                  punctuation.
                 </p>
               </div>
               <div className=" flex justify-center">
